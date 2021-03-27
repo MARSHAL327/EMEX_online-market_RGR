@@ -14,12 +14,27 @@
             <div class="section-title__more"></div>
         </div>
 
-        <div class="stock-card grid-3fr">
+        <div class="stock-card grid-4fr">
             @foreach($stock as $stockItem)
-                <div class="stock-card__item">
-                    <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $stockItem->img }}" alt="">
-                    <span class="stock-card__text">{{ $stockItem->title }}</span>
-                    <div class="black-bg"></div>
+                <div class="card stock-card__item">
+                    <div class="card-back">
+                        <span class="stock-card__desc">
+                            {{ $stockItem->desc }}
+                            <div class="stock-card__date">
+                                Начало акции:
+                                <span>{{ date('d.m.Y', strtotime($stockItem->date_start)) }}</span>
+                            </div>
+                            <div class="stock-card__date">
+                                Конец акции:
+                                <span>{{ date('d.m.Y', strtotime($stockItem->date_end)) }}</span>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="card-front">
+                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $stockItem->img }}" alt="">
+                        <span class="stock-card__text">{{ $stockItem->title }}</span>
+                        <div class="black-bg"></div>
+                    </div>
                 </div>
             @endforeach
         </div>

@@ -8,14 +8,18 @@ use App\Http\Requests\StockRequest;
 class StockController extends Controller
 {
     public function showStock(){
-        $stock = Stock::paginate(5);
-        return view('stock', compact('stock'));
+        $stock = Stock::paginate(3);
+        return view('stock')->with([
+            "stock" => $stock
+        ]);
     }
 
-    public function showOneStock($id){
+    public function getSomeStock($countStock){
         $stock = new Stock();
-        return view('oneStock', ["oneStock" => $stock->find($id)]);
+
+        return $stock->take($countStock)->get();
     }
+
 
     public function addOneStock(StockRequest $req){
 

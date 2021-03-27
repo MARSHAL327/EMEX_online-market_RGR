@@ -7,8 +7,6 @@ $(document).ready(function () {
     let blackBg = $(".black-bg");
     let mainForm = $(".main-form");
 
-    console.log(mainForm);
-
     function errorAjax(result){
         let errors = result["responseJSON"]["errors"];
         let keys = Object.keys(errors);
@@ -84,16 +82,6 @@ $(document).ready(function () {
         $(this).parent().toggleClass("active");
     })
 
-    // registerModal.find("form").on("submit", function (event) {
-    //     event.preventDefault();
-    //     sendAjax($(this), errorAjax, successAjax);
-    // })
-    //
-    // loginModal.find("form").on("submit", function (event) {
-    //     event.preventDefault();
-    //     sendAjax($(this), errorAjax, successAjax);
-    // })
-
     mainForm.on("submit", function (event) {
         console.log("ok");
         event.preventDefault();
@@ -105,5 +93,9 @@ $(document).ready(function () {
 
     $(".admin-controller__btn").on("click", function () {
         $(".admin-controller__panel").toggleClass("active");
+    })
+
+    $(".header__submenu").hover(function () {
+        $(this).toggleClass("active");
     })
 });

@@ -6,15 +6,14 @@
     <div class="header__menu__basket">
         <nav class="header__menu">
             <ul>
-                <li>
+                <li class="header__submenu">
                     <a href="">
                         Запчасти
                         <span class="material-icons">expand_more</span>
                     </a>
-                    <ul class="header__menu__submenu">
+                    <ul class="header__submenu__item">
+                        <li><a href="{{ route('maintenance_brands') }}">Запчасти для ТО</a></li>
                         <li><a href="">Электрооборудование</a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
                     </ul>
                 </li>
                 <li><a href="{{ route('about-company')  }}" class="<?php if($_SERVER["REQUEST_URI"] == "/about-company") echo "active"?>">О Нас</a></li>

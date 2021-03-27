@@ -40,6 +40,27 @@
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
         </div>
+
+        <div class="auto-brand">
+            <div class="auto-brand__item">
+                <div class="auto-brand__letter">
+                    A
+                </div>
+                <ul class="auto-brand__brands">
+                    <li><a href="">Audi</a></li>
+                    <li><a href="">Acura</a></li>
+                </ul>
+            </div>
+            <div class="auto-brand__item">
+                <div class="auto-brand__letter">
+                    B
+                </div>
+                <ul class="auto-brand__brands">
+                    <li><a href="">BMW</a></li>
+                </ul>
+            </div>
+        </div>
+
     </section>
 
     <section>
@@ -54,47 +75,23 @@
         </div>
 
         <div class="news-card grid-3fr">
-            <div class="news-card__item">
-                <img src="img/image_2.png" alt="">
-                <div class="news-card__text-btn-wrapper">
-                    <div class="news-card__text-wrapper">
-                        <div class="news-card__text-title">Новость</div>
-                        <div class="news-card__text">Здесь идёт описание новости. Оно не очень большое</div>
-                    </div>
-                    <button class="news-btn">
-                        Подробнее
-                    </button>
-                </div>
-            </div>
-            <div class="news-card__item">
-                <img src="img/image_2.png" alt="">
-                <div class="news-card__text-btn-wrapper">
-                    <div class="news-card__text-wrapper">
-                        <div class="news-card__text-title">Новость побольше</div>
-                        <div class="news-card__text">Здесь идёт описание ещё одной новости. Оно чуть большое, для
-                            демонстрации вместимости текста
+            @foreach($news as $newsItem)
+                <div class="news-card__item">
+                    <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $newsItem->img }}" alt="">
+                    <div class="news-card__text-btn-wrapper">
+                        <div class="news-card__text-wrapper">
+                            <div class="news-card__text-title">{{ $newsItem->title }}</div>
+                            <div class="news-card__text">{{ $newsItem->desc }}</div>
                         </div>
+                        <a href="{{ route('news_one', $newsItem->id) }}">
+                            <button class="news-btn">
+                                Подробнее
+                            </button>
+                        </a>
+
                     </div>
-                    <button class="news-btn">
-                        Подробнее
-                    </button>
                 </div>
-            </div>
-            <div class="news-card__item">
-                <img src="img/image_2.png" alt="">
-                <div class="news-card__text-btn-wrapper">
-                    <div class="news-card__text-wrapper">
-                        <div class="news-card__text-title">Огромная новость</div>
-                        <div class="news-card__text">Здесь идёт описание новости, которая поражает своими размерами.
-                            Здесь текст не влезает, поэтому вам не видно, что происходит дальше за этими волшебными
-                            тремя точками
-                        </div>
-                    </div>
-                    <button class="news-btn">
-                        Подробнее
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -109,22 +106,29 @@
             </div>
         </div>
 
-        <div class="stock-card grid-3fr">
-            <div class="stock-card__item">
-                <img src="img/image_3.png" alt="">
-                <span class="stock-card__text">Скидки на комплектующие BMW</span>
-                <div class="black-bg"></div>
-            </div>
-            <div class="stock-card__item">
-                <img src="img/image_3.png" alt="">
-                <span class="stock-card__text">Скидки на комплектующие BMW</span>
-                <div class="black-bg"></div>
-            </div>
-            <div class="stock-card__item">
-                <img src="img/image_3.png" alt="">
-                <span class="stock-card__text">Скидки на комплектующие BMW</span>
-                <div class="black-bg"></div>
-            </div>
+        <div class="stock-card grid-4fr">
+            @foreach($stock as $stockItem)
+                <div class="card stock-card__item">
+                    <div class="card-back">
+                        <span class="stock-card__desc">
+                            {{ $stockItem->desc }}
+                            <div class="stock-card__date">
+                                Начало акции:
+                                <span>{{ date('d.m.Y', strtotime($stockItem->date_start)) }}</span>
+                            </div>
+                            <div class="stock-card__date">
+                                Конец акции:
+                                <span>{{ date('d.m.Y', strtotime($stockItem->date_end)) }}</span>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="card-front">
+                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $stockItem->img }}" alt="">
+                        <span class="stock-card__text">{{ $stockItem->title }}</span>
+                        <div class="black-bg"></div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </section>
 
