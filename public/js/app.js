@@ -19386,7 +19386,6 @@ $(document).ready(function () {
   var loginModal = $(".login-modal");
   var blackBg = $(".black-bg");
   var mainForm = $(".main-form");
-  console.log(mainForm);
 
   function errorAjax(result) {
     var errors = result["responseJSON"]["errors"];
@@ -19458,16 +19457,7 @@ $(document).ready(function () {
   });
   $("input, textarea").on("blur", function () {
     $(this).parent().toggleClass("active");
-  }); // registerModal.find("form").on("submit", function (event) {
-  //     event.preventDefault();
-  //     sendAjax($(this), errorAjax, successAjax);
-  // })
-  //
-  // loginModal.find("form").on("submit", function (event) {
-  //     event.preventDefault();
-  //     sendAjax($(this), errorAjax, successAjax);
-  // })
-
+  });
   mainForm.on("submit", function (event) {
     console.log("ok");
     event.preventDefault();
@@ -19477,6 +19467,9 @@ $(document).ready(function () {
   loginModal.find("p").on("click", toggleAuthModal);
   $(".admin-controller__btn").on("click", function () {
     $(".admin-controller__panel").toggleClass("active");
+  });
+  $(".header__submenu").hover(function () {
+    $(this).toggleClass("active");
   });
 });
 
