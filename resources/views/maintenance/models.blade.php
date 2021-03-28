@@ -18,22 +18,24 @@
     <section>
         <div class="maintenance-progress">
             <ul>
-                <li class="maintenance-progress__item active">
-                    <a href="javascript:void(0)">
+                <li class="maintenance-progress__item maintenance-progress__item_checked">
+                    <a href="{{ route('maintenance_brands') }}">
                         <div class="maintenance-progress__item__circle">
-                            <span class="material-icons">arrow_downward</span>
+                            <span class="material-icons">done</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            Выберите марку
+                            {{ $brandName }}
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
                         </div>
                     </a>
                 </li>
-                <li class="maintenance-progress__item">
-                    <a href="">
-                        <div class="maintenance-progress__item__circle"></div>
+                <li class="maintenance-progress__item active">
+                    <a href="javascript:void(0)">
+                        <div class="maintenance-progress__item__circle">
+                            <span class="material-icons">arrow_downward</span>
+                        </div>
                         <div class="maintenance-progress__item__text">
                             Выберите модель
                         </div>
@@ -52,23 +54,15 @@
                 </li>
             </ul>
         </div>
-
         <div class="white-block">
-            <div class="auto-brand">
-                @foreach($brandsFirstLetter as $firstLetter)
-                    <div class="auto-brand__item">
-                        <div class="auto-brand__letter">
-                            {{ $firstLetter->first_letter }}
-                        </div>
-                        <ul class="auto-brand__brands">
-                            @foreach($brandsData as $brand)
-                                @if( substr($brand->name, 0, 1) == $firstLetter->first_letter )
-                                    <li><a href="{{ route('maintenance_models', $brand->id) }}">{{ $brand->name }}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                @endforeach
+            <div class="auto-model">
+                <ul>
+                    <li class="auto-model__item"><a href="{{ route('maintenance_modification') }}">A1</a></li>
+                    <li class="auto-model__item"><a href="">A2</a></li>
+                    <li class="auto-model__item"><a href="">A3</a></li>
+                    <li class="auto-model__item"><a href="">A4</a></li>
+                    <li class="auto-model__item"><a href="">A5</a></li>
+                </ul>
             </div>
         </div>
     </section>

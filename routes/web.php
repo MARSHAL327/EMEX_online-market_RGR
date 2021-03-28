@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+$user = Auth::user();
 
 // ************
 // Основной роут
@@ -47,7 +48,7 @@ Route::get('/logout', function () {
 
 
 // ************
-// Для авторизованных пользователей
+// Для администратора
 // ************
 Route::group(['middleware' => 'auth'], function () {
     // ************
@@ -68,6 +69,16 @@ Route::group(['middleware' => 'auth'], function () {
     })->name("stock_add");
 
     Route::post('/stock/add', 'StockController@addOneStock')->name("stock_add");
+
+
+    // ************
+    // Добавление авто
+    // ************
+    Route::get('/add-auto', function () {
+        return view('admin.addAuto');
+    })->name("auto_add");
+
+    Route::post('/add-auto', 'AdminController@addBrand')->name("auto_add");
 });
 
 
@@ -84,7 +95,14 @@ Route::post('auth/login', 'Auth\LoginController@login')->name('login');
 
 
 // ************
-// Бренды автомобилей
+// Запачасти для ТО
 // ************
-Route::get('/maintenance/brands', "MaintenanceController@showBrands")
+Route::get('/maintenance', "MaintenanceController@showBrands")
     ->name('maintenance_brands');
+
+Route::get('/maintenance/{id}', "MaintenanceController@showModel")
+    ->name('maintenance_models')
+    ->where('id', '[0-9]+');;
+
+Route::get('/maintenance/2/3', "MaintenanceController@showModification")
+    ->name('maintenance_modification');

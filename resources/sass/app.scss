@@ -74,6 +74,63 @@ body {
     box-sizing: border-box;
 }
 
+.white-block_grey-strip{
+    padding: 0;
+
+    & .grey-strip{
+        background-color: $darkGrey;
+        border-radius: 10px 10px 0 0;
+        color: #fff;
+
+        & th:first-child{
+            border-radius: 10px 0 0 0;
+        }
+
+        & th:last-child{
+            border-radius: 0 10px 0 0;
+        }
+    }
+
+    & .modification__items{
+        & table{
+            width: 100%;
+        }
+
+        & td, & th{
+            padding: 20px 40px;
+        }
+
+        & td{
+            padding: 30px 40px;
+        }
+
+        & tr{
+            border-bottom: 1px solid $darkGrey;
+
+            &:last-child{
+                border: 0;
+            }
+        }
+    }
+}
+
+.transparent-btn{
+    & a{
+        padding: 10px 20px;
+        color: $blue;
+        border: 2px solid $blue;
+        border-radius: 10px;
+        background-color: #fff;
+        transition: .3s;
+
+        &:hover{
+            background-color: $blue;
+            color: #fff;
+            transition: .3s;
+        }
+    }
+}
+
 .main-btn {
     border-radius: 10px;
     border: 0;
@@ -137,6 +194,48 @@ body {
         color: #fff;
         transition: .3s;
     }
+}
+
+.main-tabs{
+    & ul{
+        display: grid;
+        grid-template-columns: repeat(3, 150px);
+        text-align: center;
+
+        & li{
+            border: 1px solid $darkGrey;
+            border-right: 0;
+            color: $darkGrey;
+            padding: 15px;
+            transition: .3s;
+
+            &:first-child{
+                border-radius: 10px 0 0 10px;
+            }
+
+            &:last-child{
+                border-radius: 0 10px 10px 0;
+                border-right: 1px solid $darkGrey;
+            }
+
+            &:hover{
+                cursor: pointer;
+                background-color: $darkGrey;
+                color: #fff;
+                transition: .3s;
+            }
+
+            &.active{
+                border: 1px solid $blue;
+                background-color: $blue;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.tabs__item{
+    margin-top: 30px;
 }
 
 .black-bg {
@@ -1157,33 +1256,83 @@ $slider-height: 550px;
         display: flex;
 
         & li{
-            @include centerBlcok(auto, auto, auto, auto);
+            & a{
+                @include centerBlcok(auto, auto, auto, auto);
 
-            & .maintenance-progress__item__circle{
-                @include centerBlcok(50px, 50px, auto, auto);
-                color: #fff;
-                border-radius: 100%;
-                background-color: $darkGrey;
-            }
+                & .maintenance-progress__item__circle{
+                    @include centerBlcok(50px, 50px, auto, auto);
+                    color: #fff;
+                    border-radius: 100%;
+                    background-color: $darkGrey;
+                    transition: .3s;
+                }
 
-            & .maintenance-progress__item__text{
-                margin: 0 10px;
-            }
+                & .maintenance-progress__item__text{
+                    margin: 0 10px;
+                }
 
-            & .maintenance-progress__item__next-item{
-                color: $darkGrey;
-                margin-right: 10px;
-                & .material-icons{
-                    font-size: 30px;
+                & .maintenance-progress__item__next-item{
+                    color: $darkGrey;
+                    margin-right: 10px;
+                    & .material-icons{
+                        font-size: 30px;
 
+                    }
                 }
             }
 
             &.active{
-                color: $blue;
+                & a{
+                    color: $blue;
+                }
 
                 & .maintenance-progress__item__circle{
                     background-color: $blue;
+                }
+            }
+
+            &.maintenance-progress__item_checked{
+                & a{
+                    color: $green;
+                }
+
+                & .maintenance-progress__item__circle{
+                    background-color: $green;
+                }
+            }
+
+            &:hover{
+                & .maintenance-progress__item__circle{
+                    box-shadow: $mainShadow;
+                    transition: .3s;
+                }
+            }
+        }
+    }
+}
+
+.auto-model{
+
+    & ul{
+        display: grid;
+        grid-template: repeat(3, auto) / repeat(7, 150px);
+        grid-auto-flow: column;
+
+        & .auto-model__item{
+            box-sizing: border-box;
+
+            & a{
+                width: 100%;
+                display: block;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            &:hover{
+                background-color: $lightGrey;
+
+                & a{
+                    color: $blue;
                 }
             }
         }

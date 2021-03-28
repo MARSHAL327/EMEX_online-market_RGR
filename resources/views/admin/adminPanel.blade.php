@@ -20,7 +20,7 @@
                     <span class="material-icons">edit</span>
                     Редактировать страницу
                 </a></li>
-            <li class="admin-controller__panel__item"><a href="">
+            <li class="admin-controller__panel__item"><a href="{{ route("auto_add") }}">
                     <span class="material-icons">directions_car</span>
                     Добавить авто
                 </a></li>
