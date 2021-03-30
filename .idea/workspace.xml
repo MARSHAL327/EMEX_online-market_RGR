@@ -19,22 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/icon_dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/addAuto.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/maintenance/models.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/maintenance/modification.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/RGR-Web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RGR-Web.iml" afterDir="false" />
+    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/addBrand.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MaintenanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MaintenanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/addAuto.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/adminPanel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/adminPanel.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/brands.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/brands.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/models.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/models.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/modification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/modification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,11 +153,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/maintenance" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\app\Http\Models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\views\maintenance" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\app\Http\Models" />
     </key>
   </component>
   <component name="RunManager">
@@ -180,8 +178,18 @@
       <updated>1616872032424</updated>
       <workItem from="1616872036963" duration="64000" />
       <workItem from="1616917122801" duration="21306000" />
-      <workItem from="1616950281327" duration="249000" />
+      <workItem from="1616950281327" duration="520000" />
+      <workItem from="1617029447205" duration="1360000" />
+      <workItem from="1617042073693" duration="11483000" />
     </task>
+    <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
+      <created>1616950693440</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616950693440</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,16 +239,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто" />
+    <MESSAGE value="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="794" y="443" key="NewPhpFileDialog" timestamp="1616937431599">
+    <state x="794" y="443" key="NewPhpFileDialog" timestamp="1617046629545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1616937431599" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1616942049172">
+    <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1617046629545" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616950705512">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616942049172" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1616950705512" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617095488663">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1617095488663" />
   </component>
 </project>

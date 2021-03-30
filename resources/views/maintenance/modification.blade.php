@@ -24,7 +24,7 @@
                             <span class="material-icons">done</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            Audi
+                            Lamborghini
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
@@ -32,12 +32,12 @@
                     </a>
                 </li>
                 <li class="maintenance-progress__item maintenance-progress__item_checked">
-                    <a href="{{ route('maintenance_models') }}">
+                    <a href="{{ route('maintenance_models', 6) }}">
                         <div class="maintenance-progress__item__circle">
                             <span class="material-icons">done</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            Audi A1
+                            Aventador
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>

@@ -171,34 +171,35 @@ body > .black-bg.active {
   text-align: center;
 }
 
-.main-tabs ul li {
-  border: 1px solid #989898;
-  border-right: 0;
+.main-tabs ul li a {
+  display: block;
   color: #989898;
   padding: 15px;
   transition: 0.3s;
+  border: 1px solid #989898;
+  border-right: 0;
 }
 
-.main-tabs ul li:first-child {
-  border-radius: 10px 0 0 10px;
-}
-
-.main-tabs ul li:last-child {
-  border-radius: 0 10px 10px 0;
-  border-right: 1px solid #989898;
-}
-
-.main-tabs ul li:hover {
+.main-tabs ul li a:hover {
   cursor: pointer;
   background-color: #989898;
   color: #fff;
   transition: 0.3s;
 }
 
-.main-tabs ul li.active {
-  border: 1px solid #1871C3;
+.main-tabs ul li:first-child a {
+  border-radius: 10px 0 0 10px;
+}
+
+.main-tabs ul li:last-child a {
+  border-radius: 0 10px 10px 0;
+  border-right: 1px solid #989898;
+}
+
+.main-tabs ul li.active a {
   background-color: #1871C3;
   color: #fff;
+  border: 1px solid #1871C3;
 }
 
 .tabs__item {
@@ -307,7 +308,8 @@ section:first-child {
 }
 
 input,
-textarea {
+textarea,
+select {
   display: block;
   width: 100%;
   border: 2px solid #989898;
@@ -319,7 +321,8 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   border-color: #1871C3;
   transition: 0.3s border-color;
 }

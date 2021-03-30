@@ -74,11 +74,36 @@ Route::group(['middleware' => 'auth'], function () {
     // ************
     // Добавление авто
     // ************
-    Route::get('/add-auto', function () {
-        return view('admin.addAuto');
-    })->name("auto_add");
+    Route::prefix('add-auto')->group(function () {
+        Route::prefix('brand')->group(function () {
+            Route::get('', function () {
+                return view('admin.addBrand');
+            })->name("brand_add");
 
-    Route::post('/add-auto', 'AdminController@addBrand')->name("auto_add");
+            Route::post('', 'AdminController@addBrand')->name("brand_add");
+        });
+
+        Route::prefix('model')->group(function () {
+            Route::get('', function () {
+                $brand = new \App\Http\Controllers\MaintenanceController();
+                return view('admin.addModel', $brand->getBrandsData());
+            })->name("model_add");
+
+            Route::post('', 'AdminController@addModel')->name("model_add");
+        });
+
+        Route::prefix('modification')->group(function () {
+            Route::get('', function () {
+                return view('admin.addBrand');
+            })->name("modification_add");
+
+            Route::post('', 'AdminController@addBrand')->name("modification_add");
+        });
+
+    });
+
+
+
 });
 
 
@@ -102,7 +127,11 @@ Route::get('/maintenance', "MaintenanceController@showBrands")
 
 Route::get('/maintenance/{id}', "MaintenanceController@showModel")
     ->name('maintenance_models')
-    ->where('id', '[0-9]+');;
+    ->where('id', '[0-9]+');
 
-Route::get('/maintenance/2/3', "MaintenanceController@showModification")
-    ->name('maintenance_modification');
+Route::get('/maintenance/{id_brand}/{id_model}', "MaintenanceController@showModification")
+    ->name('maintenance_modification')
+    ->where([
+        'id_brand' => '[0-9]+',
+        'id_model' => '[0-9]+',
+    ]);

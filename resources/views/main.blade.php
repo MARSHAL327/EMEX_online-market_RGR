@@ -40,27 +40,22 @@
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
         </div>
-
         <div class="auto-brand">
-            <div class="auto-brand__item">
-                <div class="auto-brand__letter">
-                    A
+            @foreach($brandsFirstLetter as $firstLetter)
+                <div class="auto-brand__item">
+                    <div class="auto-brand__letter">
+                        {{ $firstLetter->first_letter }}
+                    </div>
+                    <ul class="auto-brand__brands">
+                        @foreach($brandsData as $brand)
+                            @if( substr($brand->name, 0, 1) == $firstLetter->first_letter )
+                                <li><a href="{{ route('maintenance_models', $brand->id) }}">{{ $brand->name }}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
-                <ul class="auto-brand__brands">
-                    <li><a href="">Audi</a></li>
-                    <li><a href="">Acura</a></li>
-                </ul>
-            </div>
-            <div class="auto-brand__item">
-                <div class="auto-brand__letter">
-                    B
-                </div>
-                <ul class="auto-brand__brands">
-                    <li><a href="">BMW</a></li>
-                </ul>
-            </div>
+            @endforeach
         </div>
-
     </section>
 
     <section>

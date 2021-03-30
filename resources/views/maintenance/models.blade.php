@@ -56,13 +56,22 @@
         </div>
         <div class="white-block">
             <div class="auto-model">
-                <ul>
-                    <li class="auto-model__item"><a href="{{ route('maintenance_modification') }}">A1</a></li>
-                    <li class="auto-model__item"><a href="">A2</a></li>
-                    <li class="auto-model__item"><a href="">A3</a></li>
-                    <li class="auto-model__item"><a href="">A4</a></li>
-                    <li class="auto-model__item"><a href="">A5</a></li>
-                </ul>
+                    @if( count($autoModels) < 1 )
+                        Для данного бренда не найдено моделей
+                    @else
+                        <ul>
+                            @foreach($autoModels as $autoModel)
+                                <li class="auto-model__item">
+                                    <a href="{{
+                                    route('maintenance_modification', [
+                                    'id_brand' => $brandID,
+                                    'id_model' => $autoModel->id])
+                                    }}">{{ $autoModel->name }}
+                                    </a></li>
+                            @endforeach
+                        </ul>
+                    @endif
+
             </div>
         </div>
     </section>

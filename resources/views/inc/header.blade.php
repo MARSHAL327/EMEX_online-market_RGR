@@ -16,10 +16,10 @@
                         <li><a href="">Электрооборудование</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ route('about-company')  }}" class="<?php if($_SERVER["REQUEST_URI"] == "/about-company") echo "active"?>">О Нас</a></li>
-                <li><a href="{{ route('news_all')  }}" class="<?php if($_SERVER["REQUEST_URI"] == "/news/all") echo "active"?>">Новости</a></li>
-                <li><a href="{{ route('stock_all')  }}" class="<?php if($_SERVER["REQUEST_URI"] == "/stock/all") echo "active"?>">Акции</a></li>
-                <li><a href="{{ route('contacts')  }}" class="<?php if($_SERVER["REQUEST_URI"] == "/contacts") echo "active"?>">Контакты</a></li>
+                <li><a href="{{ route('about-company')  }}" class="<?php if(Route::current()->getName() == "about-company") echo "active"?>">О Нас</a></li>
+                <li><a href="{{ route('news_all')  }}" class="<?php if(Route::current()->getName() == "news_all") echo "active"?>">Новости</a></li>
+                <li><a href="{{ route('stock_all')  }}" class="<?php if(Route::current()->getName() == "stock_all") echo "active"?>">Акции</a></li>
+                <li><a href="{{ route('contacts')  }}" class="<?php if(Route::current()->getName() == "contacts") echo "active"?>">Контакты</a></li>
             </ul>
         </nav>
 

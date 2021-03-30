@@ -203,32 +203,42 @@ body {
         text-align: center;
 
         & li{
-            border: 1px solid $darkGrey;
-            border-right: 0;
-            color: $darkGrey;
-            padding: 15px;
-            transition: .3s;
+            & a{
+                display: block;
+                color: $darkGrey;
+                padding: 15px;
+                transition: .3s;
+                border: 1px solid $darkGrey;
+                border-right: 0;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: $darkGrey;
+                    color: #fff;
+                    transition: .3s;
+                }
+            }
 
             &:first-child{
-                border-radius: 10px 0 0 10px;
+                & a{
+                    border-radius: 10px 0 0 10px;
+                }
             }
 
             &:last-child{
-                border-radius: 0 10px 10px 0;
-                border-right: 1px solid $darkGrey;
-            }
-
-            &:hover{
-                cursor: pointer;
-                background-color: $darkGrey;
-                color: #fff;
-                transition: .3s;
+                & a{
+                    border-radius: 0 10px 10px 0;
+                    border-right: 1px solid $darkGrey;
+                }
             }
 
             &.active{
-                border: 1px solid $blue;
-                background-color: $blue;
-                color: #fff;
+                & a{
+                    background-color: $blue;
+                    color: #fff;
+                    border: 1px solid $blue;
+                }
+
             }
         }
     }
@@ -339,7 +349,7 @@ section {
     }
 }
 
-input, textarea {
+input, textarea, select {
     display: block;
     width: 100%;
     border: 2px solid $darkGrey;
