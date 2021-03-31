@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\AutoModel;
 use App\Http\Models\Brand;
+use App\Http\Models\Modification;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
 
     public function showBrands(){
-        return view('maintenance.brands')->with($this->getBrandsData());
+        return view('maintenance.brands', $this->getBrandsData());
     }
 
     public function getBrandsData(){
@@ -23,18 +24,32 @@ class MaintenanceController extends Controller
     }
 
     public function showModel($id){
-        $auoModel = AutoModel::where('brand_id', $id)->get();
+        $autoModel = AutoModel::where('brand_id', $id)->get();
 
-        $brand = (count($auoModel) < 1) ? Brand::find($id) : $auoModel[0]->Brand;
+        if( count($autoModel) < 1 ){
+            return abort(404);
+        } else {
+            $brand = $autoModel[0]->Brand;
+        }
 
         return view('maintenance.models', [
-            "brandName" => $brand->name,
-            "brandID" => $brand->id,
-            "autoModels" => $auoModel
+            "brandData" => $brand,
+            "autoModels" => $autoModel
         ]);
     }
 
     public function showModification($brand_id, $model_id){
-        return view('maintenance.modification');
+        $modification = Modification::where('model_id', $model_id)->get();
+
+        if( count($modification) < 1 ){
+            return abort(404);
+        } else {
+            $autoData = $modification[0];
+        }
+
+        return view('maintenance.modification', [
+                "autoData" => $autoData,
+                "modifications" => $modification
+            ]);
     }
 }

@@ -24,7 +24,7 @@
                             <span class="material-icons">done</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            Lamborghini
+                            {{ $autoData->autoModel->Brand->name }}
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
@@ -32,12 +32,12 @@
                     </a>
                 </li>
                 <li class="maintenance-progress__item maintenance-progress__item_checked">
-                    <a href="{{ route('maintenance_models', 6) }}">
+                    <a href="{{ route('maintenance_models', $autoData->autoModel->Brand->id) }}">
                         <div class="maintenance-progress__item__circle">
                             <span class="material-icons">done</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            Aventador
+                            {{ $autoData->autoModel->name }}
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="maintenance-progress__item active">
-                    <a href="">
+                    <a href="javascript:void(0)">
                         <div class="maintenance-progress__item__circle">
                             <span class="material-icons">arrow_downward</span>
                         </div>
@@ -58,6 +58,10 @@
         </div>
         <div class="white-block white-block_grey-strip">
             <div class="modification__items">
+                @if( count($modifications) < 1 )
+                    Для данной модели не найдено модификаций
+                @else
+                @endif
                 <table>
                     <tr class="grey-strip">
                         <th>Модификация</th>
@@ -67,26 +71,28 @@
                         <th>Мощность</th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>1.2 TFSI</td>
-                        <td>Бензиновый</td>
-                        <td>CBZA</td>
-                        <td>1.2</td>
-                        <td>86</td>
-                        <td class="transparent-btn">
-                            <a href="">Выбрать</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1.2 TFSI</td>
-                        <td>Бензиновый</td>
-                        <td>CBZA</td>
-                        <td>1.2</td>
-                        <td>86</td>
-                        <td class="transparent-btn">
-                            <a href="">Выбрать</a>
-                        </td>
-                    </tr>
+                    @foreach($modifications as $modification)
+                        <tr class="auto-model__item">
+                            <td>
+                                {{ $modification->name }}
+                            </td>
+                            <td>
+                                {{ $modification->engine_type }}
+                            </td>
+                            <td>
+                                {{ $modification->engine_model }}
+                            </td>
+                            <td>
+                                {{ $modification->engine_volume }}
+                            </td>
+                            <td>
+                                {{ $modification->power }}
+                            </td>
+                            <td class="transparent-btn">
+                                <a href="">Выбрать</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

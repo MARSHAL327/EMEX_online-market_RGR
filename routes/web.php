@@ -85,19 +85,22 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::prefix('model')->group(function () {
             Route::get('', function () {
-                $brand = new \App\Http\Controllers\MaintenanceController();
-                return view('admin.addModel', $brand->getBrandsData());
+                return view('admin.addModel', [
+                    "brandsData" => \App\Http\Models\Brand::all()
+                ]);
             })->name("model_add");
 
             Route::post('', 'AdminController@addModel')->name("model_add");
         });
 
         Route::prefix('modification')->group(function () {
-            Route::get('', function () {
-                return view('admin.addBrand');
+            Route::get('', function (){
+                return view('admin.addModification', [
+                    "autoModelData" => \App\Http\Models\AutoModel::all()
+                ]);
             })->name("modification_add");
 
-            Route::post('', 'AdminController@addBrand')->name("modification_add");
+            Route::post('', 'AdminController@addModification')->name("modification_add");
         });
 
     });

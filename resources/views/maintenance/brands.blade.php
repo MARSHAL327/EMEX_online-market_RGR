@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="maintenance-progress__item">
-                    <a href="">
+                    <a href="javascript:void(0)">
                         <div class="maintenance-progress__item__circle"></div>
                         <div class="maintenance-progress__item__text">
                             Выберите модель
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li class="maintenance-progress__item">
-                    <a href="">
+                    <a href="javascript:void(0)">
                         <div class="maintenance-progress__item__circle"></div>
                         <div class="maintenance-progress__item__text">
                             Выберите модификацию

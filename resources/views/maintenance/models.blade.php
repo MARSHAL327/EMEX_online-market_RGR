@@ -24,7 +24,7 @@
                             <span class="material-icons">done</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            {{ $brandName }}
+                            {{ $brandData->name }}
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="maintenance-progress__item">
-                    <a href="">
+                    <a href="javascript:void(0)">
                         <div class="maintenance-progress__item__circle"></div>
                         <div class="maintenance-progress__item__text">
                             Выберите модификацию
@@ -64,7 +64,7 @@
                                 <li class="auto-model__item">
                                     <a href="{{
                                     route('maintenance_modification', [
-                                    'id_brand' => $brandID,
+                                    'id_brand' => $brandData->id,
                                     'id_model' => $autoModel->id])
                                     }}">{{ $autoModel->name }}
                                     </a></li>

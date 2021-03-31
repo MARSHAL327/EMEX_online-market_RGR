@@ -9,8 +9,7 @@ class AutoModel extends Model
     protected $table = "model";
     public $timestamps = false;
 
-    public function brand()
-    {
-        return $this->belongsTo('App\Http\Models\Brand');
+    public function brand() {
+        return $this->belongsTo('App\Http\Models\Brand', 'brand_id');
     }
 }
