@@ -71,6 +71,7 @@ body > .black-bg.active {
 
 .white-block_grey-strip .modification__items td,
 .white-block_grey-strip .modification__items th {
+  text-align: left;
   padding: 20px 40px;
 }
 
@@ -1282,5 +1283,38 @@ label.active {
 
 .auto-model ul .auto-model__item:hover a {
   color: #1871C3;
+}
+
+.maintenance-title {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.maintenance-title .maintenance-title__item {
+  display: flex;
+  align-items: center;
+}
+
+.maintenance-title .maintenance-title__auto-data img {
+  width: 200px;
+}
+
+.maintenance-title .maintenance-title__auto-data .maintenance-title__auto-data__text {
+  margin-left: 30px;
+}
+
+.maintenance-title .maintenance-title__auto-data .maintenance-title__auto-data__text .maintenance-title__auto-data__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.maintenance-title .maintenance-title__auto-data .maintenance-title__auto-data__text .maintenance-title__auto-data__modification {
+  font-size: 18px;
+  color: #989898;
+}
+
+.maintenance-title .maintenance-title__button {
+  justify-self: flex-end;
 }
 

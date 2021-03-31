@@ -102,11 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::post('', 'AdminController@addModification')->name("modification_add");
         });
-
     });
-
-
-
 });
 
 
@@ -125,16 +121,28 @@ Route::post('auth/login', 'Auth\LoginController@login')->name('login');
 // ************
 // Запачасти для ТО
 // ************
-Route::get('/maintenance', "MaintenanceController@showBrands")
-    ->name('maintenance_brands');
 
-Route::get('/maintenance/{id}', "MaintenanceController@showModel")
-    ->name('maintenance_models')
-    ->where('id', '[0-9]+');
+Route::prefix('maintenance')->group(function (){
+    Route::get('', "MaintenanceController@showBrands")
+        ->name('maintenance_brands');
 
-Route::get('/maintenance/{id_brand}/{id_model}', "MaintenanceController@showModification")
-    ->name('maintenance_modification')
-    ->where([
-        'id_brand' => '[0-9]+',
-        'id_model' => '[0-9]+',
-    ]);
+    Route::get('/{id}', "MaintenanceController@showModel")
+        ->name('maintenance_models')
+        ->where('id', '[0-9]+');
+
+    Route::get('/{id_brand}/{id_model}', "MaintenanceController@showModification")
+        ->name('maintenance_modification')
+        ->where([
+            'id_brand' => '[0-9]+',
+            'id_model' => '[0-9]+',
+        ]);
+
+    Route::get('/{id_brand}/{id_model}/{id_modification}', "MaintenanceController@showMaintenance")
+        ->name('maintenance_page')
+        ->where([
+            'id_brand' => '[0-9]+',
+            'id_model' => '[0-9]+',
+            'id_modification' => '[0-9]+',
+        ]);
+});
+

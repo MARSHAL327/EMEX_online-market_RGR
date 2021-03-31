@@ -58,10 +58,6 @@
         </div>
         <div class="white-block white-block_grey-strip">
             <div class="modification__items">
-                @if( count($modifications) < 1 )
-                    Для данной модели не найдено модификаций
-                @else
-                @endif
                 <table>
                     <tr class="grey-strip">
                         <th>Модификация</th>
@@ -89,7 +85,10 @@
                                 {{ $modification->power }}
                             </td>
                             <td class="transparent-btn">
-                                <a href="">Выбрать</a>
+                                <a href=" {{ route('maintenance_page', [
+                                    'id_brand' => $autoData->autoModel->Brand->id,
+                                    'id_model' => $autoData->autoModel->id,
+                                    'id_modification' => $modification->id]) }} ">Выбрать</a>
                             </td>
                         </tr>
                     @endforeach

@@ -97,6 +97,7 @@ body {
         }
 
         & td, & th{
+            text-align: left;
             padding: 20px 40px;
         }
 
@@ -1322,7 +1323,6 @@ $slider-height: 550px;
 }
 
 .auto-model{
-
     & ul{
         display: grid;
         grid-template: repeat(3, auto) / repeat(7, 150px);
@@ -1346,5 +1346,44 @@ $slider-height: 550px;
                 }
             }
         }
+    }
+}
+
+// ************
+// Выбранный автомобиль
+// ************
+
+.maintenance-title{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    & .maintenance-title__item{
+        display: flex;
+        align-items: center;
+    }
+
+    & .maintenance-title__auto-data{
+        & img{
+            width: 200px;
+        }
+
+        & .maintenance-title__auto-data__text{
+            margin-left: 30px;
+
+            & .maintenance-title__auto-data__title{
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            & .maintenance-title__auto-data__modification{
+                font-size: 18px;
+                color: $darkGrey;
+            }
+        }
+    }
+
+    & .maintenance-title__button{
+        justify-self: flex-end;
     }
 }

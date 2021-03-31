@@ -52,4 +52,12 @@ class MaintenanceController extends Controller
                 "modifications" => $modification
             ]);
     }
+
+    public function showMaintenance($brand_id, $model_id, $modification_id){
+        return view('maintenance.maintenance', [
+            "brand" => Brand::find($brand_id),
+            "model" => AutoModel::find($model_id),
+            "modification" => Modification::find($modification_id),
+        ]);
+    }
 }
