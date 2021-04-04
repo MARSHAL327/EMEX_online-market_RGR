@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminPanel\AdminPanelController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\StockController;
+use App\Http\Models\AutoModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +18,13 @@ Route::get('/', "MainController@showPage")->name('main');
 // ************
 // Новостные роуты
 // ************
-Route::get('/news/all', "NewsController@showNews")->name('news_all');
-Route::get('/news/{id}', "NewsController@showOneNews")
-    ->name('news_one')
-    ->where('id', '[0-9]+');
+Route::get('/news/all', [NewsController::class, 'showNews'])->name('news_all');
+Route::get('/news/{id}', [NewsController::class, 'showOneNews'])->name('news_one');
 
-Route::get('/stock/all', "StockController@showStock")->name('stock_all');
+// ************
+// Акции
+// ************
+Route::get('/stock/all', [StockController::class, 'showStock'])->name('stock_all');
 
 
 // ************
@@ -54,21 +59,17 @@ Route::group(['middleware' => 'auth'], function () {
     // ************
     // Добавление новости
     // ************
-    Route::get('/news/add', function () {
-        return view('admin.addNews');
-    })->name("news_add");
+    Route::view('/news/add', 'admin.addNews')->name("news_add");
 
-    Route::post('/news/add', 'NewsController@addOneNews')->name("news_add");
+    Route::post('/news/add', [AdminPanelController::class, 'addOneNews'])->name("news_add");
 
 
     // ************
     // Добавление акции
     // ************
-    Route::get('/stock/add', function () {
-        return view('admin.addStock');
-    })->name("stock_add");
+    Route::view('/stock/add', 'admin.addStock')->name("stock_add");
 
-    Route::post('/stock/add', 'StockController@addOneStock')->name("stock_add");
+    Route::post('/stock/add', [AdminPanelController::class, 'addOneStock'])->name("stock_add");
 
 
     // ************
@@ -80,27 +81,23 @@ Route::group(['middleware' => 'auth'], function () {
                 return view('admin.addBrand');
             })->name("brand_add");
 
-            Route::post('', 'AdminController@addBrand')->name("brand_add");
+            Route::post('', [AdminPanelController::class, 'addBrand'])->name("brand_add");
         });
 
         Route::prefix('model')->group(function () {
-            Route::get('', function () {
-                return view('admin.addModel', [
-                    "brandsData" => \App\Http\Models\Brand::all()
-                ]);
-            })->name("model_add");
+            Route::view('', 'admin.addModel', [
+                "brandsData" => \App\Http\Models\Brand::all()
+            ])->name("model_add");
 
-            Route::post('', 'AdminController@addModel')->name("model_add");
+            Route::post('', [AdminPanelController::class, 'addModel'])->name("model_add");
         });
 
         Route::prefix('modification')->group(function () {
-            Route::get('', function (){
-                return view('admin.addModification', [
-                    "autoModelData" => \App\Http\Models\AutoModel::all()
-                ]);
-            })->name("modification_add");
+            Route::view('', 'admin.addModification', [
+                "autoModelData" => AutoModel::all()
+            ])->name("modification_add");
 
-            Route::post('', 'AdminController@addModification')->name("modification_add");
+            Route::post('', [AdminPanelController::class, 'addModification'])->name("modification_add");
         });
     });
 });
@@ -127,8 +124,7 @@ Route::prefix('maintenance')->group(function (){
         ->name('maintenance_brands');
 
     Route::get('/{id}', "MaintenanceController@showModel")
-        ->name('maintenance_models')
-        ->where('id', '[0-9]+');
+        ->name('maintenance_models');
 
     Route::get('/{id_brand}/{id_model}', "MaintenanceController@showModification")
         ->name('maintenance_modification')

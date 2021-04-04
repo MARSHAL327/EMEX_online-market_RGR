@@ -42,7 +42,7 @@
             <div class="modification__items">
                 <table>
                     <tr class="grey-strip">
-                        <th>Описание детали</th>
+                        <th>Название детали</th>
                         <th>Кол-во</th>
                         <th>Цена</th>
                     </tr>

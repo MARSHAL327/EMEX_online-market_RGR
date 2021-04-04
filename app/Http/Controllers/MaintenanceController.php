@@ -14,7 +14,7 @@ class MaintenanceController extends Controller
         return view('maintenance.brands', $this->getBrandsData());
     }
 
-    public function getBrandsData(){
+    public static function getBrandsData(){
         $brand = new Brand();
 
         return [
