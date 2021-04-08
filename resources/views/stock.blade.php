@@ -31,7 +31,7 @@
                         </span>
                     </div>
                     <div class="card-front">
-                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $stockItem->img }}" alt="">
+                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $stockItem->img }}" alt="">
                         <span class="stock-card__text">{{ $stockItem->title }}</span>
                         <div class="black-bg"></div>
                     </div>

@@ -72,7 +72,7 @@
         <div class="news-card grid-3fr">
             @foreach($news as $newsItem)
                 <div class="news-card__item">
-                    <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $newsItem->img }}" alt="">
+                    <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $newsItem->img }}" alt="">
                     <div class="news-card__text-btn-wrapper">
                         <div class="news-card__text-wrapper">
                             <div class="news-card__text-title">{{ $newsItem->title }}</div>
@@ -118,7 +118,7 @@
                         </span>
                     </div>
                     <div class="card-front">
-                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/{{ $stockItem->img }}" alt="">
+                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $stockItem->img }}" alt="">
                         <span class="stock-card__text">{{ $stockItem->title }}</span>
                         <div class="black-bg"></div>
                     </div>

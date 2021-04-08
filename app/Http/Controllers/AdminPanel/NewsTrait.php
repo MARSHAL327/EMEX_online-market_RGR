@@ -14,7 +14,7 @@ trait NewsTrait
 
         $news->title = $req->input('title');
         $news->desc = $req->input('desc');
-        $news->img = "img/" . $req->input('img');
+        $news->img = $req->input('img');
         $news->text = $req->input('text');
         $news->date = date("Y-m-d");
 

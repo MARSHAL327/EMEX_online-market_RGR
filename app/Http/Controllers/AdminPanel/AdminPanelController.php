@@ -7,6 +7,6 @@ use App\Http\Controllers\Controller;
 class AdminPanelController extends Controller
 {
 
-    use NewsTrait, StockTrait, MaintenanceTrait;
+    use NewsTrait, StockTrait, MaintenanceTrait, ProductTrait;
 
 }

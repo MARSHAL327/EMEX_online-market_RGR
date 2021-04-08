@@ -24,7 +24,7 @@
                     <span class="material-icons">directions_car</span>
                     Добавить авто
                 </a></li>
-            <li class="admin-controller__panel__item"><a href="">
+            <li class="admin-controller__panel__item"><a href="{{ route("productCategory_add") }}">
                     <span class="material-icons">add_circle_outline</span>
                     Добавить товар
                 </a></li>

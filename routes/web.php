@@ -77,9 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ************
     Route::prefix('add-auto')->group(function () {
         Route::prefix('brand')->group(function () {
-            Route::get('', function () {
-                return view('admin.addBrand');
-            })->name("brand_add");
+            Route::view('', 'admin.addBrand')->name("brand_add");
 
             Route::post('', [AdminPanelController::class, 'addBrand'])->name("brand_add");
         });
@@ -100,6 +98,38 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('', [AdminPanelController::class, 'addModification'])->name("modification_add");
         });
     });
+
+    // ************
+    // Добавление товара
+    // ************
+    Route::prefix('product')->group(function () {
+        Route::prefix('category')->group(function () {
+            Route::view('', 'admin.product.addCategory')->name("productCategory_add");
+            Route::post('', [AdminPanelController::class, 'addProductCategory'])->name("productCategory_add");
+        });
+
+        Route::prefix('property')->group(function () {
+            Route::view('', 'admin.product.addProperty', [
+                "categories" => \App\Http\Models\ProductCategory::all()
+            ])->name("property_add");
+            Route::post('', [AdminPanelController::class, 'addProductProperty'])->name("property_add");
+        });
+
+        Route::prefix('fabricator')->group(function () {
+            Route::view('', 'admin.product.addFabricator')->name("fabricator_add");
+            Route::post('', [AdminPanelController::class, 'addProductFabricator'])->name("fabricator_add");
+        });
+
+        Route::prefix('provider')->group(function () {
+            Route::view('', 'admin.product.addProvider')->name("provider_add");
+            Route::post('', [AdminPanelController::class, 'addProductProvider'])->name("provider_add");
+        });
+
+        Route::prefix('product')->group(function () {
+            Route::view('', 'admin.product.addProduct')->name("product_add");
+            Route::post('', [AdminPanelController::class, 'addBrand'])->name("product_add");
+        });
+    });
 });
 
 
@@ -118,7 +148,6 @@ Route::post('auth/login', 'Auth\LoginController@login')->name('login');
 // ************
 // Запачасти для ТО
 // ************
-
 Route::prefix('maintenance')->group(function (){
     Route::get('', "MaintenanceController@showBrands")
         ->name('maintenance_brands');

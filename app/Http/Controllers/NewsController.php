@@ -8,7 +8,6 @@ class NewsController extends Controller
 {
 
     public function showNews(){
-        $news = new NewsModel();
         $news = NewsModel::orderBy('date', 'desc')->paginate(3);
 
         return view('news', compact('news'));

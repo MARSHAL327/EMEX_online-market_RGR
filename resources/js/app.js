@@ -30,8 +30,27 @@ $(document).ready(function () {
 
     function sendAjax(_this, errorFoo, successFoo){
         let formData = new FormData(_this[0]);
-        if( formData.has("img") ){
-            formData.set("img", formData.get("img").name);
+        let error = false;
+        let supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
+
+        formData.forEach((item, i) => {
+            if( typeof item === "object" ){
+                if( supportedFormatsImg.includes(item.type)  ){
+                    formData.set(i.toString(), item.name);
+                } else {
+                    error = true;
+                }
+            }
+        })
+
+        if( error ){
+            swal({
+                title: "Ошибка",
+                text: "Неверный формат файла",
+                icon: "error",
+            });
+
+            return;
         }
 
         $.ajax({
@@ -83,7 +102,6 @@ $(document).ready(function () {
     })
 
     mainForm.on("submit", function (event) {
-        console.log("ok");
         event.preventDefault();
         sendAjax($(this), errorAjax, successAjax);
     })

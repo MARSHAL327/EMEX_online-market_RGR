@@ -19378,6 +19378,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 $(document).ready(function () {
@@ -19410,9 +19412,25 @@ $(document).ready(function () {
 
   function sendAjax(_this, errorFoo, successFoo) {
     var formData = new FormData(_this[0]);
+    var error = false;
+    var supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
+    formData.forEach(function (item, i) {
+      if (_typeof(item) === "object") {
+        if (supportedFormatsImg.includes(item.type)) {
+          formData.set(i.toString(), item.name);
+        } else {
+          error = true;
+        }
+      }
+    });
 
-    if (formData.has("img")) {
-      formData.set("img", formData.get("img").name);
+    if (error) {
+      swal({
+        title: "Ошибка",
+        text: "Неверный формат файла",
+        icon: "error"
+      });
+      return;
     }
 
     $.ajax({
@@ -19459,7 +19477,6 @@ $(document).ready(function () {
     $(this).parent().toggleClass("active");
   });
   mainForm.on("submit", function (event) {
-    console.log("ok");
     event.preventDefault();
     sendAjax($(this), errorAjax, successAjax);
   });
