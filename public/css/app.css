@@ -604,6 +604,7 @@ label.active {
 }
 
 .header .header__menu > ul li .header__submenu__item {
+  min-width: 250px;
   padding: 10px 0;
   position: absolute;
   top: 50px;
@@ -623,7 +624,12 @@ label.active {
   font-size: 18px;
 }
 
-.header .header__menu > ul li:last-child {
+.header .header__menu > ul li .header__submenu__item li > a:hover {
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.header .header__menu > ul > li:last-child {
   margin-right: 40px;
 }
 

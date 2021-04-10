@@ -1,7 +1,7 @@
 @extends('layouts.addProductLayout')
 
 @section('addProductContent')
-    <form action="{{ route('product_add') }}" method="post" class="main-form">
+    <form action="" method="post" class="main-form">
         @csrf
         <label for="auto_modification">
             Выбор модификации авто
@@ -31,7 +31,7 @@
         </label>
 
         <label for="name">
-            Название запчасти
+            Название товара
             <input type="text" name="name">
         </label>
 
@@ -41,24 +41,19 @@
         </label>
 
         <label for="img">
-            Картинка запчасти
+            Картинка товара
             <input type="file" name="img">
         </label>
 
         <label for="price">
-            Цена
-            <input type="text" name="price">
-        </label>
-
-        <label for="price">
-            Наличие
+            Цена товара
             <input type="text" name="price">
         </label>
 
         @foreach($productProperties as $productProperty)
-            <label for="property_{{ $productProperty->id }}">
+            <label for="properties[{{ $productProperty->id }}]">
                 {{ $productProperty->name }}
-                <input type="text" name="property_{{ $productProperty->id }}">
+                <input type="text" name="properties[{{ $productProperty->id }}]">
             </label>
         @endforeach
 

@@ -102,7 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ************
     // Добавление товара
     // ************
-    Route::prefix('product')->group(function () {
+    Route::prefix('add-product')->group(function () {
         Route::prefix('category')->group(function () {
             Route::view('', 'admin.product.addCategory')->name("productCategory_add");
             Route::post('', [AdminPanelController::class, 'addProductCategory'])->name("productCategory_add");
@@ -125,17 +125,24 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('', [AdminPanelController::class, 'addProductProvider'])->name("provider_add");
         });
 
-        Route::get('add-product/{productCategoryID}', [AdminPanelController::class, 'showAddProductPage'])
-            ->name("product_add_view")
-            ->where([
-                'productProperties' => '[0-9]+'
-            ]);
-        Route::post('add-product', [AdminPanelController::class, 'addProduct'])->name("product_add");
+        Route::prefix('add-product/{productCategoryID}')->group(function () {
+            Route::get('', [AdminPanelController::class, 'showAddProductPage'])
+                ->name("product_add_view")
+                ->where([
+                    'productCategoryID' => '[0-9]+'
+                ]);
+            Route::post('', [AdminPanelController::class, 'addProduct'])->where([
+                    'productCategoryID' => '[0-9]+'
+                ]);;
+        });
 
-        Route::view('select-category', 'admin.product.selectCategory', [
-            "productCategories" => \App\Http\Models\ProductCategory::all(),
-        ])->name('selectCategory');
-        Route::post('select-category', [AdminPanelController::class, 'selectCategory']);
+        Route::prefix('select-category')->group(function () {
+            Route::view('', 'admin.product.selectCategory', [
+                "productCategories" => \App\Http\Models\ProductCategory::all(),
+            ])->name('selectCategory');
+            Route::post('', [AdminPanelController::class, 'selectCategory']);
+        });
+
     });
 });
 
@@ -178,3 +185,12 @@ Route::prefix('maintenance')->group(function (){
         ]);
 });
 
+// ************
+// Список товаров
+// ************
+
+Route::get('product/{id_category}/', "MaintenanceController@showMaintenance")
+    ->name('maintenance_page')
+    ->where([
+        'id_category' => '[0-9]+',
+    ]);

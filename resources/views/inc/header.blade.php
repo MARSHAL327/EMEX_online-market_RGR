@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <header class="header">
     <div class="header__logo">
         <a href="{{ route('main')  }}">EMEX</a>
@@ -13,7 +17,9 @@
                     </a>
                     <ul class="header__submenu__item">
                         <li><a href="{{ route('maintenance_brands') }}">Запчасти для ТО</a></li>
-                        <li><a href="">Электрооборудование</a></li>
+                        @foreach(\App\Http\Models\ProductCategory::all() as $productCategory)
+                            <li><a href="">{{ $productCategory->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a href="{{ route('about-company')  }}" class="<?php if(Route::current()->getName() == "about-company") echo "active"?>">О Нас</a></li>

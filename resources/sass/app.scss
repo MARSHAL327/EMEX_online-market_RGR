@@ -656,6 +656,7 @@ label {
                 }
 
                 & .header__submenu__item {
+                    min-width: 250px;
                     padding: 10px 0;
                     position: absolute;
                     top: 50px;
@@ -673,13 +674,18 @@ label {
                         &>a{
                             font-weight: normal;
                             font-size: 18px;
+
+                            &:hover{
+                                border-radius: 0;
+                                background-color: rgba(0, 0, 0, 0.1);
+                            }
                         }
                     }
                 }
+            }
 
-                &:last-child {
-                    margin-right: 40px;
-                }
+            &>li:last-child {
+                margin-right: 40px;
             }
 
             & .header__submenu {
