@@ -9,11 +9,10 @@
     <link rel="shortcut icon" href="<?=$_SERVER["HTTP_HOST"]; ?>/img/logo.svg" type="image/svg">
     <link rel="stylesheet" href="<?=$_SERVER["HTTP_HOST"]; ?>/css/reset.css">
     <link rel="stylesheet" href="<?=$_SERVER["HTTP_HOST"]; ?>/css/app.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/slick.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/jquery.js"></script>
+    <script src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/sweetAlert.js"></script>
     <title>@yield('title-block')</title>
 </head>
 <body>
@@ -32,7 +31,7 @@
 </div>
 
 @include('inc.footer')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript" src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/slick.js"></script>
 <script src="<?=$_SERVER["HTTP_HOST"]; ?>/js/app.js"></script>
 </body>
 </html>

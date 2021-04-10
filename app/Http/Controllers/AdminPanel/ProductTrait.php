@@ -11,6 +11,7 @@ use App\Http\Requests\ProductCategoryRequest;
 use App\Http\Requests\ProductFabricatorRequest;
 use App\Http\Requests\ProductPropertiesRequest;
 use App\Http\Requests\ProductProviderRequest;
+use App\Http\Requests\SelectCategoryRequest;
 
 trait ProductTrait
 {
@@ -65,5 +66,24 @@ trait ProductTrait
         if( $saveStatus ){
             return $this->JSONResponse("success", "Успех", "Поставщик товара успешно добавлен");
         } else return $this->JSONResponse("error", "Ошибка", "При добавлении произошла ошибка");
+    }
+
+    public function selectCategory(SelectCategoryRequest $req){
+        $category_id = $req->input('category_id');
+
+        return redirect()->route('product_add_view', [
+            "productCategoryID" =>  $category_id,
+        ]);
+    }
+
+    public function showAddProductPage($productCategoryID){
+        $productProperties = ProductProperties::where('product_category_id', $productCategoryID)->get();
+
+        return view('admin.product.addProduct', [
+            "autoModifications" => \App\Http\Models\Modification::all(),
+            "productFabricators" => \App\Http\Models\ProductFabricator::all(),
+            "productProviders" => \App\Http\Models\ProductProvider::all(),
+            "productProperties" => $productProperties
+        ]);
     }
 }

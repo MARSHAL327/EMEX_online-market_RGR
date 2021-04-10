@@ -19410,29 +19410,33 @@ $(document).ready(function () {
     });
   }
 
-  function sendAjax(_this, errorFoo, successFoo) {
+  function formattingFormData(_this) {
     var formData = new FormData(_this[0]);
-    var error = false;
+    var error = [];
     var supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
     formData.forEach(function (item, i) {
       if (_typeof(item) === "object") {
         if (supportedFormatsImg.includes(item.type)) {
           formData.set(i.toString(), item.name);
         } else {
-          error = true;
+          error.push("Неверный формат файла");
         }
       }
     });
 
-    if (error) {
+    if (error.length > 0) {
       swal({
         title: "Ошибка",
-        text: "Неверный формат файла",
+        text: error[0],
         icon: "error"
       });
-      return;
-    }
+      return false;
+    } else return formData;
+  }
 
+  function sendAjax(_this, errorFoo, successFoo) {
+    var formData = formattingFormData(_this);
+    if (formData === false) return;
     $.ajax({
       type: _this.attr('method'),
       url: _this.attr('action'),

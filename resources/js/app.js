@@ -28,9 +28,9 @@ $(document).ready(function () {
         });
     }
 
-    function sendAjax(_this, errorFoo, successFoo){
+    function formattingFormData(_this) {
         let formData = new FormData(_this[0]);
-        let error = false;
+        let error = [];
         let supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
 
         formData.forEach((item, i) => {
@@ -38,20 +38,24 @@ $(document).ready(function () {
                 if( supportedFormatsImg.includes(item.type)  ){
                     formData.set(i.toString(), item.name);
                 } else {
-                    error = true;
+                    error.push("Неверный формат файла");
                 }
             }
         })
 
-        if( error ){
+        if( error.length > 0 ){
             swal({
                 title: "Ошибка",
-                text: "Неверный формат файла",
+                text: error[0],
                 icon: "error",
             });
+            return false;
+        } else return formData;
+    }
 
-            return;
-        }
+    function sendAjax(_this, errorFoo, successFoo){
+        let formData = formattingFormData(_this);
+        if( formData === false ) return;
 
         $.ajax({
             type: _this.attr('method'),

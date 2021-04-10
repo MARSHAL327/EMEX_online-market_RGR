@@ -5,7 +5,7 @@
         @csrf
         <label for="model_id">
             Выбор модели
-            <select name="model_id" id="">
+            <select name="model_id">
                 @foreach($autoModelData as $autoModel)
                     <option value="{{ $autoModel->id }}">{{ $autoModel->brand->name }} {{ $autoModel->name }}</option>
                 @endforeach

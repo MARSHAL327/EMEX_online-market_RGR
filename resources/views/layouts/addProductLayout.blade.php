@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+    @php
+        $routeName = Route::current()->getName();
+    @endphp
+
     <div class="white-block">
         <section>
             <div class="section-title">
@@ -18,20 +22,20 @@
 
         <div class="main-tabs">
             <ul style="grid-template-columns: repeat(5, 150px)">
-                <li class=<?php if(Route::current()->getName() == "productCategory_add") echo "active" ?> >
+                <li class=<?php if($routeName == "productCategory_add") echo "active" ?> >
                     <a href="{{ route('productCategory_add') }}">Категория</a>
                 </li>
-                <li class=<?php if(Route::current()->getName() == "property_add") echo "active" ?>>
+                <li class=<?php if($routeName == "property_add") echo "active" ?>>
                     <a href="{{ route('property_add') }}">Свойство</a>
                 </li>
-                <li class=<?php if(Route::current()->getName() == "fabricator_add") echo "active" ?>>
+                <li class=<?php if($routeName == "fabricator_add") echo "active" ?>>
                     <a href="{{ route('fabricator_add') }}">Производитель</a>
                 </li>
-                <li class=<?php if(Route::current()->getName() == "provider_add") echo "active" ?>>
+                <li class=<?php if($routeName == "provider_add") echo "active" ?>>
                     <a href="{{ route('provider_add') }}">Поставщик</a>
                 </li>
-                <li class=<?php if(Route::current()->getName() == "product_add") echo "active" ?>>
-                    <a href="{{ route('product_add') }}">Товар</a>
+                <li class=<?php if($routeName == "selectCategory" || $routeName == "product_add_view") echo "active" ?>>
+                    <a href="{{ route('selectCategory') }}">Товар</a>
                 </li>
             </ul>
         </div>

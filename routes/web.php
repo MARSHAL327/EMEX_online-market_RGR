@@ -125,10 +125,17 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('', [AdminPanelController::class, 'addProductProvider'])->name("provider_add");
         });
 
-        Route::prefix('product')->group(function () {
-            Route::view('', 'admin.product.addProduct')->name("product_add");
-            Route::post('', [AdminPanelController::class, 'addBrand'])->name("product_add");
-        });
+        Route::get('add-product/{productCategoryID}', [AdminPanelController::class, 'showAddProductPage'])
+            ->name("product_add_view")
+            ->where([
+                'productProperties' => '[0-9]+'
+            ]);
+        Route::post('add-product', [AdminPanelController::class, 'addProduct'])->name("product_add");
+
+        Route::view('select-category', 'admin.product.selectCategory', [
+            "productCategories" => \App\Http\Models\ProductCategory::all(),
+        ])->name('selectCategory');
+        Route::post('select-category', [AdminPanelController::class, 'selectCategory']);
     });
 });
 
