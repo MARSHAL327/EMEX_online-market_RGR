@@ -186,11 +186,11 @@ Route::prefix('maintenance')->group(function (){
 });
 
 // ************
-// Список товаров
+// Работа с продуктом
 // ************
 
-Route::get('product/{id_category}/', "MaintenanceController@showMaintenance")
-    ->name('maintenance_page')
-    ->where([
-        'id_category' => '[0-9]+',
-    ]);
+Route::prefix('product')->group(function (){
+    Route::get('{id}', [\App\Http\Controllers\ProductController::class, "showProductCatalogPage"])->name('product-catalog');
+    Route::get('{id_category}/{id_product}', [\App\Http\Controllers\ProductController::class, "showProductPage"])->name('product');
+});
+

@@ -18,7 +18,7 @@
                     <ul class="header__submenu__item">
                         <li><a href="{{ route('maintenance_brands') }}">Запчасти для ТО</a></li>
                         @foreach(\App\Http\Models\ProductCategory::all() as $productCategory)
-                            <li><a href="">{{ $productCategory->name }}</a></li>
+                            <li><a href="{{ route('product-catalog', $productCategory->id) }}">{{ $productCategory->name }}</a></li>
                         @endforeach
                     </ul>
                 </li>

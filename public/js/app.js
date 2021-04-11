@@ -19484,6 +19484,11 @@ $(document).ready(function () {
     event.preventDefault();
     sendAjax($(this), errorAjax, successAjax);
   });
+  $(".filter__item__title").on("click", function () {
+    $(this).parent().toggleClass("active");
+    console.log($(this).next());
+    $(this).next().slideToggle();
+  });
   registerModal.find("p").on("click", toggleAuthModal);
   loginModal.find("p").on("click", toggleAuthModal);
   $(".admin-controller__btn").on("click", function () {

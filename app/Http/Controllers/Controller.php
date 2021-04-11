@@ -19,4 +19,12 @@ class Controller extends BaseController
             "text" => $text
         ]);
     }
+
+    public function ModelFirstElement($ModelArray){
+        if( count($ModelArray) < 1 ){
+            return abort(404);
+        } else {
+            return $ModelArray[0];
+        }
+    }
 }
