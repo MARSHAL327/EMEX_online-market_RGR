@@ -40,11 +40,23 @@
                                 Поставщик: {{ $product->provider->name }}
                             </div>
                         </div>
-                        <div class="product__btn main-btn main-btn_red">Добавить в корзину</div>
+                        <div class="flex">
+                            <div class="product__count-btn flex">
+                                <div class="product__count-btn__remove circle-btn">
+                                    <span class="material-icons">remove</span>
+                                </div>
+                                <input type="number" value="1" min="1" max="{{ $product->count }}">
+                                <div class="product__count-btn__add circle-btn">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                            <div class="product__btn main-btn main-btn_red">Добавить в корзину</div>
+                        </div>
+
                     </div>
                     <div class="thin-frame">
                         <div class="blue-text bold-text fz-22">Краткие характеристики:</div>
-                        <div class="product__properties">
+                        <div class="product__properties mt-20 mb-20">
                             @foreach($product->properties as $propertyItem)
                                 <div class="product__property">
                                     <div class="product__property-name bold-text">{{ $propertyItem->properties->name }}</div>
@@ -52,12 +64,70 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="blue-text">Подробнее</div>
+                        <a href="#props" class="blue-text">Подробнее</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <section>
+        <div class="main-tabs">
+            <ul style="grid-template-columns: repeat(5, 150px)">
+                <li class="active" id="props">
+                    <a href="javascript:void(0)">Харакетристики</a>
+                </li>
+                <li class=>
+                    <a href="javascript:void(0)">Производитель</a>
+                </li>
+                <li class=>
+                    <a href="javascript:void(0)">Поставщик</a>
+                </li>
+            </ul>
+            <div>
+                <div class="product__properties mt-20">
+                    @foreach($product->properties as $propertyItem)
+                        <div class="product__property">
+                            <div class="product__property-name bold-text">{{ $propertyItem->properties->name }}</div>
+                            <div class="product__property-value">{{ $propertyItem->value }}</div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="description-block mt-20">
+                    <div class="description-block__img">
+                        <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->fabricator->logo }}" alt="">
+                    </div>
+                    <div class="description-block__content-wrapper">
+                        <div class="description-block__title">
+                            {{ $product->fabricator->name }}
+                        </div>
+                        <div class="description-block__text">
+                            {{ $product->fabricator->description }}
+                        </div>
+                    </div>
+                </div>
+                <div class="description-block mt-20">
+                    <div class="description-block__img">
+                        <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->provider->logo }}" alt="">
+                    </div>
+                    <div class="description-block__content-wrapper">
+                        <div class="description-block__title">
+                            {{ $product->provider->name }}
+                        </div>
+                        <div class="description-block__text">
+                            {{ $product->provider->description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".main-tabs").lightTabs();
+        })
+    </script>
 
 @endsection

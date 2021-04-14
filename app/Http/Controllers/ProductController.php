@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Product;
+use App\Http\Models\ProductProperties;
 use App\Http\Models\ProductProperty;
 
 class ProductController extends Controller
@@ -11,7 +12,12 @@ class ProductController extends Controller
         $listProduct = Product::where('product_category_id', $categoryID)->get();
         $productData = $this->ModelFirstElement($listProduct);
 
-        $productProperties = ProductProperty::where('product_id', $productData->id)->get();
+        $productProperties = ProductProperties::where('product_category_id', $categoryID)->get();
+        $props = [];
+
+        foreach ($productProperties as $productProperty) {
+            $props[] = ProductProperty::where('product_options_id', $productProperty->id)->get();
+        }
 
         $fabricatorNames = [];
         foreach ($listProduct as $product) {
@@ -21,8 +27,8 @@ class ProductController extends Controller
         return view('product.product-catalog', [
             "productData" => $productData,
             "listProduct" => $listProduct,
-            "productProperties" => $productProperties,
-            "fabricatorNames" => $fabricatorNames,
+            "props" => $props,
+            "fabricatorNames" => array_unique($fabricatorNames),
         ]);
     }
 

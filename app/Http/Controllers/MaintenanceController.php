@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\AutoModel;
 use App\Http\Models\Brand;
 use App\Http\Models\Modification;
+use App\Http\Models\Product;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
@@ -54,10 +55,11 @@ class MaintenanceController extends Controller
     }
 
     public function showMaintenance($brand_id, $model_id, $modification_id){
+        $products = Product::where('modification_id', $modification_id)->get();
+
         return view('maintenance.maintenance', [
-            "brand" => Brand::find($brand_id),
-            "model" => AutoModel::find($model_id),
-            "modification" => Modification::find($modification_id),
+            "autoData" => Modification::find($modification_id),
+            "products" => $products
         ]);
     }
 }

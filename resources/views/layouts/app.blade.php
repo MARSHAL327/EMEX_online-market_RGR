@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/jquery.js"></script>
     <script src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/sweetAlert.js"></script>
+    <script type="text/javascript" src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/slick.js"></script>
+    <script src="<?=$_SERVER["HTTP_HOST"]; ?>/js/app.js"></script>
     <title>@yield('title-block')</title>
 </head>
 <body>
@@ -31,7 +33,5 @@
 </div>
 
 @include('inc.footer')
-<script type="text/javascript" src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/slick.js"></script>
-<script src="<?=$_SERVER["HTTP_HOST"]; ?>/js/app.js"></script>
 </body>
 </html>

@@ -34,6 +34,21 @@ body > .black-bg.active {
   background-color: #DEDEDE;
 }
 
+.circle-btn {
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+  border-radius: 100%;
+  border: 1px solid #DEDEDE;
+  transition: 0.3s;
+}
+
+.circle-btn:hover {
+  background-color: #DEDEDE;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 .blue-text {
   color: #1871C3;
 }
@@ -44,6 +59,14 @@ body > .black-bg.active {
 
 .fz-22 {
   font-size: 22px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
 }
 
 .grey-text {
@@ -1478,14 +1501,40 @@ label.active {
   display: inline-block;
   width: auto;
   margin-right: 10px;
+  color: #000;
 }
 
 .filter .filter__item .filter__item__content label {
   margin-bottom: 2px;
+  color: #000;
 }
 
 .filter .filter__item .filter__item__content label:last-child {
   margin-bottom: 0;
+}
+
+.filter .filter__item .filter__item__content .filter__item_number {
+  width: auto;
+  height: auto;
+  top: auto;
+  left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #DEDEDE;
+}
+
+.filter .filter__item .filter__item__content .filter__item_number .dash {
+  margin: 0 10px;
+}
+
+.filter .filter__item .filter__item__content .filter__item_number input {
+  width: 100%;
+  border: 1px solid #DEDEDE;
+}
+
+.filter .filter__item .filter__item__content .filter__item_number input:focus {
+  border: 1px solid #2B2B2B;
 }
 
 .filter .filter__item.active {
@@ -1542,12 +1591,69 @@ label.active {
   margin-right: 10px;
 }
 
-.product .product__info .product__info-wrapper .product__properties {
-  margin: 20px 0;
+.product__properties {
+  line-height: 30px;
 }
 
-.product .product__info .product__info-wrapper .product__properties .product__property {
+.product__properties .product__property {
   display: grid;
   grid-template-columns: 200px 100px;
+}
+
+.product__count-btn {
+  width: auto;
+  height: auto;
+  top: auto;
+  left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.product__count-btn input {
+  margin: 0;
+  width: 70px;
+  height: 46px;
+  border: 1px solid #DEDEDE;
+  border-radius: 0;
+}
+
+.product__count-btn .product__count-btn__add,
+.product__count-btn .product__count-btn__remove {
+  width: 24px;
+  height: 24px;
+  top: auto;
+  left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 5px 5px 0;
+  border-left: 0;
+}
+
+.product__count-btn .product__count-btn__remove {
+  border-radius: 5px 0 0 5px;
+  border-left: 1px solid #DEDEDE;
+  border-right: 0;
+}
+
+.description-block {
+  display: grid;
+  grid-template-columns: 300px 850px;
+  grid-gap: 50px;
+}
+
+.description-block .description-block__img img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.description-block .description-block__title {
+  font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 

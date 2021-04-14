@@ -9,7 +9,7 @@ $btnTextColor: #3363FF;
 $btnBgColor: #E6ECFF;
 $lightenDark: #2B2B2B;
 
-@mixin centerBlcok($width, $height, $top, $left) {
+@mixin centerBlock($width, $height, $top, $left) {
     width: $width;
     height: $height;
     top: $top;
@@ -61,6 +61,21 @@ body {
     background-color: $lightGrey;
 }
 
+.circle-btn{
+    width: 25px;
+    height: 25px;
+    padding: 10px;
+    border-radius: 100%;
+    border: 1px solid $lightGrey;
+    transition: .3s;
+
+    &:hover{
+        background-color: $lightGrey;
+        transition: .3s;
+        cursor: pointer;
+    }
+}
+
 .blue-text {
     color: $blue;
 }
@@ -71,6 +86,14 @@ body {
 
 .fz-22{
     font-size: 22px;
+}
+
+.mt-20{
+    margin-top: 20px;
+}
+
+.mb-20{
+    margin-bottom: 20px;
 }
 
 .grey-text {
@@ -188,7 +211,7 @@ body {
 }
 
 .flex{
-    @include centerBlcok(auto, auto, auto, auto);
+    @include centerBlock(auto, auto, auto, auto);
     justify-content: flex-start;
 }
 
@@ -745,7 +768,7 @@ label {
 
     & .header__basket {
         position: relative;
-        @include centerBlcok(50px, 100%, auto, auto);
+        @include centerBlock(50px, 100%, auto, auto);
         box-sizing: border-box;
         border-radius: 10px;
         background-color: $blue;
@@ -764,7 +787,7 @@ label {
         }
 
         & .header__basket__count {
-            @include centerBlcok(auto, auto, -10px, auto);
+            @include centerBlock(auto, auto, -10px, auto);
             position: absolute;
             right: -10px;
             background-color: $red;
@@ -804,7 +827,7 @@ $slider-height: 550px;
         }
 
         & span, & .one-news__title, & .one-news__desc, & .one-news__date {
-            @include centerBlcok(100%, 100%, 0, 0);
+            @include centerBlock(100%, 100%, 0, 0);
             position: absolute;
             z-index: 10;
             color: #fff;
@@ -833,7 +856,7 @@ $slider-height: 550px;
     }
 
     .main-slider__prev-item, .main-slider__next-item {
-        @include centerBlcok(80px, 100%, 0, 0);
+        @include centerBlock(80px, 100%, 0, 0);
         position: absolute;
         color: #fff;
         opacity: 0;
@@ -967,7 +990,7 @@ $slider-height: 550px;
         }
 
         & .stock-card__text {
-            @include centerBlcok(100%, 100%, 0, 0);
+            @include centerBlock(100%, 100%, 0, 0);
             position: absolute;
             color: #fff;
             z-index: 2;
@@ -1081,7 +1104,7 @@ $slider-height: 550px;
         display: block;
         border-radius: 100%;
         border: 1px solid #fff;
-        @include centerBlcok(40px, 40px, auto, auto);
+        @include centerBlock(40px, 40px, auto, auto);
 
         & svg {
             width: 15px;
@@ -1128,7 +1151,7 @@ $slider-height: 550px;
         position: absolute;
         padding: 0 60px;
         box-sizing: border-box;
-        @include centerBlcok(100%, 100%, 0, 0);
+        @include centerBlock(100%, 100%, 0, 0);
         display: grid;
 
         & .about-company__statistic__item {
@@ -1316,10 +1339,10 @@ $slider-height: 550px;
 
         & li{
             & a{
-                @include centerBlcok(auto, auto, auto, auto);
+                @include centerBlock(auto, auto, auto, auto);
 
                 & .maintenance-progress__item__circle{
-                    @include centerBlcok(50px, 50px, auto, auto);
+                    @include centerBlock(50px, 50px, auto, auto);
                     color: #fff;
                     border-radius: 100%;
                     background-color: $darkGrey;
@@ -1542,12 +1565,32 @@ $slider-height: 550px;
                 display: inline-block;
                 width: auto;
                 margin-right: 10px;
+                color: #000;
             }
 
             & label{
                 margin-bottom: 2px;
+                color: #000;
                 &:last-child{
                     margin-bottom: 0;
+                }
+            }
+
+            & .filter__item_number{
+                @include centerBlock(auto, auto, auto, auto);
+                color: $lightGrey;
+
+                & .dash{
+                    margin: 0 10px;
+                }
+
+                & input{
+                    width: 100%;
+                    border: 1px solid $lightGrey;
+
+                    &:focus{
+                        border: 1px solid $lightenDark;
+                    }
                 }
             }
         }
@@ -1609,16 +1652,64 @@ $slider-height: 550px;
                     margin-right: 10px;
                 }
             }
-
-            & .product__properties{
-                margin: 20px 0;
-
-                & .product__property{
-                    display: grid;
-                    grid-template-columns: 200px 100px;
-
-                }
-            }
         }
+    }
+}
+
+.product__properties{
+    line-height: 30px;
+
+    & .product__property{
+        display: grid;
+        grid-template-columns: 200px 100px;
+    }
+}
+
+.product__count-btn{
+    @include centerBlock(auto, auto, auto, auto);
+    margin-right: 15px;
+
+    & input{
+        margin: 0;
+        width: 70px;
+        height: 46px;
+        border: 1px solid $lightGrey;
+        border-radius: 0;
+    }
+
+    & .product__count-btn__add, & .product__count-btn__remove{
+        @include centerBlock(24px, 24px, auto, auto);
+        border-radius: 0 5px 5px 0;
+        border-left: 0;
+    }
+
+    & .product__count-btn__remove{
+        border-radius: 5px 0 0 5px;
+        border-left: 1px solid $lightGrey;
+        border-right: 0;
+    }
+}
+
+// ************
+// Описательный блок
+// ************
+
+.description-block{
+    display: grid;
+    grid-template-columns: 300px 850px;
+    grid-gap: 50px;
+
+    .description-block__img{
+        & img{
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+    }
+
+    .description-block__title{
+        font-weight: bold;
+        font-size: 36px;
+        margin-bottom: 10px;
     }
 }

@@ -16,7 +16,7 @@
 
         <div class="product-catalog-wrapper">
             <div class="filter">
-                <div class="filter__item">
+                <div class="filter__item active">
                     <div class="filter__item__title">
                         Производитель
                         <span class="material-icons">expand_less</span>
@@ -29,23 +29,61 @@
                         @endforeach
                     </div>
                 </div>
-                @foreach($productProperties as $propertyItem)
-                    <div class="filter__item">
-                        <div class="filter__item__title">
-                            {{ $propertyItem->properties->name }}
-                            <span class="material-icons">expand_less</span>
+                @foreach($props as $prop)
+                        <div class="filter__item active">
+                            <div class="filter__item__title">
+                                {{ $prop[0]->properties->name }}
+                                <span class="material-icons">expand_less</span>
+                            </div>
+                            <div class="filter__item__content">
+                                @php
+                                    $min = $prop[0]->value;
+                                    $max = 0;
+
+                                    foreach ($prop as $propItem) {
+                                        if( $propItem->value > $max ) $max = $propItem->value;
+                                        if( $propItem->value < $min ) $min = $propItem->value;
+                                    }
+                                @endphp
+                                @foreach( $prop as $propValue)
+                                    @php $propType = $propValue->properties->propType->type @endphp
+                                    @if( $propType == "Число" )
+                                        <div class="filter__item_number">
+                                            <label for="min_value">
+                                                <input type="text" name="min_value" placeholder="от {{ $min }}">
+                                            </label>
+                                            <span class="dash">—</span>
+                                            <label for="max_value">
+                                                <input type="text" name="max_value" placeholder="до {{ $max }}">
+                                            </label>
+                                        </div>
+                                        @break
+                                    @elseif( $propType == "Текст" )
+                                        <label for="{{ $propValue->value }}">
+                                            <input type="checkbox" name="{{ $propValue->value }}">{{ $propValue->value }}
+                                        </label>
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="filter__item__content">
-                            <label for="{{ $propertyItem->value }}">
-                                <input type="checkbox" name="{{ $propertyItem->value }}">{{ $propertyItem->value }}
-                            </label>
-                        </div>
-                    </div>
+
+                    {{--                    <div class="filter__item">--}}
+                    {{--                        <div class="filter__item__title">--}}
+                    {{--                            {{ $prop->properties->name }}--}}
+                    {{--                            <span class="material-icons">expand_less</span>--}}
+                    {{--                        </div>--}}
+                    {{--                        <div class="filter__item__content">--}}
+                    {{--                            @foreach( $prop as $propValue)--}}
+
+                    {{--                            @endforeach--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
                 @endforeach
             </div>
             <div class="product-card">
                 @foreach($listProduct as $product)
-                    <a href="{{ route('product', [ "id_category" => $productData->category->id, "id_product" => $product->id]) }}" class="product-card__item">
+                    <a href="{{ route('product', [ "id_category" => $productData->category->id, "id_product" => $product->id]) }}"
+                       class="product-card__item">
                         <div class="product-card__img">
                             <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->img }}" alt="">
                         </div>

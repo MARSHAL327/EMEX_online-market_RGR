@@ -18,6 +18,16 @@
             <input type="text" name="name">
         </label>
 
+        <label for="prop_type_id">
+            Выбор типа свойства
+
+            <select name="prop_type_id" id="">
+                @foreach($propType as $propTypeItem)
+                    <option value="{{ $propTypeItem->id }}">{{ $propTypeItem->type }}</option>
+                @endforeach
+            </select>
+        </label>
+
         <button class="main-btn">Добавить</button>
     </form>
 @endsection

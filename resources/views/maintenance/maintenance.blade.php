@@ -20,14 +20,14 @@
             <div class="maintenance-title">
                 <div class="maintenance-title__auto-data maintenance-title__item">
                     <div class="maintenance-title__auto-data__img">
-                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $model->img }}" alt="">
+                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $autoData->autoModel->img }}" alt="">
                     </div>
                     <div class="maintenance-title__auto-data__text">
                         <div class="maintenance-title__auto-data__title">
-                            {{ $brand->name }} {{ $model->name }}
+                            {{ $autoData->autoModel->brand->name }} {{ $autoData->autoModel->name }}
                         </div>
                         <div class="maintenance-title__auto-data__modification">
-                            Модификация - {{ $modification->name }}
+                            Модификация - {{ $autoData->name }}
                         </div>
                     </div>
                 </div>
@@ -46,17 +46,26 @@
                         <th>Кол-во</th>
                         <th>Цена</th>
                     </tr>
-                    <tr class="auto-model__item">
-                        <td>
-                            Свеча зажигания
-                        </td>
-                        <td>
-                            5 шт.
-                        </td>
-                        <td class="transparent-btn">
-                            <a href="">Посмотреть цены</a>
-                        </td>
-                    </tr>
+                    @if( count($products) > 0 )
+                        @foreach($products as $product)
+                            <tr class="auto-model__item">
+                                <td>
+                                    {{ $product->category->name }}
+                                </td>
+                                <td>
+                                    {{ $product->count }} шт.
+                                </td>
+                                <td class="transparent-btn">
+                                    <a href="{{ route('product', [ "id_category" => $product->category->id, "id_product" => $product->id]) }}">Посмотреть цены</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr class="auto-model__item">
+                            <td>Для данной модификации отсутствуют запчасти</td>
+                        </tr>
+                    @endif
+
                 </table>
             </div>
         </div>

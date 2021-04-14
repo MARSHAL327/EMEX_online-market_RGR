@@ -36,6 +36,7 @@ trait ProductTrait
 
         $productProperties->product_category_id = $req->input('category_id');
         $productProperties->name = $req->input('name');
+        $productProperties->type = $req->input('prop_type_id');
 
         $saveStatus = $productProperties->save();
 
@@ -119,6 +120,7 @@ trait ProductTrait
                 "product_id" => $product->id,
                 "product_options_id" => $propertyID,
                 "value" => $propertyValue,
+                "category_id" => $productCategoryID,
             ];
         }
 

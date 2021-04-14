@@ -110,7 +110,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::prefix('property')->group(function () {
             Route::view('', 'admin.product.addProperty', [
-                "categories" => \App\Http\Models\ProductCategory::all()
+                "categories" => \App\Http\Models\ProductCategory::all(),
+                "propType" => \App\Http\Models\PropertyType::all()
             ])->name("property_add");
             Route::post('', [AdminPanelController::class, 'addProductProperty'])->name("property_add");
         });

@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <header class="header">
     <div class="header__logo">
         <a href="{{ route('main')  }}">EMEX</a>

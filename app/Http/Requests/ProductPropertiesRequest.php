@@ -26,6 +26,7 @@ class ProductPropertiesRequest extends FormRequest
         return [
             'category_id' => ["required"],
             'name' => ["required"],
+            'prop_type_id' => ["required"],
         ];
     }
 
@@ -34,6 +35,7 @@ class ProductPropertiesRequest extends FormRequest
         return [
             "category_id.required" => "Поле Выбор категории обязательно для заполнения",
             "name.required" => "Поле Название свойства обязательно для заполнения",
+            'prop_type_id' => "Поле Выбор типа свойства обязательно для заполнения",
         ];
     }
 }
