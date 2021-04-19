@@ -19531,6 +19531,113 @@ $(document).ready(function () {
     var input = $(this).next();
     if (input.val() > 1) input.val(+input.val() - 1);
   });
+  var formData;
+
+  if (sessionStorage.getItem("formData") == null) {
+    formData = {
+      "_token": $("input[name='_token']").val(),
+      "text": [],
+      "number": []
+    };
+  } else {
+    formData = JSON.parse(sessionStorage.getItem("formData"));
+    formData.text.forEach(function (item) {
+      $("input[value='".concat(item.value, "']")).attr("checked", "checked");
+    });
+    filterAjax(formData);
+  }
+
+  function filterAjax(formData) {
+    var url = new URL(window.location);
+    $.ajax({
+      type: "POST",
+      data: formData,
+      dataType: "html",
+      beforeSend: function beforeSend() {
+        $(".product-card__loader").addClass("active");
+      },
+      success: function success(data) {
+        // $(".test").append(data);
+        window.history.pushState('', '', url.origin + url.pathname);
+        data = new DOMParser().parseFromString(data, "text/html");
+        var html = $(data.querySelector(".product-card-wrapper"));
+        $(".product-card-wrapper").replaceWith(html);
+      },
+      complete: function complete() {
+        $(".product-card__loader").removeClass("active");
+      }
+    });
+  }
+
+  $(".filter .filter__input_text").on("change", function (e) {
+    formData.text = [];
+    $(".filter .filter__input_text").each(function () {
+      formData.text.push({
+        "name": $(this).attr("name"),
+        "value": $(this).val(),
+        "status": $(this).prop("checked")
+      });
+    });
+    formData.text = formData.text.filter(function (item) {
+      return item.status;
+    });
+    console.log(formData); // sessionStorage.setItem("formData", JSON.stringify(formData));
+
+    filterAjax(formData);
+  });
+  $(".filter .filter__item_number input").on("keyup", function (e) {
+    var arrKeys = ["Backspace", "Enter"];
+    if ((isNaN(+e.key) || isNaN(e.key)) && !arrKeys.includes(e.key)) return;
+    formData.number = [];
+    $(".filter .filter__item_number").each(function () {
+      var first_el = $(this).find(".filter__input").eq(0);
+      var second_el = $(this).find(".filter__input").eq(1);
+      formData.number.push({
+        name: $(this).find(".filter__input_number").attr("name"),
+        min: +first_el.val(),
+        max: +second_el.val()
+      });
+    });
+    formData.number = formData.number.filter(function (item) {
+      var input = $(".filter__input_number[name='".concat(item.name, "']"));
+      var maxValue = +input.attr("max");
+      if (item.max === 0) item.max = maxValue;
+      if (item.min !== 0 || item.max !== maxValue) return item;
+    }); // sessionStorage.setItem("formData", JSON.stringify(formData));
+
+    filterAjax(formData);
+  });
+  $(document).on("click", ".product-card-wrapper .pagination li", function (e) {
+    if ($(this).hasClass("active")) return;
+    e.preventDefault();
+    var url = $(this).children().attr("href");
+    $.ajax({
+      url: url,
+      type: "GET",
+      dataType: "html",
+      data: formData,
+      beforeSend: function beforeSend() {
+        $(".product-card__loader").addClass("active");
+      },
+      success: function success(data) {
+        data = new DOMParser().parseFromString(data, "text/html");
+        var html = $(data.querySelector(".product-card-wrapper"));
+        $(".product-card-wrapper").replaceWith(html);
+        window.history.pushState('', '', url);
+      },
+      error: function error(data) {
+        swal({
+          "icon": "error",
+          "title": "Ошибка",
+          "text": "Ошибка при загрузке"
+        });
+        $(".test").append(data);
+      },
+      complete: function complete() {
+        $(".product-card__loader").removeClass("active");
+      }
+    });
+  });
 });
 
 /***/ }),

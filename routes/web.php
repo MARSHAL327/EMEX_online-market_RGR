@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminPanel\AdminPanelController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\ProductController;
 use App\Http\Models\AutoModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -191,7 +192,8 @@ Route::prefix('maintenance')->group(function (){
 // ************
 
 Route::prefix('product')->group(function (){
-    Route::get('{id}', [\App\Http\Controllers\ProductController::class, "showProductCatalogPage"])->name('product-catalog');
-    Route::get('{id_category}/{id_product}', [\App\Http\Controllers\ProductController::class, "showProductPage"])->name('product');
+    Route::get('{id}', [ProductController::class, "showProductCatalogPage"])->name('product-catalog');
+    Route::post('{id}', [ProductController::class, "filterProduct"])->name('product-filter');
+    Route::get('{id_category}/{id_product}', [ProductController::class, "showProductPage"])->name('product');
 });
 

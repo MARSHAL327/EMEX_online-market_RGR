@@ -12,4 +12,8 @@ class ProductProperty extends Model
     public function properties(){
         return $this->belongsTo('App\Http\Models\ProductProperties', 'product_options_id');
     }
+
+    public function product(){
+        return $this->belongsTo('App\Http\Models\Product', 'product_id');
+    }
 }

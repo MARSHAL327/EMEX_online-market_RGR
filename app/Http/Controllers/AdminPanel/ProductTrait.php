@@ -120,7 +120,6 @@ trait ProductTrait
                 "product_id" => $product->id,
                 "product_options_id" => $propertyID,
                 "value" => $propertyValue,
-                "category_id" => $productCategoryID,
             ];
         }
 
