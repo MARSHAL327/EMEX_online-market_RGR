@@ -1590,7 +1590,7 @@ $slider-height: 550px;
             border-bottom: 1px solid $lightGrey;
             border-radius: 10px;
 
-            &>span{
+            &>span.material-icons{
                 transition: .3s;
                 margin-top: -4px;
             }
@@ -1650,7 +1650,7 @@ $slider-height: 550px;
             transition: .3s;
 
             & .filter__item__title{
-                &>span{
+                &>span.material-icons{
                     transition: .3s;
                     transform: rotate(-180deg);
                 }

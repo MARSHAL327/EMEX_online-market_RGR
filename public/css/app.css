@@ -1541,7 +1541,7 @@ label.active {
   border-radius: 10px;
 }
 
-.filter .filter__item .filter__item__title > span {
+.filter .filter__item .filter__item__title > span.material-icons {
   transition: 0.3s;
   margin-top: -4px;
 }
@@ -1607,7 +1607,7 @@ label.active {
   transition: 0.3s;
 }
 
-.filter .filter__item.active .filter__item__title > span {
+.filter .filter__item.active .filter__item__title > span.material-icons {
   transition: 0.3s;
   transform: rotate(-180deg);
 }

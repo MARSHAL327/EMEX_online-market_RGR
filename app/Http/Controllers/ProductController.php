@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Product;
+use App\Http\Models\ProductFabricator;
 use App\Http\Models\ProductProperties;
 use App\Http\Models\ProductProperty;
 use Illuminate\Http\Request;
@@ -53,50 +54,108 @@ class ProductController extends Controller
         ]);
     }
 
+    private function filterFabricators($textInput, $categoryID){
+        $MatchProductID = [];
+        $prevMatchProductID = [];
+
+        foreach ($textInput as $textValue){
+            $propID = ProductFabricator::where('name', $textValue)->value("id");
+
+            $MatchProductID = Product::where([
+                ['product_fabricator_id', $propID],
+                ['product_category_id', $categoryID]
+            ])
+                ->pluck('id')
+                ->toArray();
+
+            $MatchProductID = array_merge($prevMatchProductID, $MatchProductID);
+            $prevMatchProductID = $MatchProductID;
+        }
+
+        return $MatchProductID;
+    }
+
+    private function filterTextProduct($textProps, $categoryID)
+    {
+        $MatchProductID = [];
+        $prevMatchProductID = [];
+        $MatchProductIDs = [];
+
+        foreach ( array_values($textProps) as $i => $textProp) {
+            foreach ( $textProp as $textInput ){
+                $textInputName = array_keys($textProp)[0];
+
+                if( $textInputName == "Производитель" )
+                    $MatchProductID = $this->filterFabricators($textInput, $categoryID);
+                else {
+                    $propID = ProductProperties::where('name', $textInputName)->value("id");
+
+                    foreach ($textInput as $textValue){
+                        $MatchProductID = ProductProperty::where([
+                            ["product_options_id", $propID],
+                            ["value", $textValue["value"]]
+                        ])
+                            ->pluck('product_id')
+                            ->toArray();
+
+                        $MatchProductID = array_merge($prevMatchProductID, $MatchProductID);
+                        $prevMatchProductID = $MatchProductID;
+                    }
+                }
+
+                if( $i > 0 ){
+                    $MatchProductIDs = array_intersect($MatchProductIDs, $MatchProductID);
+                } else $MatchProductIDs = $MatchProductID;
+            }
+        }
+
+        return $MatchProductIDs;
+    }
+
+    private function filterNumberProduct($numberInputs)
+    {
+        $MatchProductID = [];
+
+        foreach ($numberInputs as $numberInput) {
+            $propID = ProductProperties::where('name', $numberInput["name"])->value("id");
+
+            $MatchProductID[] = ProductProperty::where("product_options_id", $propID)
+                ->whereBetween("value", [(int)$numberInput["min"], (int)$numberInput["max"]])
+                ->select("product_id")
+                ->get();
+        }
+
+        return $MatchProductID;
+    }
+
     public function filterProduct(Request $req, $categoryID)
     {
         $productsID = [];
-        $temp = [];
-        $query = [];
 
-        if ($req->input('text') != NULL) {
-            foreach ($req->input('text') as $item) {
-                $propID = ProductProperties::where('name', $item["name"])->value("id");
+        $textInputs = $req->input('text');
+        $numberInputs = $req->input('number');
 
-                $query[] = ProductProperty::where([
-                    ["product_options_id", $propID],
-                    ["value", $item["value"]]
-                ])
-                    ->select("product_id")
-                    ->get();
-            }
+        if ($textInputs != NULL) {
+            $productsID = $this->filterTextProduct($textInputs, $categoryID);
         }
 
-        if ($req->input('number') != NULL) {
-            foreach ($req->input('number') as $item) {
-                $propID = ProductProperties::where('name', $item["name"])->value("id");
+//        if ($numberInputs != NULL) {
+//            $query = array_merge($query, $this->filterNumberProduct($numberInputs));
+//        }
+//
+//        $PrevProductsID = [];
+//        for ($i = 0; $i < count($query); $i++) {
+//            $productsID = [];
+//
+//            foreach ($query[$i] as $item) {
+//                $productsID[] = $item->product_id ?? $item->id;
+//            }
+//
+//            if ($i > 0) $productsID = array_intersect($productsID, $PrevProductsID);
+//            $PrevProductsID = $productsID;
+//        }
 
-                $query[] = ProductProperty::where("product_options_id", $propID)
-                    ->whereBetween("value", [(int)$item["min"], (int)$item["max"]])
-                    ->select("product_id")
-                    ->get();
-            }
-        }
-
-        if( count($query) > 0 ){
-            for ($i = 0; $i <  count($query); $i++) {
-                $productsID = [];
-
-                foreach ($query[$i] as $item) {
-                    $productsID[] = $item->product_id;
-                }
-
-                if( $i > 0 ) $productsID = array_intersect($productsID, $temp);
-                $temp = $productsID;
-            }
-        }
-
-        if ($req->input('text') == NULL && $req->input('number') == NULL) {
+        if ($textInputs == NULL && $numberInputs == NULL) {
             $paginateListProduct = Product::where('product_category_id', $categoryID)->paginate(self::PER_PAGE);
         } else {
             $paginateListProduct = Product::whereIn('id', array_unique($productsID))->paginate(self::PER_PAGE);

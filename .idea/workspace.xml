@@ -21,16 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/ProductTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/ProductTrait.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/ProductProperty.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/ProductProperty.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/product/product-catalog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/product/product-catalog.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +148,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/maintenance" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -162,11 +159,26 @@
       <recent name="F:\IT\web\OSPanel\domains\RGR-Web\app\Http\Controllers\AdminPanel" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.phpunit.xml">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <configuration name="watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.watch" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -197,7 +209,12 @@
       <workItem from="1618735459070" duration="29496000" />
       <workItem from="1618817332789" duration="3270000" />
       <workItem from="1618823748120" duration="3833000" />
-      <workItem from="1618839693325" duration="9551000" />
+      <workItem from="1618839693325" duration="14355000" />
+      <workItem from="1618923283929" duration="8493000" />
+      <workItem from="1618942517893" duration="17983000" />
+      <workItem from="1619027513617" duration="3728000" />
+      <workItem from="1619203219353" duration="24000" />
+      <workItem from="1619248999080" duration="5373000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
@@ -272,6 +289,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1618838982845" />
+    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1618936571548">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618936571548" />
+    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1618936571548">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618936571548" />
+    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1618936571548">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618936571548" />
+    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1618936571548">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618936571548" />
     <state x="676" y="243" key="NewPhpClassDialog" timestamp="1618838253073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -280,6 +313,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1618690489893" />
+    <state width="550" height="446" key="SwitcherDM" timestamp="1618944083058">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="550" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1618944083058" />
     <state x="609" y="403" key="VCS.ChangelistChooser" timestamp="1618741942684">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -288,10 +325,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1616950705512" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1618770328791">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1619009061940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1618770328791" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1619009061940" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1618740731509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

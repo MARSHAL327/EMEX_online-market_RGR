@@ -165,28 +165,51 @@ $(document).ready(function () {
             input.val(+(input.val()) - 1);
     })
 
-    let formData;
-    if( sessionStorage.getItem("formData") == null ){
-        formData = {
-            "_token": $("input[name='_token']").val(),
-            "text": [],
-            "number": []
+    let filterData;
+
+    function fillSessionStorage() {
+        if( sessionStorage.getItem("filterData") == null ){
+            return true;
+        } else {
+            filterData = JSON.parse(sessionStorage.getItem("filterData"))
+            filterData.text.forEach(item => {
+                $(`input[value='${item.value}']`).attr("checked", "checked")
+            })
+            filterAjax(filterData)
+            return false;
         }
-    } else {
-        formData = JSON.parse(sessionStorage.getItem("formData"))
-        formData.text.forEach(item => {
-            $(`input[value='${item.value}']`).attr("checked", "checked")
-        })
-        filterAjax(formData)
     }
 
+    function createFilterData(){
+        if( fillSessionStorage() ){
+            filterData = {
+                "_token": $("input[name='_token']").val(),
+                "text": [],
+                "number": []
+            }
 
-    function filterAjax(formData){
+            $(".filter .filter__title_text").each(function () {
+                let propName = $(this).children(".filter__item__title_name").text().trim()
+                let newObj = {}
+
+                newObj[propName] = []
+
+                filterData.text.push(newObj)
+            })
+
+            return filterData
+        }
+    }
+
+    createFilterData()
+
+
+    function filterAjax(filterData){
         let url = new URL(window.location)
 
         $.ajax({
             type: "POST",
-            data: formData,
+            data: filterData,
             dataType: "html",
             beforeSend: function() {
                 $(".product-card__loader").addClass("active")
@@ -205,42 +228,54 @@ $(document).ready(function () {
         });
     }
 
+
     $(".filter .filter__input_text").on("change", function (e) {
-        formData.text = [];
+        filterData = createFilterData()
 
         $(".filter .filter__input_text").each(function () {
-            formData.text.push({
-                "name": $(this).attr("name"),
-                "value": $(this).val(),
-                "status":  $(this).prop("checked")
+
+            let propName = $(this).attr("name")
+            let isChecked = $(this).prop("checked")
+            let value = $(this).val()
+
+
+            filterData.text.forEach(function (textInput) {
+                for (let textInputName in textInput){
+                    if( textInputName === propName && isChecked ){
+                        let textInputValue = {
+                            value: value,
+                            status: isChecked
+                        }
+
+                        return textInput[textInputName].push(textInputValue)
+                    }
+                }
             })
         })
 
-        formData.text = formData.text.filter((item) => { return item.status });
 
-        console.log(formData)
-        // sessionStorage.setItem("formData", JSON.stringify(formData));
-        filterAjax(formData);
+        // sessionStorage.setItem("filterData", JSON.stringify(filterData));
+        filterAjax(filterData);
     })
 
     $(".filter .filter__item_number input").on("keyup", function (e) {
         let arrKeys = ["Backspace", "Enter"]
 
         if( (isNaN(+e.key) || isNaN(e.key)) && !arrKeys.includes(e.key) ) return
-        formData.number = []
+        filterData.number = []
 
         $(".filter .filter__item_number").each(function () {
             let first_el = $(this).find(".filter__input").eq(0)
             let second_el = $(this).find(".filter__input").eq(1)
 
-            formData.number.push({
+            filterData.number.push({
                 name: $(this).find(".filter__input_number").attr("name"),
                 min:  +first_el.val(),
                 max:  +second_el.val(),
             })
         })
 
-        formData.number = formData.number.filter((item) => {
+        filterData.number = filterData.number.filter((item) => {
             let input = $(`.filter__input_number[name='${item.name}']`)
             let maxValue = +input.attr("max")
 
@@ -250,8 +285,8 @@ $(document).ready(function () {
             if( item.min !== 0 || item.max !== maxValue ) return item
         })
 
-        // sessionStorage.setItem("formData", JSON.stringify(formData));
-        filterAjax(formData);
+        // sessionStorage.setItem("filterData", JSON.stringify(filterData));
+        filterAjax(filterData);
     })
 
     $(document).on("click", ".product-card-wrapper .pagination li", function (e) {
@@ -263,7 +298,7 @@ $(document).ready(function () {
             url: url,
             type: "GET",
             dataType: "html",
-            data: formData,
+            data: filterData,
             beforeSend: function() {
                 $(".product-card__loader").addClass("active");
             },

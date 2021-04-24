@@ -18,8 +18,8 @@
             <div class="filter">
                 @csrf
                 <div class="filter__item active">
-                    <div class="filter__item__title">
-                        Производитель
+                    <div class="filter__item__title filter__title_text">
+                        <span class="filter__item__title_name">Производитель</span>
                         <span class="material-icons">expand_less</span>
                     </div>
                     <div class="filter__item__content">
@@ -33,8 +33,8 @@
                 </div>
                 @foreach($props as $prop)
                     <div class="filter__item active">
-                        <div class="filter__item__title">
-                            {{ $prop[0]->properties->name }}
+                        <div class="filter__item__title <?= $prop[0]->properties->type == 1 ? "filter__title_number" : "filter__title_text" ?>">
+                            <span class="filter__item__title_name">{{ $prop[0]->properties->name }}</span>
                             <span class="material-icons">expand_less</span>
                         </div>
                         <div class="filter__item__content">
@@ -55,7 +55,7 @@
                                     <div class="filter__item_number">
                                         <label for="{{ $prop[0]->properties->name }}">
                                             <input class="filter__input_number filter__input"
-                                                   type="number"
+                                                   type="text"
                                                    data-extremum="min"
                                                    min="{{ $min }}"
                                                    max="{{ $max }}"
@@ -65,7 +65,7 @@
                                         <span class="dash">—</span>
                                         <label for="{{ $prop[0]->properties->name }}">
                                             <input class="filter__input"
-                                                   type="number"
+                                                   type="text"
                                                    data-extremum="max"
                                                    min="{{ $min }}"
                                                    max="{{ $max }}"
