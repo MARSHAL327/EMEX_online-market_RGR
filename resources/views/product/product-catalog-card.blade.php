@@ -19,7 +19,7 @@
                 <a href="{{ route('product', [ "id_category" => $categoryID, "id_product" => $product->id]) }}"
                    class="product-card__item">
                     <div class="product-card__img">
-                        <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->img }}" alt="">
+                        <img src="/img/{{ $product->img }}" alt="">
                     </div>
                     <div class="product-card__price">
                         {{ number_format($product->price, 0, '.', ' ') }} ₽

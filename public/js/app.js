@@ -19551,13 +19551,14 @@ $(document).ready(function () {
       filterData = {
         "_token": $("input[name='_token']").val(),
         "text": [],
-        "number": []
+        "number": [],
+        "inputs": []
       };
-      $(".filter .filter__title_text").each(function () {
-        var propName = $(this).children(".filter__item__title_name").text().trim();
+      $(".filter .filter__item__title_name").each(function () {
+        var propName = $(this).text().trim();
         var newObj = {};
         newObj[propName] = [];
-        filterData.text.push(newObj);
+        filterData.inputs.push(newObj);
       });
       return filterData;
     }
@@ -19575,7 +19576,6 @@ $(document).ready(function () {
         $(".product-card__loader").addClass("active");
       },
       success: function success(data) {
-        // $(".test").append(data);
         window.history.pushState('', '', url.origin + url.pathname);
         data = new DOMParser().parseFromString(data, "text/html");
         var html = $(data.querySelector(".product-card-wrapper"));
@@ -19587,13 +19587,12 @@ $(document).ready(function () {
     });
   }
 
-  $(".filter .filter__input_text").on("change", function (e) {
-    filterData = createFilterData();
-    $(".filter .filter__input_text").each(function () {
+  function fillTextFilterData() {
+    $(".filter .filter__input").each(function () {
       var propName = $(this).attr("name");
       var isChecked = $(this).prop("checked");
       var value = $(this).val();
-      filterData.text.forEach(function (textInput) {
+      filterData.inputs.forEach(function (textInput) {
         for (var textInputName in textInput) {
           if (textInputName === propName && isChecked) {
             var textInputValue = {
@@ -19604,29 +19603,42 @@ $(document).ready(function () {
           }
         }
       });
-    }); // sessionStorage.setItem("filterData", JSON.stringify(filterData));
+    });
+  }
+
+  function fillNumberFilterData() {
+    $(".filter .filter__item_number").each(function () {
+      var minEl = $(this).find(".filter__input").eq(0).val();
+      var maxEl = $(this).find(".filter__input").eq(1).val();
+      var thisPropName = $(this).data("prop-name");
+      var thisPropID = $(this).data("prop-id");
+
+      if (minEl !== "" || maxEl !== "") {
+        if (maxEl === "") maxEl = $(this).find(".filter__input").attr("max");
+        if (minEl === "") minEl = 0;
+        filterData.inputs[thisPropID][thisPropName].push({
+          min: +minEl,
+          max: +maxEl
+        });
+      }
+    });
+  }
+
+  $(".filter .filter__input_text").on("change", function () {
+    filterData = createFilterData();
+    fillTextFilterData();
+    fillNumberFilterData();
+    console.log(filterData.inputs); // sessionStorage.setItem("filterData", JSON.stringify(filterData));
 
     filterAjax(filterData);
   });
   $(".filter .filter__item_number input").on("keyup", function (e) {
     var arrKeys = ["Backspace", "Enter"];
     if ((isNaN(+e.key) || isNaN(e.key)) && !arrKeys.includes(e.key)) return;
-    filterData.number = [];
-    $(".filter .filter__item_number").each(function () {
-      var first_el = $(this).find(".filter__input").eq(0);
-      var second_el = $(this).find(".filter__input").eq(1);
-      filterData.number.push({
-        name: $(this).find(".filter__input_number").attr("name"),
-        min: +first_el.val(),
-        max: +second_el.val()
-      });
-    });
-    filterData.number = filterData.number.filter(function (item) {
-      var input = $(".filter__input_number[name='".concat(item.name, "']"));
-      var maxValue = +input.attr("max");
-      if (item.max === 0) item.max = maxValue;
-      if (item.min !== 0 || item.max !== maxValue) return item;
-    }); // sessionStorage.setItem("filterData", JSON.stringify(filterData));
+    filterData = createFilterData();
+    fillTextFilterData();
+    fillNumberFilterData();
+    console.log(filterData.inputs); // sessionStorage.setItem("filterData", JSON.stringify(filterData));
 
     filterAjax(filterData);
   });

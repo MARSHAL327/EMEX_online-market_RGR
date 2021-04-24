@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function showProductCatalogPage(Request $req, $categoryID)
     {
 
-        if ($req->input('text') != NULL || $req->input('number') != NULL) {
+        if ($req->input('inputs') != NULL) {
             return $this->filterProduct($req, $categoryID);
         }
         $query = Product::where('product_category_id', $categoryID);
@@ -68,6 +68,7 @@ class ProductController extends Controller
                 ->pluck('id')
                 ->toArray();
 
+
             $MatchProductID = array_merge($prevMatchProductID, $MatchProductID);
             $prevMatchProductID = $MatchProductID;
         }
@@ -78,7 +79,6 @@ class ProductController extends Controller
     private function filterTextProduct($textProps, $categoryID)
     {
         $MatchProductID = [];
-        $prevMatchProductID = [];
         $MatchProductIDs = [];
 
         foreach ( array_values($textProps) as $i => $textProp) {
@@ -90,11 +90,22 @@ class ProductController extends Controller
                 else {
                     $propID = ProductProperties::where('name', $textInputName)->value("id");
 
+                    $prevMatchProductID = [];
                     foreach ($textInput as $textValue){
-                        $MatchProductID = ProductProperty::where([
-                            ["product_options_id", $propID],
-                            ["value", $textValue["value"]]
-                        ])
+                        if( array_key_exists("value", $textValue) ){
+                            $query = [
+                                ["product_options_id", $propID],
+                                ["value", $textValue["value"]]
+                            ];
+                        } else {
+                            $query = [
+                                ["product_options_id", $propID],
+                                ["value", ">=", (int)$textValue["min"]],
+                                ["value", "<=", (int)$textValue["max"]]
+                            ];
+                        }
+
+                        $MatchProductID = ProductProperty::where($query)
                             ->pluck('product_id')
                             ->toArray();
 
@@ -112,50 +123,17 @@ class ProductController extends Controller
         return $MatchProductIDs;
     }
 
-    private function filterNumberProduct($numberInputs)
-    {
-        $MatchProductID = [];
-
-        foreach ($numberInputs as $numberInput) {
-            $propID = ProductProperties::where('name', $numberInput["name"])->value("id");
-
-            $MatchProductID[] = ProductProperty::where("product_options_id", $propID)
-                ->whereBetween("value", [(int)$numberInput["min"], (int)$numberInput["max"]])
-                ->select("product_id")
-                ->get();
-        }
-
-        return $MatchProductID;
-    }
-
     public function filterProduct(Request $req, $categoryID)
     {
         $productsID = [];
+        $allInputs = $req->input('inputs');
 
-        $textInputs = $req->input('text');
-        $numberInputs = $req->input('number');
-
-        if ($textInputs != NULL) {
-            $productsID = $this->filterTextProduct($textInputs, $categoryID);
+        if ($allInputs != NULL) {
+            $productsID = $this->filterTextProduct($allInputs, $categoryID);
         }
-
-//        if ($numberInputs != NULL) {
-//            $query = array_merge($query, $this->filterNumberProduct($numberInputs));
-//        }
-//
-//        $PrevProductsID = [];
-//        for ($i = 0; $i < count($query); $i++) {
-//            $productsID = [];
-//
-//            foreach ($query[$i] as $item) {
-//                $productsID[] = $item->product_id ?? $item->id;
-//            }
-//
-//            if ($i > 0) $productsID = array_intersect($productsID, $PrevProductsID);
-//            $PrevProductsID = $productsID;
 //        }
 
-        if ($textInputs == NULL && $numberInputs == NULL) {
+        if ($allInputs == NULL) {
             $paginateListProduct = Product::where('product_category_id', $categoryID)->paginate(self::PER_PAGE);
         } else {
             $paginateListProduct = Product::whereIn('id', array_unique($productsID))->paginate(self::PER_PAGE);

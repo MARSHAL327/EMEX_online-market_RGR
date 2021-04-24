@@ -7,7 +7,7 @@ $(document).ready(function () {
     let blackBg = $(".black-bg");
     let mainForm = $(".main-form");
 
-    function errorAjax(result){
+    function errorAjax(result) {
         let errors = result["responseJSON"]["errors"];
         let keys = Object.keys(errors);
         let firstError = errors[keys[0]][0];
@@ -18,13 +18,13 @@ $(document).ready(function () {
         });
     }
 
-    function successAjax(res){
+    function successAjax(res) {
         swal({
             title: res.title,
             text: res.text,
             icon: res.icon,
         }).then(() => {
-            if( res.icon !== "error" ) window.location.replace("");
+            if (res.icon !== "error") window.location.replace("");
         });
     }
 
@@ -34,8 +34,8 @@ $(document).ready(function () {
         let supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
 
         formData.forEach((item, i) => {
-            if( typeof item === "object" ){
-                if( supportedFormatsImg.includes(item.type)  ){
+            if (typeof item === "object") {
+                if (supportedFormatsImg.includes(item.type)) {
                     formData.set(i.toString(), item.name);
                 } else {
                     error.push("Неверный формат файла");
@@ -43,7 +43,7 @@ $(document).ready(function () {
             }
         })
 
-        if( error.length > 0 ){
+        if (error.length > 0) {
             swal({
                 title: "Ошибка",
                 text: error[0],
@@ -53,9 +53,9 @@ $(document).ready(function () {
         } else return formData;
     }
 
-    function sendAjax(_this, errorFoo, successFoo){
+    function sendAjax(_this, errorFoo, successFoo) {
         let formData = formattingFormData(_this);
-        if( formData === false ) return;
+        if (formData === false) return;
 
         $.ajax({
             type: _this.attr('method'),
@@ -64,20 +64,20 @@ $(document).ready(function () {
             dataType: "json",
             processData: false,
             contentType: false,
-            beforeSend: function() {
+            beforeSend: function () {
                 _this.find(".main-btn").prop("disabled", true);
             },
             statusCode: {
                 422: errorFoo,
                 200: successFoo
             },
-            complete: function() {
+            complete: function () {
                 _this.find(".main-btn").prop("disabled", false);
             }
         });
     }
 
-    function toggleAuthModal(){
+    function toggleAuthModal() {
         registerModal.toggleClass("active");
         loginModal.toggleClass('active');
     }
@@ -127,13 +127,13 @@ $(document).ready(function () {
         $(this).toggleClass("active");
     })
 
-    jQuery.fn.lightTabs = function(options){
+    jQuery.fn.lightTabs = function (options) {
 
-        var createTabs = function(){
+        var createTabs = function () {
             tabs = this;
             i = 0;
 
-            showPage = function(i){
+            showPage = function (i) {
                 $(tabs).children("div").children("div").hide();
                 $(tabs).children("div").children("div").eq(i).show();
                 $(tabs).children("ul").children("li").removeClass("active");
@@ -142,12 +142,12 @@ $(document).ready(function () {
 
             showPage(0);
 
-            $(tabs).children("ul").children("li").each(function(index, element){
+            $(tabs).children("ul").children("li").each(function (index, element) {
                 $(element).attr("data-page", i);
                 i++;
             });
 
-            $(tabs).children("ul").children("li").click(function(){
+            $(tabs).children("ul").children("li").click(function () {
                 showPage(parseInt($(this).attr("data-page")));
             });
         };
@@ -161,14 +161,14 @@ $(document).ready(function () {
 
     $(".product__count-btn__remove").on("click", function () {
         let input = $(this).next();
-        if( input.val() > 1 )
+        if (input.val() > 1)
             input.val(+(input.val()) - 1);
     })
 
     let filterData;
 
     function fillSessionStorage() {
-        if( sessionStorage.getItem("filterData") == null ){
+        if (sessionStorage.getItem("filterData") == null) {
             return true;
         } else {
             filterData = JSON.parse(sessionStorage.getItem("filterData"))
@@ -180,21 +180,22 @@ $(document).ready(function () {
         }
     }
 
-    function createFilterData(){
-        if( fillSessionStorage() ){
+    function createFilterData() {
+        if (fillSessionStorage()) {
             filterData = {
                 "_token": $("input[name='_token']").val(),
                 "text": [],
-                "number": []
+                "number": [],
+                "inputs": []
             }
 
-            $(".filter .filter__title_text").each(function () {
-                let propName = $(this).children(".filter__item__title_name").text().trim()
+            $(".filter .filter__item__title_name").each(function () {
+                let propName = $(this).text().trim()
                 let newObj = {}
 
                 newObj[propName] = []
 
-                filterData.text.push(newObj)
+                filterData.inputs.push(newObj)
             })
 
             return filterData
@@ -204,56 +205,75 @@ $(document).ready(function () {
     createFilterData()
 
 
-    function filterAjax(filterData){
+    function filterAjax(filterData) {
         let url = new URL(window.location)
 
         $.ajax({
             type: "POST",
             data: filterData,
             dataType: "html",
-            beforeSend: function() {
+            beforeSend: function () {
                 $(".product-card__loader").addClass("active")
             },
-            success: function(data){
-                // $(".test").append(data);
-
+            success: function (data) {
                 window.history.pushState('', '', url.origin + url.pathname)
                 data = new DOMParser().parseFromString(data, "text/html")
                 let html = $(data.querySelector(".product-card-wrapper"))
                 $(".product-card-wrapper").replaceWith(html)
             },
-            complete: function() {
+            complete: function () {
                 $(".product-card__loader").removeClass("active")
             }
         });
     }
 
 
-    $(".filter .filter__input_text").on("change", function (e) {
-        filterData = createFilterData()
-
-        $(".filter .filter__input_text").each(function () {
-
+    function fillTextFilterData() {
+        $(".filter .filter__input").each(function () {
             let propName = $(this).attr("name")
             let isChecked = $(this).prop("checked")
             let value = $(this).val()
 
-
-            filterData.text.forEach(function (textInput) {
-                for (let textInputName in textInput){
-                    if( textInputName === propName && isChecked ){
+            filterData.inputs.forEach(function (textInput) {
+                for (let textInputName in textInput) {
+                    if (textInputName === propName && isChecked) {
                         let textInputValue = {
                             value: value,
                             status: isChecked
                         }
-
                         return textInput[textInputName].push(textInputValue)
                     }
                 }
             })
         })
+    }
+
+    function fillNumberFilterData(){
+        $(".filter .filter__item_number").each(function () {
+            let minEl = $(this).find(".filter__input").eq(0).val()
+            let maxEl = $(this).find(".filter__input").eq(1).val()
+            let thisPropName = $(this).data("prop-name")
+            let thisPropID = $(this).data("prop-id")
+
+            if (minEl !== "" || maxEl !== "") {
+                if( maxEl === "" ) maxEl = $(this).find(".filter__input").attr("max")
+                if( minEl === "" ) minEl = 0
+
+                filterData.inputs[thisPropID][thisPropName].push({
+                    min: +minEl,
+                    max: +maxEl,
+                })
+            }
+        })
+    }
 
 
+    $(".filter .filter__input_text").on("change", function () {
+        filterData = createFilterData()
+        fillTextFilterData()
+        fillNumberFilterData()
+
+        console.log(filterData.inputs)
         // sessionStorage.setItem("filterData", JSON.stringify(filterData));
         filterAjax(filterData);
     })
@@ -261,36 +281,18 @@ $(document).ready(function () {
     $(".filter .filter__item_number input").on("keyup", function (e) {
         let arrKeys = ["Backspace", "Enter"]
 
-        if( (isNaN(+e.key) || isNaN(e.key)) && !arrKeys.includes(e.key) ) return
-        filterData.number = []
+        if ((isNaN(+e.key) || isNaN(e.key)) && !arrKeys.includes(e.key)) return
+        filterData = createFilterData()
+        fillTextFilterData()
+        fillNumberFilterData()
 
-        $(".filter .filter__item_number").each(function () {
-            let first_el = $(this).find(".filter__input").eq(0)
-            let second_el = $(this).find(".filter__input").eq(1)
-
-            filterData.number.push({
-                name: $(this).find(".filter__input_number").attr("name"),
-                min:  +first_el.val(),
-                max:  +second_el.val(),
-            })
-        })
-
-        filterData.number = filterData.number.filter((item) => {
-            let input = $(`.filter__input_number[name='${item.name}']`)
-            let maxValue = +input.attr("max")
-
-            if( item.max === 0 )
-                item.max = maxValue
-
-            if( item.min !== 0 || item.max !== maxValue ) return item
-        })
-
+        console.log(filterData.inputs)
         // sessionStorage.setItem("filterData", JSON.stringify(filterData));
         filterAjax(filterData);
     })
 
     $(document).on("click", ".product-card-wrapper .pagination li", function (e) {
-        if( $(this).hasClass("active") ) return
+        if ($(this).hasClass("active")) return
         e.preventDefault()
         let url = $(this).children().attr("href")
 
@@ -299,24 +301,24 @@ $(document).ready(function () {
             type: "GET",
             dataType: "html",
             data: filterData,
-            beforeSend: function() {
+            beforeSend: function () {
                 $(".product-card__loader").addClass("active");
             },
-            success: function(data){
+            success: function (data) {
                 data = new DOMParser().parseFromString(data, "text/html")
                 let html = $(data.querySelector(".product-card-wrapper"))
                 $(".product-card-wrapper").replaceWith(html)
                 window.history.pushState('', '', url);
             },
-            error: function(data){
-              swal({
-                  "icon": "error",
-                  "title": "Ошибка",
-                  "text": "Ошибка при загрузке"
-              })
+            error: function (data) {
+                swal({
+                    "icon": "error",
+                    "title": "Ошибка",
+                    "text": "Ошибка при загрузке"
+                })
                 $(".test").append(data);
             },
-            complete: function() {
+            complete: function () {
                 $(".product-card__loader").removeClass("active");
             }
         });

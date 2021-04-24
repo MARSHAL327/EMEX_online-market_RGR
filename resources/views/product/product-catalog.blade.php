@@ -31,6 +31,7 @@
                         @endforeach
                     </div>
                 </div>
+                <?php $i = 1 ?>
                 @foreach($props as $prop)
                     <div class="filter__item active">
                         <div class="filter__item__title <?= $prop[0]->properties->type == 1 ? "filter__title_number" : "filter__title_text" ?>">
@@ -52,11 +53,13 @@
                                     $propType = $propValue->properties->propType->type;
                                 @endphp
                                 @if( $propType == "Число" )
-                                    <div class="filter__item_number">
+                                    <div class="filter__item_number"
+                                         data-prop-name="{{ $prop[0]->properties->name }}"
+                                         data-prop-id="{{ $i }}"
+                                    >
                                         <label for="{{ $prop[0]->properties->name }}">
                                             <input class="filter__input_number filter__input"
                                                    type="text"
-                                                   data-extremum="min"
                                                    min="{{ $min }}"
                                                    max="{{ $max }}"
                                                    name="{{ $prop[0]->properties->name }}"
@@ -66,7 +69,6 @@
                                         <label for="{{ $prop[0]->properties->name }}">
                                             <input class="filter__input"
                                                    type="text"
-                                                   data-extremum="max"
                                                    min="{{ $min }}"
                                                    max="{{ $max }}"
                                                    name="{{ $prop[0]->properties->name }}"
@@ -76,13 +78,19 @@
                                     @break
                                 @elseif( $propType == "Текст" )
                                     <label for="{{ $prop[0]->properties->name }}">
-                                        <input class="filter__input_text filter__input" value="{{ $propValue->value }}" type="checkbox"
-                                               name="{{ $prop[0]->properties->name }}">{{ $propValue->value }}
+                                        <input class="filter__input_text filter__input"
+                                               value="{{ $propValue->value }}"
+                                               type="checkbox"
+                                               name="{{ $prop[0]->properties->name }}">
+                                        {{ $propValue->value }}
                                     </label>
                                 @endif
+
+
                             @endforeach
                         </div>
                     </div>
+                    <?php $i++ ?>
                 @endforeach
             </div>
 
