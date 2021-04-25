@@ -818,6 +818,10 @@ $slider-height: 550px;
     height: $slider-height;
     position: relative;
 
+    & .slick-slide{
+        height: 550px !important;
+    }
+
     .main-slider {
         box-shadow: $mainShadow;
         border-radius: 20px;

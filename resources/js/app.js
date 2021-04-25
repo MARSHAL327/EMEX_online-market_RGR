@@ -172,38 +172,60 @@ $(document).ready(function () {
             return true;
         } else {
             filterData = JSON.parse(sessionStorage.getItem("filterData"))
-            filterData.text.forEach(item => {
-                $(`input[value='${item.value}']`).attr("checked", "checked")
-            })
-            filterAjax(filterData)
-            return false;
+
+            if( filterData.filterPage === window.location.pathname ){
+                filterData.inputs.forEach(propID => {
+                    for (let propName in propID){
+                        if( propID.hasOwnProperty(propName) ){
+                            propID[propName].forEach(propValue => {
+                                if( propValue.value !== undefined ){
+                                    $(`input[value='${propValue.value}']`).attr("checked", "checked")
+                                } else {
+                                    let input = $(`input[name='${propName}']`)
+                                    let min = input.eq(0)
+                                    let max = input.eq(1)
+
+                                    if( +min.attr("min") !== propValue.min ) min.val(propValue.min)
+                                    if( +max.attr("max") !== propValue.max ) max.val(propValue.max)
+                                }
+                            })
+                        }
+                    }
+                })
+
+                filterAjax(filterData)
+                return false;
+            } else {
+                sessionStorage.removeItem("filterData")
+                return true;
+            }
+
+
         }
     }
 
     function createFilterData() {
-        if (fillSessionStorage()) {
-            filterData = {
-                "_token": $("input[name='_token']").val(),
-                "text": [],
-                "number": [],
-                "inputs": []
-            }
-
-            $(".filter .filter__item__title_name").each(function () {
-                let propName = $(this).text().trim()
-                let newObj = {}
-
-                newObj[propName] = []
-
-                filterData.inputs.push(newObj)
-            })
-
-            return filterData
+        filterData = {
+            "_token": $("input[name='_token']").val(),
+            "filterPage": window.location.pathname,
+            "inputs": []
         }
+
+        $(".filter .filter__item__title_name").each(function () {
+            let propName = $(this).text().trim()
+            let newObj = {}
+
+            newObj[propName] = []
+
+            filterData.inputs.push(newObj)
+        })
+
+        return filterData
     }
 
-    createFilterData()
-
+    if (fillSessionStorage()) {
+        createFilterData()
+    }
 
     function filterAjax(filterData) {
         let url = new URL(window.location)
@@ -273,8 +295,7 @@ $(document).ready(function () {
         fillTextFilterData()
         fillNumberFilterData()
 
-        console.log(filterData.inputs)
-        // sessionStorage.setItem("filterData", JSON.stringify(filterData));
+        sessionStorage.setItem("filterData", JSON.stringify(filterData));
         filterAjax(filterData);
     })
 
@@ -286,8 +307,7 @@ $(document).ready(function () {
         fillTextFilterData()
         fillNumberFilterData()
 
-        console.log(filterData.inputs)
-        // sessionStorage.setItem("filterData", JSON.stringify(filterData));
+        sessionStorage.setItem("filterData", JSON.stringify(filterData));
         filterAjax(filterData);
     })
 
@@ -295,6 +315,7 @@ $(document).ready(function () {
         if ($(this).hasClass("active")) return
         e.preventDefault()
         let url = $(this).children().attr("href")
+        console.log(filterData)
 
         $.ajax({
             url: url,
@@ -304,19 +325,19 @@ $(document).ready(function () {
             beforeSend: function () {
                 $(".product-card__loader").addClass("active");
             },
-            success: function (data) {
-                data = new DOMParser().parseFromString(data, "text/html")
-                let html = $(data.querySelector(".product-card-wrapper"))
+            success: function (res) {
+                res = new DOMParser().parseFromString(res, "text/html")
+                let html = $(res.querySelector(".product-card-wrapper"))
                 $(".product-card-wrapper").replaceWith(html)
                 window.history.pushState('', '', url);
             },
-            error: function (data) {
+            error: function (res) {
                 swal({
                     "icon": "error",
                     "title": "Ошибка",
                     "text": "Ошибка при загрузке"
                 })
-                $(".test").append(data);
+                $(".test").append(res);
             },
             complete: function () {
                 $(".product-card__loader").removeClass("active");

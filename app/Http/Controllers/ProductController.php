@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    private const PER_PAGE = 3;
+    private const PER_PAGE = 2;
 
     public function showProductCatalogPage(Request $req, $categoryID)
     {
-
         if ($req->input('inputs') != NULL) {
             return $this->filterProduct($req, $categoryID);
         }
+
         $query = Product::where('product_category_id', $categoryID);
         $listProduct = $query->get();
         $paginateListProduct = $query->paginate(self::PER_PAGE);

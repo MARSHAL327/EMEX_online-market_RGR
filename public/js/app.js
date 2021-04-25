@@ -19538,33 +19538,56 @@ $(document).ready(function () {
       return true;
     } else {
       filterData = JSON.parse(sessionStorage.getItem("filterData"));
-      filterData.text.forEach(function (item) {
-        $("input[value='".concat(item.value, "']")).attr("checked", "checked");
-      });
-      filterAjax(filterData);
-      return false;
+
+      if (filterData.filterPage === window.location.pathname) {
+        filterData.inputs.forEach(function (propID) {
+          var _loop = function _loop(propName) {
+            if (propID.hasOwnProperty(propName)) {
+              propID[propName].forEach(function (propValue) {
+                if (propValue.value !== undefined) {
+                  $("input[value='".concat(propValue.value, "']")).attr("checked", "checked");
+                } else {
+                  var input = $("input[name='".concat(propName, "']"));
+                  var min = input.eq(0);
+                  var max = input.eq(1);
+                  if (+min.attr("min") !== propValue.min) min.val(propValue.min);
+                  if (+max.attr("max") !== propValue.max) max.val(propValue.max);
+                }
+              });
+            }
+          };
+
+          for (var propName in propID) {
+            _loop(propName);
+          }
+        });
+        filterAjax(filterData);
+        return false;
+      } else {
+        sessionStorage.removeItem("filterData");
+        return true;
+      }
     }
   }
 
   function createFilterData() {
-    if (fillSessionStorage()) {
-      filterData = {
-        "_token": $("input[name='_token']").val(),
-        "text": [],
-        "number": [],
-        "inputs": []
-      };
-      $(".filter .filter__item__title_name").each(function () {
-        var propName = $(this).text().trim();
-        var newObj = {};
-        newObj[propName] = [];
-        filterData.inputs.push(newObj);
-      });
-      return filterData;
-    }
+    filterData = {
+      "_token": $("input[name='_token']").val(),
+      "filterPage": window.location.pathname,
+      "inputs": []
+    };
+    $(".filter .filter__item__title_name").each(function () {
+      var propName = $(this).text().trim();
+      var newObj = {};
+      newObj[propName] = [];
+      filterData.inputs.push(newObj);
+    });
+    return filterData;
   }
 
-  createFilterData();
+  if (fillSessionStorage()) {
+    createFilterData();
+  }
 
   function filterAjax(filterData) {
     var url = new URL(window.location);
@@ -19628,8 +19651,7 @@ $(document).ready(function () {
     filterData = createFilterData();
     fillTextFilterData();
     fillNumberFilterData();
-    console.log(filterData.inputs); // sessionStorage.setItem("filterData", JSON.stringify(filterData));
-
+    sessionStorage.setItem("filterData", JSON.stringify(filterData));
     filterAjax(filterData);
   });
   $(".filter .filter__item_number input").on("keyup", function (e) {
@@ -19638,14 +19660,14 @@ $(document).ready(function () {
     filterData = createFilterData();
     fillTextFilterData();
     fillNumberFilterData();
-    console.log(filterData.inputs); // sessionStorage.setItem("filterData", JSON.stringify(filterData));
-
+    sessionStorage.setItem("filterData", JSON.stringify(filterData));
     filterAjax(filterData);
   });
   $(document).on("click", ".product-card-wrapper .pagination li", function (e) {
     if ($(this).hasClass("active")) return;
     e.preventDefault();
     var url = $(this).children().attr("href");
+    console.log(filterData);
     $.ajax({
       url: url,
       type: "GET",
@@ -19654,19 +19676,19 @@ $(document).ready(function () {
       beforeSend: function beforeSend() {
         $(".product-card__loader").addClass("active");
       },
-      success: function success(data) {
-        data = new DOMParser().parseFromString(data, "text/html");
-        var html = $(data.querySelector(".product-card-wrapper"));
+      success: function success(res) {
+        res = new DOMParser().parseFromString(res, "text/html");
+        var html = $(res.querySelector(".product-card-wrapper"));
         $(".product-card-wrapper").replaceWith(html);
         window.history.pushState('', '', url);
       },
-      error: function error(data) {
+      error: function error(res) {
         swal({
           "icon": "error",
           "title": "Ошибка",
           "text": "Ошибка при загрузке"
         });
-        $(".test").append(data);
+        $(".test").append(res);
       },
       complete: function complete() {
         $(".product-card__loader").removeClass("active");
