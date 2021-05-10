@@ -25,10 +25,12 @@
             </ul>
         </nav>
 
-        <div class="header__basket">
+        <a href="{{ route('basket') }}" class="header__basket">
             <span class="material-icons">shopping_cart</span>
-            <div class="header__basket__count">1</div>
-        </div>
+            <div class="header__basket__count">
+                {{ isset($_COOKIE['basket_id']) ? \Cart::session($_COOKIE['basket_id'])->getTotalQuantity() : "0" }}
+            </div>
+        </a>
     </div>
 
 </header>

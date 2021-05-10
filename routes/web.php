@@ -187,13 +187,26 @@ Route::prefix('maintenance')->group(function (){
         ]);
 });
 
+
 // ************
 // Работа с продуктом
 // ************
-
 Route::prefix('product')->group(function (){
     Route::get('{id}', [ProductController::class, "showProductCatalogPage"])->name('product-catalog');
     Route::post('{id}', [ProductController::class, "filterProduct"])->name('product-filter');
     Route::get('{id_category}/{id_product}', [ProductController::class, "showProductPage"])->name('product');
 });
 
+
+// ************
+// Корзина
+// ************
+Route::prefix('basket')->group(function (){
+    Route::view('', 'basket.basket')->name('basket');
+
+    Route::post('add-item', [\App\Http\Controllers\BasketController::class, "addItemsToBasket"])
+        ->name('basketAddItems');
+
+    Route::post('remove-item', [\App\Http\Controllers\BasketController::class, "removeItemFromBasket"])
+        ->name('basketRemoveItem');
+});

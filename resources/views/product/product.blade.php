@@ -16,7 +16,7 @@
 
         <div class="product">
             <div class="product__img">
-                <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->img }}" alt="">
+                <img src="/img/{{ $product->img }}" alt="">
             </div>
             <div class="product__info">
                 <div class="product__text">
@@ -40,26 +40,28 @@
                                 Поставщик: {{ $product->provider->name }}
                             </div>
                         </div>
-                        <div class="flex">
+                        <form class="flex product-form" action="{{ route("basketAddItems") }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $product->id }}">
                             <div class="product__count-btn flex">
                                 <div class="product__count-btn__remove circle-btn">
                                     <span class="material-icons">remove</span>
                                 </div>
-                                <input type="number" value="1" min="1" max="{{ $product->count }}">
+                                <input name="qty" type="number" value="1" min="1" max="{{ $product->count }}">
                                 <div class="product__count-btn__add circle-btn">
                                     <span class="material-icons">add</span>
                                 </div>
                             </div>
-                            <div class="product__btn main-btn main-btn_red">Добавить в корзину</div>
-                        </div>
-
+                            <button type="submit" class="product__btn main-btn main-btn_red">Добавить в корзину</button>
+                        </form>
                     </div>
                     <div class="thin-frame">
                         <div class="blue-text bold-text fz-22">Краткие характеристики:</div>
                         <div class="product__properties mt-20 mb-20">
                             @foreach($product->properties as $propertyItem)
                                 <div class="product__property">
-                                    <div class="product__property-name bold-text">{{ $propertyItem->properties->name }}</div>
+                                    <div
+                                        class="product__property-name bold-text">{{ $propertyItem->properties->name }}</div>
                                     <div class="product__property-value">{{ $propertyItem->value }}</div>
                                 </div>
                             @endforeach
@@ -95,7 +97,7 @@
                 </div>
                 <div class="description-block mt-20">
                     <div class="description-block__img">
-                        <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->fabricator->logo }}" alt="">
+                        <img src="/img/{{ $product->fabricator->logo }}" alt="">
                     </div>
                     <div class="description-block__content-wrapper">
                         <div class="description-block__title">
@@ -108,7 +110,7 @@
                 </div>
                 <div class="description-block mt-20">
                     <div class="description-block__img">
-                        <img src="http://<?= $_SERVER["HTTP_HOST"] ?>/img/{{ $product->provider->logo }}" alt="">
+                        <img src="/img/{{ $product->provider->logo }}" alt="">
                     </div>
                     <div class="description-block__content-wrapper">
                         <div class="description-block__title">

@@ -19382,86 +19382,201 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+function errorAjax(result) {
+  var errors = result["responseJSON"]["errors"];
+  var keys = Object.keys(errors);
+  var firstError = errors[keys[0]][0];
+  swal({
+    title: "Ошибка",
+    text: firstError,
+    icon: "error"
+  });
+}
+
+function successAjax(res) {
+  swal({
+    title: res.title,
+    text: res.text,
+    icon: res.icon
+  }).then(function () {// if (res.icon !== "error") window.location.replace("");
+  });
+}
+
+function formattingFormData(_this) {
+  var formData = new FormData(_this[0]);
+  var error = [];
+  var supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
+  formData.forEach(function (item, i) {
+    if (_typeof(item) === "object") {
+      if (supportedFormatsImg.includes(item.type)) {
+        formData.set(i.toString(), item.name);
+      } else {
+        error.push("Неверный формат файла");
+      }
+    }
+  });
+
+  if (error.length > 0) {
+    swal({
+      title: "Ошибка",
+      text: error[0],
+      icon: "error"
+    });
+    return false;
+  } else return formData;
+}
+
+function completeAjax(data) {
+  console.log(data);
+}
+
+function sendAjax(_this, errorFoo, successFoo) {
+  var completeFoo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+  var formData = formattingFormData(_this);
+  if (formData === false) return;
+  $.ajax({
+    type: _this.attr('method'),
+    url: _this.attr('action'),
+    data: formData,
+    dataType: "json",
+    processData: false,
+    contentType: false,
+    beforeSend: function beforeSend() {
+      _this.find(".main-btn").prop("disabled", true);
+    },
+    statusCode: {
+      422: errorFoo,
+      200: successFoo
+    },
+    complete: function complete(data) {
+      if (completeFoo !== "") completeFoo(data);
+
+      _this.find(".main-btn").prop("disabled", false);
+    }
+  });
+}
+
+function toggleAuthModal() {
+  registerModal.toggleClass("active");
+  loginModal.toggleClass('active');
+}
+
+function fillSessionStorage() {
+  if (sessionStorage.getItem("filterData") == null) {
+    return true;
+  } else {
+    filterData = JSON.parse(sessionStorage.getItem("filterData"));
+
+    if (filterData.filterPage === window.location.pathname) {
+      filterData.inputs.forEach(function (propID) {
+        var _loop = function _loop(propName) {
+          if (propID.hasOwnProperty(propName)) {
+            propID[propName].forEach(function (propValue) {
+              if (propValue.value !== undefined) {
+                $("input[value='".concat(propValue.value, "']")).attr("checked", "checked");
+              } else {
+                var input = $("input[name='".concat(propName, "']"));
+                var min = input.eq(0);
+                var max = input.eq(1);
+                if (+min.attr("min") !== propValue.min) min.val(propValue.min);
+                if (+max.attr("max") !== propValue.max) max.val(propValue.max);
+              }
+            });
+          }
+        };
+
+        for (var propName in propID) {
+          _loop(propName);
+        }
+      });
+      filterAjax(filterData);
+      return false;
+    } else {
+      sessionStorage.removeItem("filterData");
+      return true;
+    }
+  }
+}
+
+function createFilterData() {
+  filterData = {
+    "_token": $("input[name='_token']").val(),
+    "filterPage": window.location.pathname,
+    "inputs": []
+  };
+  $(".filter .filter__item__title_name").each(function () {
+    var propName = $(this).text().trim();
+    var newObj = {};
+    newObj[propName] = [];
+    filterData.inputs.push(newObj);
+  });
+  return filterData;
+}
+
+function filterAjax(filterData) {
+  var url = new URL(window.location);
+  $.ajax({
+    type: "POST",
+    data: filterData,
+    dataType: "html",
+    beforeSend: function beforeSend() {
+      $(".product-card__loader").addClass("active");
+    },
+    success: function success(data) {
+      window.history.pushState('', '', url.origin + url.pathname);
+      data = new DOMParser().parseFromString(data, "text/html");
+      var html = $(data.querySelector(".product-card-wrapper"));
+      $(".product-card-wrapper").replaceWith(html);
+    },
+    complete: function complete() {
+      $(".product-card__loader").removeClass("active");
+    }
+  });
+}
+
+function fillTextFilterData() {
+  $(".filter .filter__input").each(function () {
+    var propName = $(this).attr("name");
+    var isChecked = $(this).prop("checked");
+    var value = $(this).val();
+    filterData.inputs.forEach(function (textInput) {
+      for (var textInputName in textInput) {
+        if (textInputName === propName && isChecked) {
+          var textInputValue = {
+            value: value,
+            status: isChecked
+          };
+          return textInput[textInputName].push(textInputValue);
+        }
+      }
+    });
+  });
+}
+
+function fillNumberFilterData() {
+  $(".filter .filter__item_number").each(function () {
+    var minEl = $(this).find(".filter__input").eq(0).val();
+    var maxEl = $(this).find(".filter__input").eq(1).val();
+    var thisPropName = $(this).data("prop-name");
+    var thisPropID = $(this).data("prop-id");
+
+    if (minEl !== "" || maxEl !== "") {
+      if (maxEl === "") maxEl = $(this).find(".filter__input").attr("max");
+      if (minEl === "") minEl = 0;
+      filterData.inputs[thisPropID][thisPropName].push({
+        min: +minEl,
+        max: +maxEl
+      });
+    }
+  });
+}
+
 $(document).ready(function () {
   var lang = $(".lang-change");
   var registerModal = $(".register-modal");
   var loginModal = $(".login-modal");
   var blackBg = $(".black-bg");
   var mainForm = $(".main-form");
-
-  function errorAjax(result) {
-    var errors = result["responseJSON"]["errors"];
-    var keys = Object.keys(errors);
-    var firstError = errors[keys[0]][0];
-    swal({
-      title: "Ошибка",
-      text: firstError,
-      icon: "error"
-    });
-  }
-
-  function successAjax(res) {
-    swal({
-      title: res.title,
-      text: res.text,
-      icon: res.icon
-    }).then(function () {
-      if (res.icon !== "error") window.location.replace("");
-    });
-  }
-
-  function formattingFormData(_this) {
-    var formData = new FormData(_this[0]);
-    var error = [];
-    var supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
-    formData.forEach(function (item, i) {
-      if (_typeof(item) === "object") {
-        if (supportedFormatsImg.includes(item.type)) {
-          formData.set(i.toString(), item.name);
-        } else {
-          error.push("Неверный формат файла");
-        }
-      }
-    });
-
-    if (error.length > 0) {
-      swal({
-        title: "Ошибка",
-        text: error[0],
-        icon: "error"
-      });
-      return false;
-    } else return formData;
-  }
-
-  function sendAjax(_this, errorFoo, successFoo) {
-    var formData = formattingFormData(_this);
-    if (formData === false) return;
-    $.ajax({
-      type: _this.attr('method'),
-      url: _this.attr('action'),
-      data: formData,
-      dataType: "json",
-      processData: false,
-      contentType: false,
-      beforeSend: function beforeSend() {
-        _this.find(".main-btn").prop("disabled", true);
-      },
-      statusCode: {
-        422: errorFoo,
-        200: successFoo
-      },
-      complete: function complete() {
-        _this.find(".main-btn").prop("disabled", false);
-      }
-    });
-  }
-
-  function toggleAuthModal() {
-    registerModal.toggleClass("active");
-    loginModal.toggleClass('active');
-  }
-
   lang.on("click", function () {
     $(this).toggleClass("active");
   });
@@ -19486,7 +19601,6 @@ $(document).ready(function () {
   });
   $(".filter__item__title").on("click", function () {
     $(this).parent().toggleClass("active");
-    console.log($(this).next());
     $(this).next().slideToggle();
   });
   registerModal.find("p").on("click", toggleAuthModal);
@@ -19533,118 +19647,8 @@ $(document).ready(function () {
   });
   var filterData;
 
-  function fillSessionStorage() {
-    if (sessionStorage.getItem("filterData") == null) {
-      return true;
-    } else {
-      filterData = JSON.parse(sessionStorage.getItem("filterData"));
-
-      if (filterData.filterPage === window.location.pathname) {
-        filterData.inputs.forEach(function (propID) {
-          var _loop = function _loop(propName) {
-            if (propID.hasOwnProperty(propName)) {
-              propID[propName].forEach(function (propValue) {
-                if (propValue.value !== undefined) {
-                  $("input[value='".concat(propValue.value, "']")).attr("checked", "checked");
-                } else {
-                  var input = $("input[name='".concat(propName, "']"));
-                  var min = input.eq(0);
-                  var max = input.eq(1);
-                  if (+min.attr("min") !== propValue.min) min.val(propValue.min);
-                  if (+max.attr("max") !== propValue.max) max.val(propValue.max);
-                }
-              });
-            }
-          };
-
-          for (var propName in propID) {
-            _loop(propName);
-          }
-        });
-        filterAjax(filterData);
-        return false;
-      } else {
-        sessionStorage.removeItem("filterData");
-        return true;
-      }
-    }
-  }
-
-  function createFilterData() {
-    filterData = {
-      "_token": $("input[name='_token']").val(),
-      "filterPage": window.location.pathname,
-      "inputs": []
-    };
-    $(".filter .filter__item__title_name").each(function () {
-      var propName = $(this).text().trim();
-      var newObj = {};
-      newObj[propName] = [];
-      filterData.inputs.push(newObj);
-    });
-    return filterData;
-  }
-
   if (fillSessionStorage()) {
     createFilterData();
-  }
-
-  function filterAjax(filterData) {
-    var url = new URL(window.location);
-    $.ajax({
-      type: "POST",
-      data: filterData,
-      dataType: "html",
-      beforeSend: function beforeSend() {
-        $(".product-card__loader").addClass("active");
-      },
-      success: function success(data) {
-        window.history.pushState('', '', url.origin + url.pathname);
-        data = new DOMParser().parseFromString(data, "text/html");
-        var html = $(data.querySelector(".product-card-wrapper"));
-        $(".product-card-wrapper").replaceWith(html);
-      },
-      complete: function complete() {
-        $(".product-card__loader").removeClass("active");
-      }
-    });
-  }
-
-  function fillTextFilterData() {
-    $(".filter .filter__input").each(function () {
-      var propName = $(this).attr("name");
-      var isChecked = $(this).prop("checked");
-      var value = $(this).val();
-      filterData.inputs.forEach(function (textInput) {
-        for (var textInputName in textInput) {
-          if (textInputName === propName && isChecked) {
-            var textInputValue = {
-              value: value,
-              status: isChecked
-            };
-            return textInput[textInputName].push(textInputValue);
-          }
-        }
-      });
-    });
-  }
-
-  function fillNumberFilterData() {
-    $(".filter .filter__item_number").each(function () {
-      var minEl = $(this).find(".filter__input").eq(0).val();
-      var maxEl = $(this).find(".filter__input").eq(1).val();
-      var thisPropName = $(this).data("prop-name");
-      var thisPropID = $(this).data("prop-id");
-
-      if (minEl !== "" || maxEl !== "") {
-        if (maxEl === "") maxEl = $(this).find(".filter__input").attr("max");
-        if (minEl === "") minEl = 0;
-        filterData.inputs[thisPropID][thisPropName].push({
-          min: +minEl,
-          max: +maxEl
-        });
-      }
-    });
   }
 
   $(".filter .filter__input_text").on("change", function () {
@@ -19663,11 +19667,11 @@ $(document).ready(function () {
     sessionStorage.setItem("filterData", JSON.stringify(filterData));
     filterAjax(filterData);
   });
+  $("");
   $(document).on("click", ".product-card-wrapper .pagination li", function (e) {
     if ($(this).hasClass("active")) return;
     e.preventDefault();
     var url = $(this).children().attr("href");
-    console.log(filterData);
     $.ajax({
       url: url,
       type: "GET",
@@ -19694,6 +19698,10 @@ $(document).ready(function () {
         $(".product-card__loader").removeClass("active");
       }
     });
+  });
+  $(".product-form").on("submit", function (e) {
+    e.preventDefault();
+    sendAjax($(this), errorAjax, successAjax, completeAjax);
   });
 });
 

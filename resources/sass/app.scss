@@ -1768,3 +1768,147 @@ $slider-height: 550px;
         margin-bottom: 10px;
     }
 }
+
+// ************
+// Корзина
+// ************
+
+.basket{
+    display: grid;
+    grid-template-columns: 795px 350px;
+    grid-gap: 55px;
+    margin-top: 60px;
+}
+
+.basket__item{
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 25px;
+    margin-top: 50px;
+
+    &:first-child{
+        margin-top: 0;
+    }
+
+    & .basket__item__img{
+        & img{
+            width: 100px;
+            height: 80px;
+            object-fit: contain;
+        }
+    }
+
+    & .basket__item__title-wrapper{
+        position: relative;
+
+        & .basket__item__title{
+            max-width: 270px;
+            font-size: 18px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:hover+.basket__item__title_all{
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                transition: .3s;
+            }
+        }
+
+        & .basket__item__title_all{
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            border-radius: 10px;
+            box-shadow: $mainShadow;
+            padding: 15px;
+            background-color: #fff;
+            transform: translateY(-25px);
+            transition: .3s;
+            font-weight: bold;
+
+            &:hover{
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                transition: .3s;
+            }
+        }
+    }
+
+    & .basket__item__few-products{
+        color: $red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    & .basket__item__delete{
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        color: $red;
+        font-size: 20px;
+        border-radius: 100%;
+        transition: .3s;
+
+        &:hover{
+            background-color: $red;
+            color: #fff;
+            box-shadow: $mainShadow;
+            transition: .3s;
+            cursor: pointer;
+        }
+    }
+
+    & .basket__item__fabricator{
+        color: $darkGrey;
+        margin-top: 10px;
+    }
+
+    & .product__count-btn{
+        margin: 0;
+        align-items: flex-start;
+
+        & .circle-btn{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            border: 1px solid #DEDEDE;
+
+            & .material-icons{
+                font-size: 18px;
+            }
+        }
+
+        & input{
+            width: 50px;
+            height: 37px;
+            text-align: center;
+            border: 0;
+        }
+
+        & input::-webkit-outer-spin-button,
+        & input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+    }
+
+    & .basket__item__price_all{
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    & .basket__item__price_one{
+        color: $darkGrey;
+        margin-top: 10px;
+    }
+
+}
