@@ -1,5 +1,7 @@
 require('./bootstrap');
 
+let filterData;
+
 function errorAjax(result) {
     let errors = result["responseJSON"]["errors"];
     let keys = Object.keys(errors);
@@ -17,8 +19,23 @@ function successAjax(res) {
         text: res.text,
         icon: res.icon,
     }).then(() => {
-        // if (res.icon !== "error") window.location.replace("");
+        if (res.icon !== "error") window.location.replace("");
     });
+}
+
+function successAddItemToBasket(res) {
+    swal({
+        title: res.title,
+        text: res.text,
+        icon: res.icon,
+    })
+    console.log(res.numElementsRemaining)
+    if( res.numElementsRemaining === 0 ){
+        $(".product__count-btn").remove()
+        $(".product__btn").prop("disabled", true)
+        $(".product__btn").attr("type", "button")
+        $(".product__btn").text("Выбрано максимальное количество")
+    }
 }
 
 function formattingFormData(_this) {
@@ -47,7 +64,7 @@ function formattingFormData(_this) {
 }
 
 function completeAjax(data) {
-    console.log(data)
+    $(".header__basket__count").text(data.numAddedItems)
 }
 
 function sendAjax(_this, errorFoo, successFoo, completeFoo = "") {
@@ -69,15 +86,10 @@ function sendAjax(_this, errorFoo, successFoo, completeFoo = "") {
             200: successFoo
         },
         complete: function (data) {
-            if( completeFoo !== "" ) completeFoo(data)
             _this.find(".main-btn").prop("disabled", false);
+            if( completeFoo !== "" ) completeFoo(data)
         }
     });
-}
-
-function toggleAuthModal() {
-    registerModal.toggleClass("active");
-    loginModal.toggleClass('active');
 }
 
 function fillSessionStorage() {
@@ -197,12 +209,83 @@ function fillNumberFilterData(){
     })
 }
 
+function deleteItemFromBasket(id){
+    let currentNumItemsInBasket = +$(".header__basket__count").text()
+    let numItemsInBasket = currentNumItemsInBasket - 1
+
+    $(`.basket__item[data-id=${id}]`).remove()
+    $(".header__basket__count").text(numItemsInBasket)
+    if( numItemsInBasket < 1 )
+        $(".section-title").after("<div class=\"big-text\">\n" +
+            "                В вашей корзине пока ничего нет\n" +
+            "            </div>\n" +
+            "            <a href=\"/\">На главную</a>")
+
+    $.ajax({
+        url: "basket/remove-item",
+        type: "POST",
+        dataType: "json",
+        data: {
+            _token: $("input[name=_token]").val(),
+            id: id
+        },
+        error: function () {
+            swal({
+                title: "Ошибка",
+                text: "При удалении произошла ошибка",
+                icon: "error",
+            })
+        },
+    });
+}
+
+function changeItemNum(e){
+    let parentElement = $(this).parents(".basket__item")
+    let input = parentElement.find("input[name=qty]")
+    let newNum = +input.val()
+    let maxItemNum = +input.attr("max")
+
+    if( newNum < 1 || newNum > maxItemNum ) return
+
+    let id = parentElement.data("id")
+    let oneItemPrice = parseInt(parentElement.find(".basket__item__price_one span").text().replace(/\s+/g, ''))
+    let allItemPriceElement = parentElement.find(".basket__item__price_all span")
+
+    let fewItemsElement = parentElement.find(".basket__item__few-products span");
+    if( maxItemNum - newNum <= 5 ){
+        if( fewItemsElement.length === 0 ) parentElement
+            .find(".basket__item__few-products")
+            .append(`Осталось <span>${maxItemNum - newNum}</span> шт.`);
+        fewItemsElement.text(maxItemNum - newNum)
+    } else if( maxItemNum - newNum === 6 ) parentElement.find(".basket__item__few-products").text("")
+
+    $.ajax({
+        url: "basket/count-item",
+        type: "POST",
+        dataType: "json",
+        data: {
+            _token: $("input[name=_token]").val(),
+            id: id,
+            newNum: newNum,
+            itemPrice: oneItemPrice
+        },
+        success: function (data) {
+            allItemPriceElement.text(data.newPrice)
+        },
+    });
+}
+
 $(document).ready(function () {
     let lang = $(".lang-change");
     let registerModal = $(".register-modal");
     let loginModal = $(".login-modal");
     let blackBg = $(".black-bg");
     let mainForm = $(".main-form");
+
+    function toggleAuthModal() {
+        registerModal.toggleClass("active");
+        loginModal.toggleClass('active');
+    }
 
     lang.on("click", function () {
         $(this).toggleClass("active");
@@ -277,17 +360,18 @@ $(document).ready(function () {
 
     $(".product__count-btn__add").on("click", function () {
         let input = $(this).prev();
-        input.val(+(input.val()) + 1);
+        let newValue = +(input.val()) + 1
+
+        if( newValue <= input.attr("max") )
+            input.val(+(input.val()) + 1);
     })
 
     $(".product__count-btn__remove").on("click", function () {
         let input = $(this).next();
+
         if (input.val() > 1)
             input.val(+(input.val()) - 1);
     })
-
-    let filterData;
-
 
     if (fillSessionStorage()) {
         createFilterData()
@@ -352,6 +436,11 @@ $(document).ready(function () {
 
     $(".product-form").on("submit", function (e) {
         e.preventDefault();
-        sendAjax($(this), errorAjax, successAjax, completeAjax);
+        sendAjax($(this), errorAjax, successAddItemToBasket, completeAjax);
+    })
+
+    $(".basket__item__delete").on("click", function () {
+        let id = $(this).data("id")
+        deleteItemFromBasket(id)
     })
 });

@@ -19382,6 +19382,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var filterData;
+
 function errorAjax(result) {
   var errors = result["responseJSON"]["errors"];
   var keys = Object.keys(errors);
@@ -19398,8 +19400,25 @@ function successAjax(res) {
     title: res.title,
     text: res.text,
     icon: res.icon
-  }).then(function () {// if (res.icon !== "error") window.location.replace("");
+  }).then(function () {
+    if (res.icon !== "error") window.location.replace("");
   });
+}
+
+function successAddItemToBasket(res) {
+  swal({
+    title: res.title,
+    text: res.text,
+    icon: res.icon
+  });
+  console.log(res.numElementsRemaining);
+
+  if (res.numElementsRemaining === 0) {
+    $(".product__count-btn").remove();
+    $(".product__btn").prop("disabled", true);
+    $(".product__btn").attr("type", "button");
+    $(".product__btn").text("Выбрано максимальное количество");
+  }
 }
 
 function formattingFormData(_this) {
@@ -19427,7 +19446,7 @@ function formattingFormData(_this) {
 }
 
 function completeAjax(data) {
-  console.log(data);
+  $(".header__basket__count").text(data.numAddedItems);
 }
 
 function sendAjax(_this, errorFoo, successFoo) {
@@ -19449,16 +19468,11 @@ function sendAjax(_this, errorFoo, successFoo) {
       200: successFoo
     },
     complete: function complete(data) {
-      if (completeFoo !== "") completeFoo(data);
-
       _this.find(".main-btn").prop("disabled", false);
+
+      if (completeFoo !== "") completeFoo(data);
     }
   });
-}
-
-function toggleAuthModal() {
-  registerModal.toggleClass("active");
-  loginModal.toggleClass('active');
 }
 
 function fillSessionStorage() {
@@ -19571,12 +19585,74 @@ function fillNumberFilterData() {
   });
 }
 
+function deleteItemFromBasket(id) {
+  var currentNumItemsInBasket = +$(".header__basket__count").text();
+  var numItemsInBasket = currentNumItemsInBasket - 1;
+  $(".basket__item[data-id=".concat(id, "]")).remove();
+  $(".header__basket__count").text(numItemsInBasket);
+  if (numItemsInBasket < 1) $(".section-title").after("<div class=\"big-text\">\n" + "                В вашей корзине пока ничего нет\n" + "            </div>\n" + "            <a href=\"/\">На главную</a>");
+  $.ajax({
+    url: "basket/remove-item",
+    type: "POST",
+    dataType: "json",
+    data: {
+      _token: $("input[name=_token]").val(),
+      id: id
+    },
+    error: function error() {
+      swal({
+        title: "Ошибка",
+        text: "При удалении произошла ошибка",
+        icon: "error"
+      });
+    }
+  });
+}
+
+function changeItemNum(e) {
+  var parentElement = $(this).parents(".basket__item");
+  var input = parentElement.find("input[name=qty]");
+  var newNum = +input.val();
+  var maxItemNum = +input.attr("max");
+  if (newNum < 1 || newNum > maxItemNum) return;
+  var id = parentElement.data("id");
+  var oneItemPrice = parseInt(parentElement.find(".basket__item__price_one span").text().replace(/\s+/g, ''));
+  var allItemPriceElement = parentElement.find(".basket__item__price_all span");
+  var fewItemsElement = parentElement.find(".basket__item__few-products span");
+
+  if (maxItemNum - newNum <= 5) {
+    if (fewItemsElement.length === 0) parentElement.find(".basket__item__few-products").append("\u041E\u0441\u0442\u0430\u043B\u043E\u0441\u044C <span>".concat(maxItemNum - newNum, "</span> \u0448\u0442."));
+    fewItemsElement.text(maxItemNum - newNum);
+  } else if (maxItemNum - newNum === 6) parentElement.find(".basket__item__few-products").text("");
+
+  $.ajax({
+    url: "basket/count-item",
+    type: "POST",
+    dataType: "json",
+    data: {
+      _token: $("input[name=_token]").val(),
+      id: id,
+      newNum: newNum,
+      itemPrice: oneItemPrice
+    },
+    success: function success(data) {
+      allItemPriceElement.text(data.newPrice);
+    }
+  });
+}
+
 $(document).ready(function () {
   var lang = $(".lang-change");
   var registerModal = $(".register-modal");
   var loginModal = $(".login-modal");
   var blackBg = $(".black-bg");
   var mainForm = $(".main-form");
+
+  function toggleAuthModal() {
+    registerModal.toggleClass("active");
+    loginModal.toggleClass('active');
+  }
+
   lang.on("click", function () {
     $(this).toggleClass("active");
   });
@@ -19639,13 +19715,13 @@ $(document).ready(function () {
 
   $(".product__count-btn__add").on("click", function () {
     var input = $(this).prev();
-    input.val(+input.val() + 1);
+    var newValue = +input.val() + 1;
+    if (newValue <= input.attr("max")) input.val(+input.val() + 1);
   });
   $(".product__count-btn__remove").on("click", function () {
     var input = $(this).next();
     if (input.val() > 1) input.val(+input.val() - 1);
   });
-  var filterData;
 
   if (fillSessionStorage()) {
     createFilterData();
@@ -19701,7 +19777,11 @@ $(document).ready(function () {
   });
   $(".product-form").on("submit", function (e) {
     e.preventDefault();
-    sendAjax($(this), errorAjax, successAjax, completeAjax);
+    sendAjax($(this), errorAjax, successAddItemToBasket, completeAjax);
+  });
+  $(".basket__item__delete").on("click", function () {
+    var id = $(this).data("id");
+    deleteItemFromBasket(id);
   });
 });
 

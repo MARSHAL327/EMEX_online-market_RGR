@@ -28,7 +28,7 @@
         <a href="{{ route('basket') }}" class="header__basket">
             <span class="material-icons">shopping_cart</span>
             <div class="header__basket__count">
-                {{ isset($_COOKIE['basket_id']) ? \Cart::session($_COOKIE['basket_id'])->getTotalQuantity() : "0" }}
+                {{ isset($_COOKIE['basket_id']) ? count(\Cart::session($_COOKIE['basket_id'])->getContent()) : "0" }}
             </div>
         </a>
     </div>

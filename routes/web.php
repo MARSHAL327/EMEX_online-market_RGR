@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPanel\AdminPanelController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
@@ -204,9 +205,12 @@ Route::prefix('product')->group(function (){
 Route::prefix('basket')->group(function (){
     Route::view('', 'basket.basket')->name('basket');
 
-    Route::post('add-item', [\App\Http\Controllers\BasketController::class, "addItemsToBasket"])
+    Route::post('add-item', [BasketController::class, "addItemsToBasket"])
         ->name('basketAddItems');
 
-    Route::post('remove-item', [\App\Http\Controllers\BasketController::class, "removeItemFromBasket"])
+    Route::post('remove-item', [BasketController::class, "removeItemFromBasket"])
         ->name('basketRemoveItem');
+
+    Route::post('count-item', [BasketController::class, "changeItemNum"])
+        ->name('changeItemNum');
 });

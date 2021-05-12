@@ -5,12 +5,19 @@
 @endsection
 
 <?php
-    $basketItems = [];
-    $basketID = isset($_COOKIE['basket_id']) ? $_COOKIE['basket_id'] : 0;
-    if( $basketID && !\Cart::session($basketID)->isEmpty() )
-        $basketItems = \Cart::session($basketID)->getContent();
+$basketItems = [];
+$basketID = isset($_COOKIE['basket_id']) ? $_COOKIE['basket_id'] : 0;
+if ($basketID && !\Cart::session($basketID)->isEmpty())
+    $basketItems = \Cart::session($basketID)->getContent();
 
 ?>
+
+<script>
+    $(document).ready(function () {
+        $("input[name=qty]").on("change", changeItemNum)
+        $(".product__count-btn__remove, .product__count-btn__add").on("click", changeItemNum)
+    })
+</script>
 
 @section('content')
     <section>
@@ -23,12 +30,15 @@
         </div>
 
         @if( count($basketItems) < 1 )
-            Ваша коризна пуста
+            <div class="big-text">
+                В вашей корзине пока ничего нет
+            </div>
+            <a href="{{ route('main') }}">На главную</a>
         @else
             <div class="basket">
                 <div class="basket__items">
                     @foreach($basketItems as $basketItem)
-                        <div class="basket__item">
+                        <div class="basket__item" data-id="{{ $basketItem->id }}">
                             <div class="basket__item__img">
                                 <img src="/img/{{ $basketItem->attributes->img }}" alt="">
                             </div>
@@ -49,7 +59,8 @@
                                     <div class="product__count-btn__remove circle-btn">
                                         <span class="material-icons">remove</span>
                                     </div>
-                                    <input name="qty" type="number" value="{{ $basketItem->quantity }}" min="1" max="100">
+                                    <input name="qty" type="number" value="{{ $basketItem->quantity }}" min="1"
+                                           max="{{ $basketItem->attributes->numProduct }}">
                                     <div class="product__count-btn__add circle-btn">
                                         <span class="material-icons">add</span>
                                     </div>
@@ -57,7 +68,7 @@
 
                                 <div class="basket__item__few-products">
                                     @if( ($basketItem->model->count - $basketItem->quantity) <= 5 )
-                                        Осталось {{ $basketItem->model->count - $basketItem->quantity }} шт.
+                                        Осталось <span>{{ $basketItem->model->count - $basketItem->quantity }}</span> шт.
                                     @endif
                                 </div>
                             </div>
@@ -65,19 +76,19 @@
 
                             <div>
                                 <div class="basket__item__price_all">
-                                    {{ number_format($basketItem->price * $basketItem->quantity, 0, '.', ' ') }} ₽
+                                    <span>{{ number_format($basketItem->price * $basketItem->quantity, 0, '.', ' ') }}</span> ₽
                                 </div>
                                 <div class="basket__item__price_one">
-                                    {{ number_format($basketItem->price, 0, '.', ' ') }} ₽
+                                    <span>{{ number_format($basketItem->price, 0, '.', ' ') }}</span> ₽
                                 </div>
                             </div>
-                            <div class="basket__item__delete">
+                            <div class="basket__item__delete" data-id="{{ $basketItem->id }}">
                                 <span class="material-icons">delete</span>
                             </div>
 
                         </div>
-
                     @endforeach
+                        @csrf
                 </div>
                 <div class="basket__order">
 

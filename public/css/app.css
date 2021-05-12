@@ -26,6 +26,17 @@ body > .black-bg.active {
   margin: 0 auto;
 }
 
+.big-text {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.big-text + a {
+  color: #1871C3;
+}
+
 span.material-icons {
   user-select: none;
   -ms-user-select: none;
@@ -185,6 +196,16 @@ span.material-icons {
 .main-btn.main-btn_red:hover {
   color: #D32F2F;
   background-color: #fff;
+}
+
+.main-btn.main-btn_red:disabled {
+  background-color: rgba(211, 47, 47, 0.5);
+}
+
+.main-btn.main-btn_red:disabled:hover {
+  background-color: rgba(211, 47, 47, 0.5);
+  box-shadow: none;
+  color: #fff;
 }
 
 .flex {

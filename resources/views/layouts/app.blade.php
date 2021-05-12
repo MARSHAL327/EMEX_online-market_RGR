@@ -27,7 +27,7 @@
 @endif
 
 
-<div class="wrapper">
+<div class="wrapper" style="min-height: 800px">
     @include('inc.header')
     @yield('content')
 </div>

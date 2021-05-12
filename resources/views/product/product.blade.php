@@ -4,6 +4,15 @@
     {{ $product->category->name }}
 @endsection
 
+
+<?php
+$productBasketData = null;
+
+if( isset($_COOKIE["basket_id"]) ){
+    $productBasketData = \Cart::session($_COOKIE["basket_id"])->get($product->id);
+}
+?>
+
 @section('content')
     <section>
         <div class="section-title">
@@ -42,17 +51,23 @@
                         </div>
                         <form class="flex product-form" action="{{ route("basketAddItems") }}" method="post">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $product->id }}">
-                            <div class="product__count-btn flex">
-                                <div class="product__count-btn__remove circle-btn">
-                                    <span class="material-icons">remove</span>
+                            @if( $productBasketData !== null && $productBasketData->quantity >= $product->count)
+                                <button type="button" class="product__btn main-btn main-btn_red" disabled>Выбрано максимальное количество</button>
+                            @else
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="max_qty" value="{{ $product->count }}">
+                                <div class="product__count-btn flex">
+                                    <div class="product__count-btn__remove circle-btn">
+                                        <span class="material-icons">remove</span>
+                                    </div>
+                                    <input name="qty" type="number" value="1" min="1" max="{{ $product->count }}">
+                                    <div class="product__count-btn__add circle-btn">
+                                        <span class="material-icons">add</span>
+                                    </div>
                                 </div>
-                                <input name="qty" type="number" value="1" min="1" max="{{ $product->count }}">
-                                <div class="product__count-btn__add circle-btn">
-                                    <span class="material-icons">add</span>
-                                </div>
-                            </div>
-                            <button type="submit" class="product__btn main-btn main-btn_red">Добавить в корзину</button>
+                                <button type="submit" class="product__btn main-btn main-btn_red">Добавить в корзину</button>
+                            @endif
+
                         </form>
                     </div>
                     <div class="thin-frame">
