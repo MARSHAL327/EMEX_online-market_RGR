@@ -83,11 +83,13 @@ function sendAjax(_this, errorFoo, successFoo, completeFoo = "") {
         },
         statusCode: {
             422: errorFoo,
-            200: successFoo
+            200: function(data){
+                successFoo(data)
+                if( completeFoo !== "" ) completeFoo(data)
+            }
         },
         complete: function (data) {
             _this.find(".main-btn").prop("disabled", false);
-            if( completeFoo !== "" ) completeFoo(data)
         }
     });
 }
@@ -240,6 +242,8 @@ function deleteItemFromBasket(id){
 }
 
 function changeItemNum(e){
+    e.preventDefault()
+
     let parentElement = $(this).parents(".basket__item")
     let input = parentElement.find("input[name=qty]")
     let newNum = +input.val()
@@ -253,11 +257,12 @@ function changeItemNum(e){
 
     let fewItemsElement = parentElement.find(".basket__item__few-products span");
     if( maxItemNum - newNum <= 5 ){
-        if( fewItemsElement.length === 0 ) parentElement
-            .find(".basket__item__few-products")
-            .append(`Осталось <span>${maxItemNum - newNum}</span> шт.`);
+        if( fewItemsElement.length === 0 )
+            parentElement
+                .find(".basket__item__few-products")
+                .append(`Осталось <span>${maxItemNum - newNum}</span> шт.`);
         fewItemsElement.text(maxItemNum - newNum)
-    } else if( maxItemNum - newNum === 6 ) parentElement.find(".basket__item__few-products").text("")
+    } else parentElement.find(".basket__item__few-products").text("")
 
     $.ajax({
         url: "basket/count-item",
@@ -439,8 +444,13 @@ $(document).ready(function () {
         sendAjax($(this), errorAjax, successAddItemToBasket, completeAjax);
     })
 
-    $(".basket__item__delete").on("click", function () {
+    $(".basket__item__delete").on("click", function (e) {
+        e.preventDefault()
+
         let id = $(this).data("id")
         deleteItemFromBasket(id)
     })
+
+    $(".basket__item input[name=qty]").on("change", changeItemNum)
+    $(".basket__item .product__count-btn__remove, .basket__item .product__count-btn__add").on("click", changeItemNum)
 });

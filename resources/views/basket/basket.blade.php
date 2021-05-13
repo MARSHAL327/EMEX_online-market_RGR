@@ -12,13 +12,6 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
 
 ?>
 
-<script>
-    $(document).ready(function () {
-        $("input[name=qty]").on("change", changeItemNum)
-        $(".product__count-btn__remove, .product__count-btn__add").on("click", changeItemNum)
-    })
-</script>
-
 @section('content')
     <section>
         <div class="section-title">
@@ -39,10 +32,12 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
                 <div class="basket__items">
                     @foreach($basketItems as $basketItem)
                         <div class="basket__item" data-id="{{ $basketItem->id }}">
-                            <div class="basket__item__img">
+                            <a href="{{ route('product', [ "id_category" => $basketItem->model->category, "id_product" => $basketItem->id]) }}"
+                               class="basket__item__img">
                                 <img src="/img/{{ $basketItem->attributes->img }}" alt="">
-                            </div>
-                            <div class="basket__item__title-wrapper">
+                            </a>
+                            <a href="{{ route('product', [ "id_category" => $basketItem->model->category, "id_product" => $basketItem->id]) }}"
+                               class="basket__item__title-wrapper">
                                 <div class="basket__item__title">
                                     {{ $basketItem->name }}
                                 </div>
@@ -52,7 +47,7 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
                                 <div class="basket__item__fabricator">
                                     Производитель: {{ $basketItem->attributes->fabricator }}
                                 </div>
-                            </div>
+                            </a>
 
                             <div class="basket__item__count-btn">
                                 <div class="product__count-btn flex">
@@ -68,7 +63,8 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
 
                                 <div class="basket__item__few-products">
                                     @if( ($basketItem->model->count - $basketItem->quantity) <= 5 )
-                                        Осталось <span>{{ $basketItem->model->count - $basketItem->quantity }}</span> шт.
+                                        Осталось <span>{{ $basketItem->model->count - $basketItem->quantity }}</span>
+                                        шт.
                                     @endif
                                 </div>
                             </div>
@@ -76,7 +72,8 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
 
                             <div>
                                 <div class="basket__item__price_all">
-                                    <span>{{ number_format($basketItem->price * $basketItem->quantity, 0, '.', ' ') }}</span> ₽
+                                    <span>{{ number_format($basketItem->price * $basketItem->quantity, 0, '.', ' ') }}</span>
+                                    ₽
                                 </div>
                                 <div class="basket__item__price_one">
                                     <span>{{ number_format($basketItem->price, 0, '.', ' ') }}</span> ₽
@@ -88,7 +85,7 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
 
                         </div>
                     @endforeach
-                        @csrf
+                    @csrf
                 </div>
                 <div class="basket__order">
 

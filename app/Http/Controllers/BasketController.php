@@ -68,7 +68,10 @@ class BasketController extends Controller
     public function changeItemNum(Request $req){
         $newPrice = number_format($req->itemPrice * $req->newNum, 0, '.', ' ');
         \Cart::session($_COOKIE['basket_id'])->update($req->id,[
-            'quantity' => (int)$req->newNum,
+            'quantity' => [
+                'relative' => false,
+                'value' => (int)$req->newNum
+            ]
         ]);
 
         return response()->json([
