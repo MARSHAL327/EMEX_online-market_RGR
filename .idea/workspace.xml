@@ -19,28 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckUserRole.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Models/Users.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_15_094608_delete_customers_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_15_101319_delete_users_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_15_101358_delete_users_data_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_15_101511_create_user_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/addManager.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/LoginRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/RegistrationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/RegistrationRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/adminPanel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/adminPanel.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/inc/header-contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/header-contact.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -242,7 +221,7 @@
       <workItem from="1620823103068" duration="17591000" />
       <workItem from="1620895103098" duration="4528000" />
       <workItem from="1620914689894" duration="3485000" />
-      <workItem from="1621064707094" duration="10827000" />
+      <workItem from="1621064707094" duration="11512000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
