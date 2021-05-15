@@ -22,7 +22,7 @@
 @include('inc.header-contact')
 @include('inc.register')
 @include('inc.login')
-@if( $user != null && $user->role == "admin" )
+@if( $user != null && ($user->role == "admin" || $user->role == "content") )
     @include('admin.adminPanel')
 @endif
 

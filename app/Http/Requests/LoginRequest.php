@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => ["required", "regex:/((8|\+7|\+3)-?)?\(?\d{3,5}\)?-?\d{1}-?\d{1}-?\d{1}-?\d{1}-?\d{1}((-?\d{1})?-?\d{1})?/"],
+            "login" => ["required"],
             "password" => ["required"],
         ];
     }
@@ -32,8 +32,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            "phone.required" => "Поле телефон обязательно для заполнения",
-            "phone.regex" => "Неверно введён телефон",
+            "login.required" => "Поле логин обязательно для заполнения",
             "password.required" => "Поле пароль обязательно для заполнения",
         ];
     }

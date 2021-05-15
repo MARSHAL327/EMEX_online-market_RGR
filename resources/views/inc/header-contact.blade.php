@@ -1,4 +1,4 @@
-<?php use Illuminate\Support\Facades\Auth;?>
+<?php use Illuminate\Support\Facades\Auth; ?>
 
 <div class="header-contact">
     <div class="wrapper">
@@ -33,17 +33,20 @@
 
             </div>
 
-            <?php if (Auth::check()): ?>
-            <a href="{{ route('logout')  }}" class="header-contact_right__auth header-contact__item">
-                Выход
-                <span class="material-icons">logout</span>
-            </a>
-            <?php else: ?>
-            <div class="header-contact_right__auth header-contact__item auth">
-                Вход
-                <span class="material-icons">account_circle</span>
-            </div>
-            <?php endif; ?>
+            @if(false)
+                @if (Auth::check())
+                    <a href="{{ route('logout')  }}" class="header-contact_right__auth header-contact__item">
+                        Выход
+                        <span class="material-icons">logout</span>
+                    </a>
+                @else
+                    <div class="header-contact_right__auth header-contact__item auth">
+                        Вход
+                        <span class="material-icons">account_circle</span>
+                    </div>
+                @endif
+            @endif
+
         </div>
     </div>
 </div>

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use app\core\View;
 use App\Http\Controllers\Controller;
-use App\Http\Models\UserData;
+use App\Http\Models\Users;
 use App\Http\Requests\LoginRequest;
-use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -30,10 +28,11 @@ class LoginController extends Controller
 
     public function authenticate($req)
     {
-        $userData = UserData::firstWhere('phone', $req->input('phone'));
+        $userData = Users::firstWhere('login', $req->input('login'));
+        if($userData == null) return false;
 
         $credentials = [
-            "user_data" => $userData->id,
+            "id" => $userData->id,
             "password" => $req->input('password')
         ];
 

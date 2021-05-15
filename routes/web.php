@@ -57,12 +57,23 @@ Route::get('/logout', function () {
 // ************
 // Для администратора
 // ************
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'isUserRole:admin'], function () {
+    // ************
+    // Добавление менеджера
+    // ************
+    Route::view('/add-manager', 'admin.addManager')->name("admin.addManager");
+    Route::post('/add-manager', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name("admin.addManager_post");
+});
+
+
+// ************
+// Для администратора и контент-менеджера
+// ************
+Route::group(['middleware' => ['isUserRole:admin,content']], function () {
     // ************
     // Добавление новости
     // ************
     Route::view('/news/add', 'admin.addNews')->name("news_add");
-
     Route::post('/news/add', [AdminPanelController::class, 'addOneNews'])->name("news_add");
 
 
@@ -70,7 +81,6 @@ Route::group(['middleware' => 'auth'], function () {
     // Добавление акции
     // ************
     Route::view('/stock/add', 'admin.addStock')->name("stock_add");
-
     Route::post('/stock/add', [AdminPanelController::class, 'addOneStock'])->name("stock_add");
 
 
@@ -159,7 +169,8 @@ Route::post('auth/register', 'Auth\RegisterController@register')->name('register
 // ************
 // Авторизация
 // ************
-Route::post('auth/login', 'Auth\LoginController@login')->name('login');
+Route::view('admin', 'admin.login')->name('login-page');
+Route::post('admin', 'Auth\LoginController@login')->name('login');
 
 
 // ************

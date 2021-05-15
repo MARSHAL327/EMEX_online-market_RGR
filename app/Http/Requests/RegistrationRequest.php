@@ -24,8 +24,7 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'fio' => ["required", "regex:/^\w{1,}\s\w{1,}\s\w{1,}$/iu"],
-            'phone' => ["required", "regex:/((8|\+7|\+3)-?)?\(?\d{3,5}\)?-?\d{1}-?\d{1}-?\d{1}-?\d{1}-?\d{1}((-?\d{1})?-?\d{1})?/"],
+            "login" => ["required"],
             "password" => ["required"],
         ];
     }
@@ -33,10 +32,7 @@ class RegistrationRequest extends FormRequest
     public function messages()
     {
         return [
-            "fio.required" => "Поле ФИО обязательно для заполнения",
-            "fio.regex" => "Поле ФИО должно содержать фамилию имя отчество",
-            "phone.required" => "Поле телефон обязательно для заполнения",
-            "phone.regex" => "Неверно введён телефон",
+            "login.required" => "Поле логин обязательно для заполнения",
             "password.required" => "Поле пароль обязательно для заполнения",
         ];
     }
