@@ -2,7 +2,6 @@
     <div class="header__logo">
         <a href="{{ route('main')  }}">EMEX</a>
     </div>
-
     <div class="header__menu__basket">
         <nav class="header__menu">
             <ul>

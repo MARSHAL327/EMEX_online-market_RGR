@@ -212,17 +212,6 @@ function fillNumberFilterData(){
 }
 
 function deleteItemFromBasket(id){
-    let currentNumItemsInBasket = +$(".header__basket__count").text()
-    let numItemsInBasket = currentNumItemsInBasket - 1
-
-    $(`.basket__item[data-id=${id}]`).remove()
-    $(".header__basket__count").text(numItemsInBasket)
-    if( numItemsInBasket < 1 )
-        $(".section-title").after("<div class=\"big-text\">\n" +
-            "                В вашей корзине пока ничего нет\n" +
-            "            </div>\n" +
-            "            <a href=\"/\">На главную</a>")
-
     $.ajax({
         url: "basket/remove-item",
         type: "POST",
@@ -230,6 +219,21 @@ function deleteItemFromBasket(id){
         data: {
             _token: $("input[name=_token]").val(),
             id: id
+        },
+        success: function(data){
+            $(`.basket__item[data-id=${data.id}]`).remove()
+            $(".header__basket__count").text(data.numItemsInBasket)
+            if( data.numItemsInBasket < 1 ){
+                $(".basket").remove()
+                $(".section-title").after("<div class=\"big-text\">\n" +
+                    "                В вашей корзине пока ничего нет\n" +
+                    "            </div>\n" +
+                    "            <a href=\"/\">На главную</a>")
+
+            }
+
+            $(".order__count span").text(parseInt($(".order__count span").text()) - 1)
+            $(".basket__order__total-price .total-price").text(data.newTotalPrice)
         },
         error: function () {
             swal({
@@ -276,6 +280,7 @@ function changeItemNum(e){
         },
         success: function (data) {
             allItemPriceElement.text(data.newPrice)
+            $(".basket__order__total-price .total-price").text(data.newTotalPrice)
         },
     });
 }

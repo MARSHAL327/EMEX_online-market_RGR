@@ -77,6 +77,10 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
                                 </div>
                                 <div class="basket__item__price_one">
                                     <span>{{ number_format($basketItem->price, 0, '.', ' ') }}</span> ₽
+                                    <span class="material-icons info__btn">info</span>
+                                    <div class="basket__item__price_one__text info__text">
+                                        Цена за 1 штуку
+                                    </div>
                                 </div>
                             </div>
                             <div class="basket__item__delete" data-id="{{ $basketItem->id }}">
@@ -88,7 +92,35 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
                     @csrf
                 </div>
                 <div class="basket__order">
+                    <div class="basket__order__total-price">
+                        <span>Итого</span>
+                        <div>
+                            <span class="total-price">{{ number_format(\Cart::session($_COOKIE['basket_id'])->getSubTotal(), 0, '.', ' ')  }}</span> ₽
+                        </div>
+                    </div>
+                    <div class="order__count grey-text">
+                        Количество, <span>{{ isset($_COOKIE['basket_id']) ? count(\Cart::session($_COOKIE['basket_id'])->getContent()) : "0" }}</span> шт.
+                    </div>
+                    <div class="order__line"></div>
+                    <div class="basket__order-form__title basket__order__total-price">
+                        Оформление заказа
+                    </div>
+                    <div class="basket__order-form">
+                        <form action="" method="post" class="main-form">
+                            @csrf
+                            <label for="fio">
+                                ФИО
+                                <input type="text" name="fio">
+                            </label>
 
+                            <label for="phone">
+                                Телефон
+                                <input type="text" name="phone">
+                            </label>
+
+                            <button class="main-btn main-btn_red">Заказать</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         @endif

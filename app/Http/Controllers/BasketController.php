@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Product;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Http\Request;
 
 class BasketController extends Controller
@@ -58,9 +59,11 @@ class BasketController extends Controller
 
     public function removeItemFromBasket(Request $req){
         \Cart::session($_COOKIE['basket_id'])->remove($req->id);
+        $newTotalPrice = number_format(\Cart::session($_COOKIE['basket_id'])->getSubTotal(), 0, '.', ' ');
 
         return response()->json([
             "id" => $req->id,
+            "newTotalPrice" => $newTotalPrice,
             "numItemsInBasket" => (int)count(\Cart::getContent())
         ]);
     }
@@ -76,7 +79,16 @@ class BasketController extends Controller
 
         return response()->json([
             "newPrice" => $newPrice,
+            "newTotalPrice" => number_format(\Cart::session($_COOKIE['basket_id'])->getSubTotal(), 0, '.', ' '),
             "quantity" => (int)$req->newNum
+        ]);
+    }
+
+    public function sendOrder(OrderRequest $req){
+        return response()->json([
+            "icon" => "success",
+            "title" => "Успех",
+            "text" => "Заказ успешно отправлен"
         ]);
     }
 }

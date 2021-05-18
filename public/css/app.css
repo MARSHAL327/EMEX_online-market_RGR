@@ -1754,7 +1754,7 @@ label.active {
   display: grid;
   grid-template-columns: 795px 350px;
   grid-gap: 55px;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .basket__item {
@@ -1906,7 +1906,69 @@ label.active {
 }
 
 .basket__item .basket__item__price_one {
+  position: relative;
+  display: flex;
+  align-items: center;
   color: #989898;
   margin-top: 10px;
+}
+
+.basket__item .basket__item__price_one .material-icons {
+  font-size: 22px;
+  margin-left: 5px;
+}
+
+.basket__item .basket__item__price_one .basket__item__price_one__text {
+  position: absolute;
+  transform: translateY(10px);
+  top: 28px;
+  left: 0;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.info__btn:hover + .info__text {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: 0.3s;
+}
+
+.basket__order {
+  border-radius: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  padding: 30px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.basket__order .basket__order__total-price {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.basket__order .order__count {
+  margin-top: 10px;
+}
+
+.basket__order .order__line {
+  margin: 15px 0;
+  width: 60px;
+  height: 2px;
+  background-color: #D32F2F;
+}
+
+.basket__order .basket__order-form {
+  margin-top: 15px;
 }
 
