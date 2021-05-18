@@ -113,7 +113,7 @@ trait ProductTrait
             return $this->JSONResponse("error", "Ошибка", "При добавлении произошла ошибка");
         }
 
-        // Добавление свйоств товара
+        // Добавление свойств товара
         $properties = [];
         foreach ( $req->input('properties') as $propertyID => $propertyValue ){
             $properties[] = [

@@ -19,6 +19,9 @@ class CreateOrdersTable extends Migration
 
             $table->integer('product_id')->unsigned()->default(1);
             $table->foreign('product_id')->references('id')->on('product');
+
+            $table->integer('product_total_price');
+            $table->integer('product_quantity');
         });
     }
 

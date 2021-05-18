@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Customer;
+use App\Http\Models\Order;
+use App\Http\Models\Orders;
 use App\Http\Models\Product;
 use App\Http\Requests\OrderRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
 {
@@ -85,10 +89,38 @@ class BasketController extends Controller
     }
 
     public function sendOrder(OrderRequest $req){
-        return response()->json([
-            "icon" => "success",
-            "title" => "Успех",
-            "text" => "Заказ успешно отправлен"
-        ]);
+        try {
+            if( !isset($_COOKIE['basket_id']) ) throw new \ErrorException("При оформлении произошла ошибка");
+
+            $customer = new Customer();
+            $customer->fio = $req->fio;
+            $customer->phone = $req->phone;
+            $customer->save();
+
+            $order = new Order();
+            $order->customer_id = $customer->id;
+            $order->date = date("Y-m-d H:m:i");
+            $order->total_price = \Cart::session($_COOKIE['basket_id'])->getSubTotal();
+            $order->count_products = count(\Cart::session($_COOKIE['basket_id'])->getContent());
+            $order->save();
+
+            $products = [];
+
+            foreach (\Cart::session($_COOKIE["basket_id"])->getContent() as $basketItem){
+                $products[] = [
+                    "order_id" => $order->id,
+                    "product_id" => $basketItem->id,
+                    "product_total_price" => $basketItem->price * $basketItem->quantity,
+                    "product_quantity" => $basketItem->quantity
+                ];
+            }
+
+            DB::table('orders')->insert($products);
+
+            return $this->JSONResponse("success", "Успех", "Заказ успешно оформлен");
+        } catch (\Exception $ex){
+            return $this->JSONResponse("error", "Ошибка", $ex->getMessage());
+        }
+
     }
 }
