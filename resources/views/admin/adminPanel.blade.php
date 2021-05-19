@@ -21,13 +21,9 @@
                     Добавить товар
                 </a></li>
             @if($user->role == "admin")
-                <li class="admin-controller__panel__item"><a href="">
+                <li class="admin-controller__panel__item"><a href="{{ route("admin.orderList") }}">
                         <span class="material-icons">list_alt</span>
                         Посмотреть список заказов
-                    </a></li>
-                <li class="admin-controller__panel__item"><a href="">
-                        <span class="material-icons">edit</span>
-                        Редактировать страницу
                     </a></li>
                 <li class="admin-controller__panel__item"><a href="{{ route('admin.addManager') }}">
                         <span class="material-icons">person_add</span>

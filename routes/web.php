@@ -63,6 +63,12 @@ Route::group(['middleware' => 'isUserRole:admin'], function () {
     // ************
     Route::view('/add-manager', 'admin.addManager')->name("admin.addManager");
     Route::post('/add-manager', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name("admin.addManager_post");
+
+
+    // ************
+    // Просмотр списка заказов
+    // ************
+    Route::get('/order-list', [])->name("admin.orderList");
 });
 
 

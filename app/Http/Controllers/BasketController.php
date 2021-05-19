@@ -92,6 +92,8 @@ class BasketController extends Controller
         try {
             if( !isset($_COOKIE['basket_id']) ) throw new \ErrorException("При оформлении произошла ошибка");
 
+            $basket = \Cart::session($_COOKIE['basket_id']);
+
             $customer = new Customer();
             $customer->fio = $req->fio;
             $customer->phone = $req->phone;
@@ -100,19 +102,23 @@ class BasketController extends Controller
             $order = new Order();
             $order->customer_id = $customer->id;
             $order->date = date("Y-m-d H:m:i");
-            $order->total_price = \Cart::session($_COOKIE['basket_id'])->getSubTotal();
-            $order->count_products = count(\Cart::session($_COOKIE['basket_id'])->getContent());
+            $order->total_price = $basket->getSubTotal();
+            $order->count_products = count($basket->getContent());
             $order->save();
 
             $products = [];
 
-            foreach (\Cart::session($_COOKIE["basket_id"])->getContent() as $basketItem){
+            foreach ($basket->getContent() as $basketItem){
                 $products[] = [
                     "order_id" => $order->id,
                     "product_id" => $basketItem->id,
                     "product_total_price" => $basketItem->price * $basketItem->quantity,
                     "product_quantity" => $basketItem->quantity
                 ];
+
+                $product = Product::find($basketItem->id);
+                $product->count = $product->count - $basketItem->quantity;
+                $product->save();
             }
 
             DB::table('orders')->insert($products);

@@ -21,12 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/ProductTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/ProductTrait.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BasketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BasketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/CustomerModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/UserData.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_18_201926_create_new_customers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_18_201926_create_new_customers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_18_201942_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_18_201942_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/adminPanel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/adminPanel.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +227,8 @@
       <workItem from="1620895103098" duration="4528000" />
       <workItem from="1620914689894" duration="3485000" />
       <workItem from="1621064707094" duration="11512000" />
-      <workItem from="1621357554155" duration="10785000" />
+      <workItem from="1621357554155" duration="10945000" />
+      <workItem from="1621439394874" duration="3000000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
@@ -329,10 +327,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="676" y="243" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621079460693" />
-    <state x="794" y="443" key="NewPhpFileDialog" timestamp="1621079125038">
+    <state x="794" y="443" key="NewPhpFileDialog" timestamp="1621446654920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621079125038" />
+    <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621446654920" />
     <state width="550" height="446" key="SwitcherDM" timestamp="1618944083058">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
