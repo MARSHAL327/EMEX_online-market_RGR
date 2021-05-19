@@ -37,6 +37,10 @@ body > .black-bg.active {
   color: #1871C3;
 }
 
+img {
+  max-width: 100%;
+}
+
 span.material-icons {
   user-select: none;
   -ms-user-select: none;
@@ -76,7 +80,7 @@ span.material-icons {
 }
 
 .fz-22 {
-  font-size: 22px;
+  font-size: 22px !important;
 }
 
 .mt-20 {
@@ -124,26 +128,47 @@ span.material-icons {
   border-radius: 0 10px 0 0;
 }
 
-.white-block_grey-strip .modification__items table {
+.white-block_grey-strip table {
   width: 100%;
 }
 
-.white-block_grey-strip .modification__items td,
-.white-block_grey-strip .modification__items th {
+.white-block_grey-strip td,
+.white-block_grey-strip th {
   text-align: left;
   padding: 20px 40px;
+  vertical-align: middle;
 }
 
-.white-block_grey-strip .modification__items td {
+.white-block_grey-strip td {
   padding: 30px 40px;
 }
 
-.white-block_grey-strip .modification__items tr {
+.white-block_grey-strip tr {
   border-bottom: 1px solid #989898;
 }
 
-.white-block_grey-strip .modification__items tr:last-child {
+.white-block_grey-strip tr:last-child {
   border: 0;
+}
+
+.white-block_grey-strip img {
+  width: 200px;
+  height: 120px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.white-block_grey-strip a:hover {
+  color: #1871C3;
+}
+
+.order-table td,
+.order-table th {
+  padding: 20px 30px;
+}
+
+.order-table td {
+  padding: 30px;
 }
 
 .transparent-btn a {

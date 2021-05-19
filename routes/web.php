@@ -5,7 +5,9 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use App\Http\Models\AutoModel;
+use App\Http\Models\Order;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,7 +70,10 @@ Route::group(['middleware' => 'isUserRole:admin'], function () {
     // ************
     // Просмотр списка заказов
     // ************
-    Route::get('/order-list', [])->name("admin.orderList");
+    Route::view('/order-list', "admin.orderList", [
+        "orders" => Order::orderBy("id", "DESC")->paginate(4)
+    ])->name("admin.orderList");
+    Route::get('/order-list/{id}', [OrderController::class, "showOrder"])->name("admin.order");
 });
 
 

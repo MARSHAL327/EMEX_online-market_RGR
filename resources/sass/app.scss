@@ -64,6 +64,10 @@ body {
     }
 }
 
+img{
+    max-width: 100%;
+}
+
 span.material-icons {
     user-select: none;
     -ms-user-select: none;
@@ -103,7 +107,7 @@ span.material-icons {
 }
 
 .fz-22 {
-    font-size: 22px;
+    font-size: 22px !important;
 }
 
 .mt-20 {
@@ -150,27 +154,46 @@ span.material-icons {
         }
     }
 
-    & .modification__items {
-        & table {
-            width: 100%;
-        }
+    & table {
+        width: 100%;
+    }
 
-        & td, & th {
-            text-align: left;
-            padding: 20px 40px;
-        }
+    & td, & th {
+        text-align: left;
+        padding: 20px 40px;
+        vertical-align: middle;
+    }
 
-        & td {
-            padding: 30px 40px;
-        }
+    & td {
+        padding: 30px 40px;
+    }
 
-        & tr {
-            border-bottom: 1px solid $darkGrey;
+    & tr {
+        border-bottom: 1px solid $darkGrey;
 
-            &:last-child {
-                border: 0;
-            }
+        &:last-child {
+            border: 0;
         }
+    }
+
+    & img{
+        width: 200px;
+        height: 120px;
+        object-fit: contain;
+    }
+
+    & a:hover{
+        color: $blue;
+    }
+}
+
+.order-table{
+    & td, & th {
+        padding: 20px 30px;
+    }
+
+    & td{
+        padding: 30px;
     }
 }
 
@@ -1952,12 +1975,12 @@ $slider-height: 550px;
         color: $darkGrey;
         margin-top: 10px;
 
-        & .material-icons{
+        & .material-icons {
             font-size: 22px;
             margin-left: 5px;
         }
 
-        & .basket__item__price_one__text{
+        & .basket__item__price_one__text {
             position: absolute;
             transform: translateY(10px);
             top: 28px;
@@ -1975,38 +1998,38 @@ $slider-height: 550px;
     }
 }
 
-.info__btn:hover+.info__text{
+.info__btn:hover + .info__text {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     transition: .3s;
 }
 
-.basket__order{
+.basket__order {
     border-radius: 20px;
     box-shadow: $mainShadow;
     padding: 30px;
     height: fit-content;
 
-    & .basket__order__total-price{
+    & .basket__order__total-price {
         display: flex;
         justify-content: space-between;
         font-weight: bold;
         font-size: 24px;
     }
 
-    & .order__count{
+    & .order__count {
         margin-top: 10px;
     }
 
-    & .order__line{
+    & .order__line {
         margin: 15px 0;
         width: 60px;
         height: 2px;
         background-color: $red;
     }
 
-    & .basket__order-form{
+    & .basket__order-form {
         margin-top: 15px;
     }
 }
