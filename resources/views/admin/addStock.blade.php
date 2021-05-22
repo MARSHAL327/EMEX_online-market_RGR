@@ -30,7 +30,7 @@
 
             <label for="desc">
                 Описание акции
-                <textarea name="desc"></textarea>
+                <textarea name="desc" id="stock_desc"></textarea>
             </label>
 
             <label for="date_start">
@@ -46,5 +46,13 @@
             <button class="main-btn">Добавить</button>
         </form>
     </div>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#stock_desc' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 
 @endsection

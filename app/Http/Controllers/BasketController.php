@@ -7,8 +7,10 @@ use App\Http\Models\Order;
 use App\Http\Models\Orders;
 use App\Http\Models\Product;
 use App\Http\Requests\OrderRequest;
+use App\Mail\OrderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class BasketController extends Controller
 {
@@ -122,6 +124,10 @@ class BasketController extends Controller
             }
 
             DB::table('orders')->insert($products);
+
+            $basket->clear();
+
+//            Mail::to("sanya.shvedenko@mail.ru")->send(new OrderMail());
 
             return $this->JSONResponse("success", "Успех", "Заказ успешно оформлен");
         } catch (\Exception $ex){

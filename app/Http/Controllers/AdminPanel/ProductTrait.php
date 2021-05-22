@@ -50,7 +50,7 @@ trait ProductTrait
 
         $productFabricator->name = $req->input('name');
         $productFabricator->logo = $req->input('logo');
-        $productFabricator->description = $req->input('desc');
+        $productFabricator->description = htmlspecialchars($req->input('desc'));
 
         $saveStatus = $productFabricator->save();
 
@@ -64,7 +64,7 @@ trait ProductTrait
 
         $productProvider->name = $req->input('name');
         $productProvider->logo = $req->input('logo');
-        $productProvider->description = $req->input('desc');
+        $productProvider->description = htmlspecialchars($req->input('desc'));
 
         $saveStatus = $productProvider->save();
 

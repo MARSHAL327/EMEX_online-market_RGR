@@ -15,6 +15,7 @@
     <script src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/sweetAlert.js"></script>
     <script type="text/javascript" src="<?=$_SERVER["HTTP_HOST"]; ?>/Libs/slick.js"></script>
     <script src="<?=$_SERVER["HTTP_HOST"]; ?>/js/app.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
     <title>@yield('title-block')</title>
 </head>
 <body>

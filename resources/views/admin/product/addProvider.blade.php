@@ -15,9 +15,17 @@
 
         <label for="desc">
             Описание поставщика
-            <textarea name="desc"></textarea>
+            <textarea name="desc" id="provider_desc"></textarea>
         </label>
 
         <button class="main-btn">Добавить</button>
     </form>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#provider_desc' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection

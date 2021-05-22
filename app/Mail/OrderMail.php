@@ -28,6 +28,8 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->view('basket.basket');
+        return $this
+            ->from('sanya.shvedenko@mail.ru')
+            ->view('basket.basket');
     }
 }

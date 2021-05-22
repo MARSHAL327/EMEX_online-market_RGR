@@ -17,11 +17,11 @@
         <div class="news-card grid-3fr">
             @foreach($news as $newsItem)
                 <div class="news-card__item">
-                    <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $newsItem->img }}" alt="">
+                    <img src="/img/{{ $newsItem->img }}" alt="">
                     <div class="news-card__text-btn-wrapper">
                         <div class="news-card__text-wrapper">
                             <div class="news-card__text-title">{{ $newsItem->title }}</div>
-                            <div class="news-card__text">{{ $newsItem->desc }}</div>
+                            <div class="news-card__text"><?= htmlspecialchars_decode($newsItem->desc) ?></div>
                         </div>
                         <a href="{{ route('news_one', $newsItem->id) }}">
                             <button class="news-btn">

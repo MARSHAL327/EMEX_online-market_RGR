@@ -13,9 +13,9 @@ trait NewsTrait
         $news = new NewsModel();
 
         $news->title = $req->input('title');
-        $news->desc = $req->input('desc');
+        $news->desc = htmlspecialchars($req->input('desc'));
         $news->img = $req->input('img');
-        $news->text = $req->input('text');
+        $news->text = htmlspecialchars($req->input('text'));
         $news->date = date("Y-m-d");
 
         $saveStatus = $news->save();

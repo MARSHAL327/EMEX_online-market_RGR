@@ -18,8 +18,8 @@
             @foreach($stock as $stockItem)
                 <div class="card stock-card__item">
                     <div class="card-back">
-                        <span class="stock-card__desc">
-                            {{ $stockItem->desc }}
+                        <span class="stock-card__desc default-style">
+                            <?= htmlspecialchars_decode($stockItem->desc) ?>
                             <div class="stock-card__date">
                                 Начало акции:
                                 <span>{{ date('d.m.Y', strtotime($stockItem->date_start)) }}</span>
@@ -31,7 +31,7 @@
                         </span>
                     </div>
                     <div class="card-front">
-                        <img src="<?= $_SERVER["HTTP_HOST"]; ?>/img/{{ $stockItem->img }}" alt="">
+                        <img src="/img/{{ $stockItem->img }}" alt="">
                         <span class="stock-card__text">{{ $stockItem->title }}</span>
                         <div class="black-bg"></div>
                     </div>

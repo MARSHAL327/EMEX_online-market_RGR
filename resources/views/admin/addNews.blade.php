@@ -30,16 +30,31 @@
 
             <label for="desc">
                 Описание новости
-                <textarea name="desc"></textarea>
+                <textarea name="desc" id="news_desc" class="default-style CKEditor"></textarea>
             </label>
 
             <label for="text">
                 Текст новости
-                <textarea name="text"></textarea>
+                <textarea name="text" id="news_text" class="default-style CKEditor"></textarea>
             </label>
+
 
             <button class="main-btn">Добавить</button>
         </form>
     </div>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#news_desc' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+        ClassicEditor
+            .create( document.querySelector( '#news_text' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 
 @endsection

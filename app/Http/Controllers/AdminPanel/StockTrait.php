@@ -12,8 +12,8 @@ trait StockTrait
         $stock = new Stock();
 
         $stock->title = $req->input('title');
-        $stock->img = "img/" . $req->input('img');
-        $stock->desc = $req->input('desc');
+        $stock->img = $req->input('img');
+        $stock->desc = htmlspecialchars($req->input('desc'));
         $stock->date_start = $req->input('date_start');
         $stock->date_end = $req->input('date_end');
 

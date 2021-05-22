@@ -21,13 +21,29 @@
   <component name="ChangeListManager">
     <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Models/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Models/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/NewsTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/NewsTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/ProductTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/ProductTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/StockTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminPanel/StockTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BasketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BasketController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/OrderMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/OrderMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/orderList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orderList.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/reset.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/addNews.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/addNews.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/addStock.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/addStock.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/addFabricator.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/addFabricator.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/addProvider.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/addProvider.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/basket/basket.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/basket/basket.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/news.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/news.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/oneNews.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/oneNews.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/product/product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/product/product.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/stock.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/stock.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +248,8 @@
       <workItem from="1620914689894" duration="3485000" />
       <workItem from="1621064707094" duration="11512000" />
       <workItem from="1621357554155" duration="10945000" />
-      <workItem from="1621439394874" duration="9200000" />
+      <workItem from="1621439394874" duration="9323000" />
+      <workItem from="1621669631295" duration="14612000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
@@ -347,6 +364,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1616950705512" />
+    <state x="803" y="281" key="refactoring.ChangeSignatureDialog" timestamp="1621672342039">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="803" y="281" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621672342039" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1619009061940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

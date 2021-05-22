@@ -119,7 +119,7 @@ if( isset($_COOKIE["basket_id"]) ){
                             {{ $product->fabricator->name }}
                         </div>
                         <div class="description-block__text">
-                            {{ $product->fabricator->description }}
+                            <?= htmlspecialchars_decode($product->fabricator->description) ?>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ if( isset($_COOKIE["basket_id"]) ){
                             {{ $product->provider->name }}
                         </div>
                         <div class="description-block__text">
-                            {{ $product->provider->description }}
+                            <?= htmlspecialchars_decode($product->provider->description) ?>
                         </div>
                     </div>
                 </div>

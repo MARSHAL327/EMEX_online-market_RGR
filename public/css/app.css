@@ -137,6 +137,7 @@ span.material-icons {
   text-align: left;
   padding: 20px 40px;
   vertical-align: middle;
+  font-weight: 400;
 }
 
 .white-block_grey-strip td {
@@ -1995,5 +1996,13 @@ label.active {
 
 .basket__order .basket__order-form {
   margin-top: 15px;
+}
+
+.basket-empty {
+  display: none;
+}
+
+.ck-editor {
+  margin-top: 10px !important;
 }
 

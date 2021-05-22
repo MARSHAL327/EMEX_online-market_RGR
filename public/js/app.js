@@ -19586,6 +19586,13 @@ function fillNumberFilterData() {
   });
 }
 
+function clearBasket() {
+  $(".basket").fadeOut(400, "swing", function () {
+    $(this).remove();
+    $(".basket-empty").fadeIn(400);
+  });
+}
+
 function deleteItemFromBasket(id) {
   $.ajax({
     url: "basket/remove-item",
@@ -19600,8 +19607,7 @@ function deleteItemFromBasket(id) {
       $(".header__basket__count").text(data.numItemsInBasket);
 
       if (data.numItemsInBasket < 1) {
-        $(".basket").remove();
-        $(".section-title").after("<div class=\"big-text\">\n" + "                В вашей корзине пока ничего нет\n" + "            </div>\n" + "            <a href=\"/\">На главную</a>");
+        clearBasket();
       }
 
       $(".order__count span").text(parseInt($(".order__count span").text()) - 1);
@@ -19788,6 +19794,10 @@ $(document).ready(function () {
   $(".product-form").on("submit", function (e) {
     e.preventDefault();
     sendAjax($(this), errorAjax, successAddItemToBasket, completeAjax);
+  });
+  $("#basket__order-form").on("submit", function (e) {
+    e.preventDefault();
+    sendAjax($(this), errorAjax, successAddItemToBasket, clearBasket);
   });
   $(".basket__item__delete").on("click", function (e) {
     e.preventDefault();

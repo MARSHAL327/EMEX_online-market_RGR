@@ -23,11 +23,19 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
         </div>
 
         @if( count($basketItems) < 1 )
-            <div class="big-text">
-                В вашей корзине пока ничего нет
+            <div class="basket-empty" style="display: block">
+                <div class="big-text">
+                    В вашей корзине пока ничего нет
+                </div>
+                <a href="{{ route('main') }}">На главную</a>
             </div>
-            <a href="{{ route('main') }}">На главную</a>
         @else
+            <div class="basket-empty">
+                <div class="big-text">
+                    В вашей корзине пока ничего нет
+                </div>
+                <a href="{{ route('main') }}">На главную</a>
+            </div>
             <div class="basket">
                 <div class="basket__items">
                     @foreach($basketItems as $basketItem)
@@ -106,7 +114,7 @@ if ($basketID && !\Cart::session($basketID)->isEmpty())
                         Оформление заказа
                     </div>
                     <div class="basket__order-form">
-                        <form action="" method="post" class="main-form">
+                        <form action="" method="post"id="basket__order-form">
                             @csrf
                             <label for="fio">
                                 ФИО
