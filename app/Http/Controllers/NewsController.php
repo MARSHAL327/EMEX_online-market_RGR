@@ -21,7 +21,7 @@ class NewsController extends Controller
 
     public function showOneNews($id){
         $news = new NewsModel();
-        return view('oneNews', ["oneNews" => $news->find($id)]);
+        return view('oneNews', ["oneNews" => $news->findOrFail($id)]);
     }
 
 }

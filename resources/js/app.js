@@ -44,7 +44,8 @@ function formattingFormData(_this) {
     let supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
 
     formData.forEach((item, i) => {
-        if (typeof item === "object") {
+        console.log(item)
+        if (typeof item === "object" && item.name !== "") {
             if (supportedFormatsImg.includes(item.type)) {
                 formData.set(i.toString(), item.name);
             } else {
@@ -216,7 +217,6 @@ function clearBasket(){
         $(this).remove()
         $(".basket-empty").fadeIn(400)
     })
-
 }
 
 function deleteItemFromBasket(id){

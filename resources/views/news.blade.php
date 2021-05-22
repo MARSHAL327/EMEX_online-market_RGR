@@ -17,6 +17,11 @@
         <div class="news-card grid-3fr">
             @foreach($news as $newsItem)
                 <div class="news-card__item">
+                    @if( $user != null && ($user->role == "admin" || $user->role == "content") )
+                        <a href="{{ route('news.edit', $newsItem->id) }}" class="news__edit">
+                            <span class="material-icons">edit</span>
+                        </a>
+                    @endif
                     <img src="/img/{{ $newsItem->img }}" alt="">
                     <div class="news-card__text-btn-wrapper">
                         <div class="news-card__text-wrapper">
@@ -28,7 +33,6 @@
                                 Подробнее
                             </button>
                         </a>
-
                     </div>
                 </div>
             @endforeach

@@ -19426,7 +19426,9 @@ function formattingFormData(_this) {
   var error = [];
   var supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
   formData.forEach(function (item, i) {
-    if (_typeof(item) === "object") {
+    console.log(item);
+
+    if (_typeof(item) === "object" && item.name !== "") {
       if (supportedFormatsImg.includes(item.type)) {
         formData.set(i.toString(), item.name);
       } else {

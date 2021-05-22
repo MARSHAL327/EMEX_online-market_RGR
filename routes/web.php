@@ -89,6 +89,13 @@ Route::group(['middleware' => ['isUserRole:admin,content']], function () {
 
 
     // ************
+    // Редактирование новости
+    // ************
+    Route::get('/news/edit/{id}', [AdminPanelController::class, "showEditPage"])->name("news.edit");
+    Route::post('/news/edit/{id}', [AdminPanelController::class, 'editNews'])->name("news.edit");
+
+
+    // ************
     // Добавление акции
     // ************
     Route::view('/stock/add', 'admin.addStock')->name("stock_add");
