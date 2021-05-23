@@ -919,6 +919,33 @@ label.active {
           backdrop-filter: saturate(180%) blur(5px);
 }
 
+.edit {
+  position: relative;
+}
+
+.edit .edit__btn {
+  opacity: 0;
+  visibility: hidden;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 100%;
+  padding: 7px 8px;
+  transition: 0.3s;
+  z-index: 100;
+}
+
+.edit .edit__btn:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  transition: 0.3s;
+}
+
+.edit:hover .edit__btn {
+  opacity: 1;
+  visibility: visible;
+}
+
 .news-card {
   grid-gap: 75px;
 }
@@ -928,28 +955,6 @@ label.active {
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   box-sizing: border-box;
-}
-
-.news-card .news-card__item .news__edit {
-  opacity: 0;
-  visibility: hidden;
-  top: 10px;
-  right: 10px;
-  position: absolute;
-  background-color: #fff;
-  border-radius: 100%;
-  padding: 5px;
-  transition: 0.3s;
-}
-
-.news-card .news-card__item .news__edit:hover {
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-  transition: 0.3s;
-}
-
-.news-card .news-card__item:hover .news__edit {
-  opacity: 1;
-  visibility: visible;
 }
 
 .news-card .news-card__item img {
@@ -2030,7 +2035,6 @@ label.active {
 }
 
 .edit-img {
-  width: 200px;
   height: 200px;
   -o-object-fit: cover;
      object-fit: cover;

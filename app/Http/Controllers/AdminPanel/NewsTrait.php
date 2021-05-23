@@ -26,10 +26,10 @@ trait NewsTrait
         } else return $this->JSONResponse("error", "Ошибка", "При добавлении произошла ошибка");
     }
 
-    public function showEditPage($id){
+    public function showNewsEditPage($id){
         $news  = NewsModel::findOrFail($id);
 
-        return view('admin.editNews', [
+        return view('admin.edit.editNews', [
             "news" => $news
         ]);
     }

@@ -16,28 +16,35 @@
     @if( count($paginateListProduct) > 0 )
         <div class="product-card">
             @foreach($paginateListProduct as $product)
-                <a href="{{ route('product', [ "id_category" => $categoryID, "id_product" => $product->id]) }}"
-                   class="product-card__item">
-                    <div class="product-card__img">
-                        <img src="/img/{{ $product->img }}" alt="">
-                    </div>
-                    <div class="product-card__price">
-                        {{ number_format($product->price, 0, '.', ' ') }} ₽
-                    </div>
-                    <div class="product-card__name">
-                        {{ $product->name }}
-                    </div>
-                    <div class="product-card__properties">
-                        @foreach($product->properties as $propertyItem)
-                            <div class="product-cards__properties-item">
-                                {{ $propertyItem->properties->name }}: {{ $propertyItem->value }}
+                <div class="edit product-card__item">
+                    @if( $user )
+                        <a href="{{ route('product.edit', [ "category_id" => $categoryID, "product_id" => $product->id]) }}" class="edit__btn">
+                            <span class="material-icons">edit</span>
+                        </a>
+                    @endif
+                        <a href="{{ route('product', [ "id_category" => $categoryID, "id_product" => $product->id]) }}">
+                            <div class="product-card__img">
+                                <img src="/img/{{ $product->img }}" alt="">
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="main-btn main-btn_red">
-                        Подробнее
-                    </div>
-                </a>
+                            <div class="product-card__price">
+                                {{ number_format($product->price, 0, '.', ' ') }} ₽
+                            </div>
+                            <div class="product-card__name">
+                                {{ $product->name }}
+                            </div>
+                            <div class="product-card__properties">
+                                @foreach($product->properties as $propertyItem)
+                                    <div class="product-cards__properties-item">
+                                        {{ $propertyItem->properties->name }}: {{ $propertyItem->value }}
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="main-btn main-btn_red">
+                                Подробнее
+                            </div>
+                        </a>
+                </div>
+
             @endforeach
         </div>
     @else

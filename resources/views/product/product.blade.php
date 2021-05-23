@@ -22,7 +22,14 @@ if( isset($_COOKIE["basket_id"]) ){
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
         </div>
+    </section>
 
+    <div class="edit">
+        @if( $user )
+            <a href="{{ route('product.edit', [ "category_id" => $product->category->id, "product_id" => $product->id]) }}" class="edit__btn">
+                <span class="material-icons">edit</span>
+            </a>
+        @endif
         <div class="product">
             <div class="product__img">
                 <img src="/img/{{ $product->img }}" alt="">
@@ -86,59 +93,60 @@ if( isset($_COOKIE["basket_id"]) ){
                 </div>
             </div>
         </div>
-    </section>
 
-    <section>
-        <div class="main-tabs">
-            <ul style="grid-template-columns: repeat(5, 150px)">
-                <li class="active" id="props">
-                    <a href="javascript:void(0)">Харакетристики</a>
-                </li>
-                <li class=>
-                    <a href="javascript:void(0)">Производитель</a>
-                </li>
-                <li class=>
-                    <a href="javascript:void(0)">Поставщик</a>
-                </li>
-            </ul>
-            <div>
-                <div class="product__properties mt-20">
-                    @foreach($product->properties as $propertyItem)
-                        <div class="product__property">
-                            <div class="product__property-name bold-text">{{ $propertyItem->properties->name }}</div>
-                            <div class="product__property-value">{{ $propertyItem->value }}</div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="description-block mt-20">
-                    <div class="description-block__img">
-                        <img src="/img/{{ $product->fabricator->logo }}" alt="">
+        <section>
+            <div class="main-tabs">
+                <ul style="grid-template-columns: repeat(5, 150px)">
+                    <li class="active" id="props">
+                        <a href="javascript:void(0)">Харакетристики</a>
+                    </li>
+                    <li class=>
+                        <a href="javascript:void(0)">Производитель</a>
+                    </li>
+                    <li class=>
+                        <a href="javascript:void(0)">Поставщик</a>
+                    </li>
+                </ul>
+                <div>
+                    <div class="product__properties mt-20">
+                        @foreach($product->properties as $propertyItem)
+                            <div class="product__property">
+                                <div class="product__property-name bold-text">{{ $propertyItem->properties->name }}</div>
+                                <div class="product__property-value">{{ $propertyItem->value }}</div>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="description-block__content-wrapper">
-                        <div class="description-block__title">
-                            {{ $product->fabricator->name }}
+                    <div class="description-block mt-20">
+                        <div class="description-block__img">
+                            <img src="/img/{{ $product->fabricator->logo }}" alt="">
                         </div>
-                        <div class="description-block__text">
-                            <?= htmlspecialchars_decode($product->fabricator->description) ?>
+                        <div class="description-block__content-wrapper">
+                            <div class="description-block__title">
+                                {{ $product->fabricator->name }}
+                            </div>
+                            <div class="description-block__text">
+                                <?= htmlspecialchars_decode($product->fabricator->description) ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="description-block mt-20">
-                    <div class="description-block__img">
-                        <img src="/img/{{ $product->provider->logo }}" alt="">
-                    </div>
-                    <div class="description-block__content-wrapper">
-                        <div class="description-block__title">
-                            {{ $product->provider->name }}
+                    <div class="description-block mt-20">
+                        <div class="description-block__img">
+                            <img src="/img/{{ $product->provider->logo }}" alt="">
                         </div>
-                        <div class="description-block__text">
-                            <?= htmlspecialchars_decode($product->provider->description) ?>
+                        <div class="description-block__content-wrapper">
+                            <div class="description-block__title">
+                                {{ $product->provider->name }}
+                            </div>
+                            <div class="description-block__text">
+                                <?= htmlspecialchars_decode($product->provider->description) ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
 
 
     <script>

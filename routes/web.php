@@ -91,8 +91,15 @@ Route::group(['middleware' => ['isUserRole:admin,content']], function () {
     // ************
     // Редактирование новости
     // ************
-    Route::get('/news/edit/{id}', [AdminPanelController::class, "showEditPage"])->name("news.edit");
+    Route::get('/news/edit/{id}', [AdminPanelController::class, "showNewsEditPage"])->name("news.edit");
     Route::post('/news/edit/{id}', [AdminPanelController::class, 'editNews'])->name("news.edit");
+
+
+    // ************
+    // Редактирование продукта
+    // ************
+    Route::get('/product/edit/{category_id}/{product_id}', [AdminPanelController::class, "showProductEditPage"])->name("product.edit");
+    Route::post('/product/edit/{category_id}/{product_id}', [AdminPanelController::class, 'editProduct'])->name("product.edit");
 
 
     // ************

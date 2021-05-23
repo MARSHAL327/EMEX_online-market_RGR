@@ -13,12 +13,11 @@
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
         </div>
-
         <div class="news-card grid-3fr">
             @foreach($news as $newsItem)
-                <div class="news-card__item">
-                    @if( $user != null && ($user->role == "admin" || $user->role == "content") )
-                        <a href="{{ route('news.edit', $newsItem->id) }}" class="news__edit">
+                <div class="news-card__item edit">
+                    @if( $user )
+                        <a href="{{ route('news.edit', $newsItem->id) }}" class="edit__btn">
                             <span class="material-icons">edit</span>
                         </a>
                     @endif
