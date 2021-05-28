@@ -13,13 +13,13 @@ function errorAjax(result) {
     });
 }
 
-function successAjax(res) {
+function successAjax(res, pageReload) {
     swal({
         title: res.title,
         text: res.text,
         icon: res.icon,
     }).then(() => {
-        if (res.icon !== "error") window.location.replace("");
+        if (res.icon !== "error" && pageReload) window.location.replace("");
     });
 }
 
@@ -29,7 +29,7 @@ function successAddItemToBasket(res) {
         text: res.text,
         icon: res.icon,
     })
-    console.log(res.numElementsRemaining)
+
     if( res.numElementsRemaining === 0 ){
         $(".product__count-btn").remove()
         $(".product__btn").prop("disabled", true)
@@ -44,7 +44,6 @@ function formattingFormData(_this) {
     let supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
 
     formData.forEach((item, i) => {
-        console.log(item)
         if (typeof item === "object" && item.name !== "") {
             if (supportedFormatsImg.includes(item.type)) {
                 formData.set(i.toString(), item.name);
@@ -72,6 +71,8 @@ function sendAjax(_this, errorFoo, successFoo, completeFoo = "") {
     let formData = formattingFormData(_this);
     if (formData === false) return;
 
+    let pageReload = _this.data("reload") !== undefined ? $(this).data("reload") : true
+
     $.ajax({
         type: _this.attr('method'),
         url: _this.attr('action'),
@@ -85,7 +86,7 @@ function sendAjax(_this, errorFoo, successFoo, completeFoo = "") {
         statusCode: {
             422: errorFoo,
             200: function(data){
-                successFoo(data)
+                successFoo(data, pageReload)
                 if( completeFoo !== "" ) completeFoo(data)
             }
         },

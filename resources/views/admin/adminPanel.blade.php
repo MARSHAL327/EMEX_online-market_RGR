@@ -29,6 +29,10 @@
                         <span class="material-icons">person_add</span>
                         Добавить контент-менеджера
                     </a></li>
+                <li class="admin-controller__panel__item"><a href="{{ route('admin.edit.editSiteData') }}">
+                        <span class="material-icons">edit</span>
+                        Редактировать данные об организации
+                    </a></li>
             @endif
             <li class="admin-controller__panel__item"><a href="{{ route('logout') }}">
                     <span class="material-icons">logout</span>

@@ -7,21 +7,13 @@
 @section('content')
     <div class="main-slider-wrapper">
         <div class="main-slider">
-            <div class="main-slider__item">
-                <img src="img/image_1.png" alt="">
-                <span>Слайд 1</span>
-                <div class="black-bg"></div>
-            </div>
-            <div class="main-slider__item">
-                <img src="img/image_1.png" alt="">
-                <span>Слайд 2</span>
-                <div class="black-bg"></div>
-            </div>
-            <div class="main-slider__item">
-                <img src="img/image_1.png" alt="">
-                <span>Слайд 3</span>
-                <div class="black-bg"></div>
-            </div>
+            @foreach($slider as $slide)
+                <div class="main-slider__item">
+                    <img src="img/{{ $slide->img }}" alt="">
+                    <span>{{ $slide->title }}</span>
+                    <div class="black-bg"></div>
+                </div>
+            @endforeach
         </div>
 
         <div class="main-slider__prev-item">
@@ -81,7 +73,7 @@
                     <div class="news-card__text-btn-wrapper">
                         <div class="news-card__text-wrapper">
                             <div class="news-card__text-title">{{ $newsItem->title }}</div>
-                            <div class="news-card__text">{{ $newsItem->desc }}</div>
+                            <div class="news-card__text"><?= htmlspecialchars_decode($newsItem->desc) ?></div>
                         </div>
                         <a href="{{ route('news_one', $newsItem->id) }}">
                             <button class="news-btn">
@@ -143,22 +135,7 @@
         </div>
 
         <div class="about-company height-text">
-            <p>
-                Предварительные выводы неутешительны: укрепление и развитие внутренней структуры влечет за собой процесс
-                внедрения и модернизации системы массового участия. Идейные соображения высшего порядка, а также
-                глубокий уровень погружения требует определения и уточнения системы массового участия. Банальные, но
-                неопровержимые выводы, а также независимые государства, превозмогая сложившуюся непростую экономическую
-                ситуацию, своевременно верифицированы.
-            </p>
-            <br><br>
-            <p>
-                Равным образом, дальнейшее развитие различных форм деятельности создаёт необходимость включения в
-                производственный план целого ряда внеочередных мероприятий с учётом комплекса вывода текущих активов.
-                Есть над чем задуматься: интерактивные прототипы освещают чрезвычайно интересные особенности картины в
-                целом, однако конкретные выводы, разумеется, описаны максимально подробно. В частности, понимание сути
-                ресурсосберегающих технологий однозначно фиксирует необходимость распределения внутренних резервов и
-                ресурсов.
-            </p>
+            {!! $siteData->description !!}
         </div>
     </section>
 

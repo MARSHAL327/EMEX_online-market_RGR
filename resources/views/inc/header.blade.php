@@ -1,6 +1,6 @@
 <header class="header">
     <div class="header__logo">
-        <a href="{{ route('main')  }}">EMEX</a>
+        <a href="{{ route('main')  }}">{{ $siteData->name }}</a>
     </div>
     <div class="header__menu__basket">
         <nav class="header__menu">

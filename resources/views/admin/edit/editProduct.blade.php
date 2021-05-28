@@ -18,19 +18,6 @@
 
         <form action="" method="post" class="main-form">
             @csrf
-            <label for="category">
-                Категория товара
-                <select name="category">
-                    @foreach($productCategories as $productCategory)
-                        @if( $productCategory->id == $product->category->id )
-                            <option selected value="{{ $productCategory->id }}">{{ $productCategory->name }}</option>
-                        @else
-                            <option value="{{ $productCategory->id }}">{{ $productCategory->name }}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </label>
-
             <label for="auto_modification">
                 Выбор модификации авто
                 <select name="auto_modification">

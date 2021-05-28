@@ -20,7 +20,7 @@
                     Звоните
                 </div>
                 <div class="footer__item__content">
-                    <a href="tel: +79787770707">+7 (978) 777 07 07</a>
+                    <a href="tel: {{ $siteData->phone }}">{{ $siteData->phone }}</a>
                 </div>
             </div>
             <div class="footer__item">
@@ -28,7 +28,7 @@
                     Пишите
                 </div>
                 <div class="footer__item__content">
-                    <a href="mailto: Emex@info.com">Emex@info.com</a>
+                    <a href="mailto: {{ $siteData->email }}">{{ $siteData->email }}</a>
                 </div>
             </div>
             <div class="footer__item">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="footer__item__content">
                     <span>
-                        г. Севастополь,<br> ул. Суворова, д. 1
+                        {{ $siteData->address }}
                     </span>
                 </div>
             </div>
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="footer-part_bottom">
-            <p>© 2010 – 2021, ООО «EMEX»</p><br>
+            <p>© 2010 – 2021, ООО «{{ $siteData->name }}»</p><br>
             <p>Все права защищены</p>
         </div>
     </div>

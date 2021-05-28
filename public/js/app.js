@@ -19395,13 +19395,13 @@ function errorAjax(result) {
   });
 }
 
-function successAjax(res) {
+function successAjax(res, pageReload) {
   swal({
     title: res.title,
     text: res.text,
     icon: res.icon
   }).then(function () {
-    if (res.icon !== "error") window.location.replace("");
+    if (res.icon !== "error" && pageReload) window.location.replace("");
   });
 }
 
@@ -19411,7 +19411,6 @@ function successAddItemToBasket(res) {
     text: res.text,
     icon: res.icon
   });
-  console.log(res.numElementsRemaining);
 
   if (res.numElementsRemaining === 0) {
     $(".product__count-btn").remove();
@@ -19426,8 +19425,6 @@ function formattingFormData(_this) {
   var error = [];
   var supportedFormatsImg = ["image/png", "image/jpg", "image/jpeg"];
   formData.forEach(function (item, i) {
-    console.log(item);
-
     if (_typeof(item) === "object" && item.name !== "") {
       if (supportedFormatsImg.includes(item.type)) {
         formData.set(i.toString(), item.name);
@@ -19455,6 +19452,7 @@ function sendAjax(_this, errorFoo, successFoo) {
   var completeFoo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
   var formData = formattingFormData(_this);
   if (formData === false) return;
+  var pageReload = _this.data("reload") !== undefined ? $(this).data("reload") : true;
   $.ajax({
     type: _this.attr('method'),
     url: _this.attr('action'),
@@ -19468,7 +19466,7 @@ function sendAjax(_this, errorFoo, successFoo) {
     statusCode: {
       422: errorFoo,
       200: function _(data) {
-        successFoo(data);
+        successFoo(data, pageReload);
         if (completeFoo !== "") completeFoo(data);
       }
     },

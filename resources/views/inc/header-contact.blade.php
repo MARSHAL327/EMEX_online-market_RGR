@@ -5,19 +5,19 @@
         <div class="header-contact_left">
             <div class="header-contact__item">
                 <span class="material-icons">location_on</span>
-                г. Севастополь, ул. Суворова, д. 1
+                {{ $siteData->address }}
             </div>
             <div class="header-contact__item">
                 <span class="material-icons">schedule</span>
-                Пн-Пт 9:00 - 18:00
+                {{ $siteData->work_time }}
             </div>
             <div class="header-contact__item">
                 <span class="material-icons">call</span>
-                <a href="tel: +79787770707">+7 (978) 777 07 07</a>
+                <a href="tel: {{ $siteData->phone }}">{{ $siteData->phone }}</a>
             </div>
             <div class="header-contact__item">
                 <span class="material-icons">email</span>
-                <a href="mailto: Emex@info.com">Emex@info.com</a>
+                <a href="mailto: {{ $siteData->email }}">{{ $siteData->email }}</a>
             </div>
         </div>
         <div class="header-contact_right">

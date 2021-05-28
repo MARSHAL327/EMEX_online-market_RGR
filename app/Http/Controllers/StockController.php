@@ -8,8 +8,9 @@ class StockController extends Controller
 {
     public function showStock(){
         $stock = Stock::orderBy('date_start', 'desc')->paginate(3);
-        return view('stock')->with([
-            "stock" => $stock
+
+        return view('stock', [
+           "stock" => $stock
         ]);
     }
 

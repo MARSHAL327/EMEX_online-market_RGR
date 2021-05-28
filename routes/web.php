@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPanel\AdminPanelController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
@@ -16,7 +17,7 @@ $user = Auth::user();
 // ************
 // Основной роут
 // ************
-Route::get('/', "MainController@showPage")->name('main');
+Route::get('/', [MainController::class, "showPage"])->name('main');
 
 
 // ************
@@ -24,6 +25,7 @@ Route::get('/', "MainController@showPage")->name('main');
 // ************
 Route::get('/news/all', [NewsController::class, 'showNews'])->name('news_all');
 Route::get('/news/{id}', [NewsController::class, 'showOneNews'])->name('news_one');
+
 
 // ************
 // Акции
@@ -61,6 +63,13 @@ Route::get('/logout', function () {
 // ************
 Route::group(['middleware' => 'isUserRole:admin'], function () {
     // ************
+    // Редактирование данных организации
+    // ************
+    Route::view('/edit-organization', 'admin.edit.editSiteData')->name("admin.edit.editSiteData");
+    Route::post('/edit-organization', [MainController::class, 'editOrganizationData'])->name("admin.edit.editSiteData");
+
+
+    // ************
     // Добавление менеджера
     // ************
     Route::view('/add-manager', 'admin.addManager')->name("admin.addManager");
@@ -74,6 +83,9 @@ Route::group(['middleware' => 'isUserRole:admin'], function () {
         "orders" => Order::orderBy("id", "DESC")->paginate(4)
     ])->name("admin.orderList");
     Route::get('/order-list/{id}', [OrderController::class, "showOrder"])->name("admin.order");
+
+
+
 });
 
 
