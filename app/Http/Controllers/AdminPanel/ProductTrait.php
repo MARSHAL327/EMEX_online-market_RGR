@@ -167,8 +167,8 @@ trait ProductTrait
     public function editProduct(ProductRequest $req, $categoryID, $productID)
     {
         $product = Product::findOrFail($productID);
-        $category = $req->input('category');
-        return $this->addProduct($req, $category, $product);
+
+        return $this->addProduct($req, $categoryID, $product);
     }
 
 

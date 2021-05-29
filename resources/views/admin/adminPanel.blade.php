@@ -20,6 +20,10 @@
                     <span class="material-icons">add_circle_outline</span>
                     Добавить товар
                 </a></li>
+            <li class="admin-controller__panel__item"><a href="{{ route("slider.edit") }}">
+                    <span class="material-icons">photo_library</span>
+                    Редактировать слайдер
+                </a></li>
             @if($user->role == "admin")
                 <li class="admin-controller__panel__item"><a href="{{ route("admin.orderList") }}">
                         <span class="material-icons">list_alt</span>

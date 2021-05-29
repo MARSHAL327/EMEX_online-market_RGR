@@ -17,6 +17,7 @@ class MainController extends Controller
         return view('main', [
             "news" => $news->getSomeNews(3),
             "stock" => $stock->getSomeStock(4),
+            "slider" => Slider::orderBy("id", "DESC")->get()
         ] + $maintenance->getBrandsData());
     }
 

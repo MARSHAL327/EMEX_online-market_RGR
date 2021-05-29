@@ -5,24 +5,33 @@
 @endsection
 
 @section('content')
-    <div class="main-slider-wrapper">
-        <div class="main-slider">
-            @foreach($slider as $slide)
-                <div class="main-slider__item">
-                    <img src="img/{{ $slide->img }}" alt="">
-                    <span>{{ $slide->title }}</span>
-                    <div class="black-bg"></div>
-                </div>
-            @endforeach
-        </div>
+    @if( count($slider) > 0 )
+        <div class="main-slider-wrapper edit">
+            @if( $user )
+                <a href="{{ route('slider.edit') }}" class="edit__btn">
+                    <span class="material-icons">edit</span>
+                </a>
+            @endif
+            <div class="main-slider">
+                @foreach($slider as $slide)
+                    <div class="main-slider__item">
+                        <img src="img/{{ $slide->img }}" alt="">
+                        <span>{{ $slide->title }}</span>
+                        @if( $slide->title != null )
+                            <div class="black-bg"></div>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
 
-        <div class="main-slider__prev-item">
-            <span class="material-icons">arrow_back_ios</span>
+            <div class="main-slider__prev-item">
+                <span class="material-icons">arrow_back_ios</span>
+            </div>
+            <div class="main-slider__next-item">
+                <span class="material-icons">arrow_forward_ios</span>
+            </div>
         </div>
-        <div class="main-slider__next-item">
-            <span class="material-icons">arrow_forward_ios</span>
-        </div>
-    </div>
+    @endif
 
     <section>
         <div class="section-title">

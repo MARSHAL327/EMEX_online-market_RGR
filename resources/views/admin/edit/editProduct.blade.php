@@ -16,7 +16,7 @@
             </div>
         </section>
 
-        <form action="" method="post" class="main-form">
+        <form action="" method="post" class="main-form" data-reload="false">
             @csrf
             <label for="auto_modification">
                 Выбор модификации авто

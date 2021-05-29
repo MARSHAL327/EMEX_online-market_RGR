@@ -52,8 +52,4 @@
     @endif
 
     {{ $paginateListProduct->links('paginate') }}
-
-    <pre>
-        <div class="test"></div>
-    </pre>
 </div>

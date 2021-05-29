@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminPanel\AdminPanelController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
@@ -83,9 +84,6 @@ Route::group(['middleware' => 'isUserRole:admin'], function () {
         "orders" => Order::orderBy("id", "DESC")->paginate(4)
     ])->name("admin.orderList");
     Route::get('/order-list/{id}', [OrderController::class, "showOrder"])->name("admin.order");
-
-
-
 });
 
 
@@ -93,6 +91,29 @@ Route::group(['middleware' => 'isUserRole:admin'], function () {
 // Для администратора и контент-менеджера
 // ************
 Route::group(['middleware' => ['isUserRole:admin,content']], function () {
+    // ************
+    // Редактирование слайдера
+    // ************
+    Route::view('/edit-slider', 'admin.edit.editSlider', [
+        "slides" => \App\Http\Models\Slider::orderBy("id", "DESC")->get()
+    ])->name("slider.edit");
+    Route::get('/edit-slide/{id}', [\App\Http\Controllers\SliderController::class, 'showEditSlidePage'])->name("slide.edit");
+    Route::post('/edit-slide/{id}', [\App\Http\Controllers\SliderController::class, 'editSlide'])->name("slide.edit");
+
+
+    // ************
+    // Добавление слайда
+    // ************
+    Route::view('/add-slide', 'admin.addSlide')->name("slide.add");
+    Route::post('/add-slide', [\App\Http\Controllers\SliderController::class, 'addSlide'])->name("slide.add");
+
+
+    // ************
+    // Удаление слайда
+    // ************
+    Route::post('/delete-slide', [\App\Http\Controllers\SliderController::class, 'deleteSlide'])->name("slider.delete");
+
+
     // ************
     // Добавление новости
     // ************
@@ -214,20 +235,20 @@ Route::post('admin', 'Auth\LoginController@login')->name('login');
 // Запачасти для ТО
 // ************
 Route::prefix('maintenance')->group(function (){
-    Route::get('', "MaintenanceController@showBrands")
+    Route::get('', [MaintenanceController::class, "showBrands"])
         ->name('maintenance_brands');
 
-    Route::get('/{id}', "MaintenanceController@showModel")
+    Route::get('/{id}', [MaintenanceController::class, "showModel"])
         ->name('maintenance_models');
 
-    Route::get('/{id_brand}/{id_model}', "MaintenanceController@showModification")
+    Route::get('/{id_brand}/{id_model}', [MaintenanceController::class, "showModification"])
         ->name('maintenance_modification')
         ->where([
             'id_brand' => '[0-9]+',
             'id_model' => '[0-9]+',
         ]);
 
-    Route::get('/{id_brand}/{id_model}/{id_modification}', "MaintenanceController@showMaintenance")
+    Route::get('/{id_brand}/{id_model}/{id_modification}', [MaintenanceController::class, "showMaintenance"])
         ->name('maintenance_page')
         ->where([
             'id_brand' => '[0-9]+',

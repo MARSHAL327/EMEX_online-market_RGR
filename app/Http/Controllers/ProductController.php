@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    private const PER_PAGE = 2;
+    private const PER_PAGE = 9;
 
     public function showProductCatalogPage(Request $req, $categoryID)
     {

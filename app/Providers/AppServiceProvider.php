@@ -30,6 +30,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         View::share("siteData", Main::find(1)->first());
-        View::share("slider", Slider::all());
     }
 }

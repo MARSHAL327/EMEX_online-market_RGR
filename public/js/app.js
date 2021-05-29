@@ -19784,7 +19784,6 @@ $(document).ready(function () {
           "title": "Ошибка",
           "text": "Ошибка при загрузке"
         });
-        $(".test").append(res);
       },
       complete: function complete() {
         $(".product-card__loader").removeClass("active");
@@ -19803,6 +19802,30 @@ $(document).ready(function () {
     e.preventDefault();
     var id = $(this).data("id");
     deleteItemFromBasket(id);
+  });
+  $(".slider-grid__delete-item").on("click", function (e) {
+    e.preventDefault();
+    var deletedElement = $(this).parents(".slider-grid__item");
+    $.ajax({
+      url: "/delete-slide",
+      type: "POST",
+      dataType: "json",
+      data: {
+        "_token": $("input[name='_token']").val(),
+        "slide_id": $(this).data("id")
+      },
+      success: function success(res) {
+        successAjax(res, false);
+        deletedElement.fadeOut();
+      },
+      error: function error() {
+        swal({
+          "icon": "error",
+          "title": "Ошибка",
+          "text": "При удалении произошла ошибка"
+        });
+      }
+    });
   });
   $(".basket__item input[name=qty]").on("change", changeItemNum);
   $(".basket__item .product__count-btn__remove, .basket__item .product__count-btn__add").on("click", changeItemNum);

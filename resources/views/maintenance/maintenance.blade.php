@@ -50,7 +50,7 @@
                         @foreach($products as $product)
                             <tr class="auto-model__item">
                                 <td>
-                                    {{ $product->category->name }}
+                                    {{ $product->name }}
                                 </td>
                                 <td>
                                     {{ $product->count }} шт.

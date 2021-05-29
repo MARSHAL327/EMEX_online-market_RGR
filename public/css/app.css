@@ -699,6 +699,10 @@ label.active {
   font-size: 52px;
 }
 
+.header .header__logo img {
+  width: 130px;
+}
+
 .header .header__menu > ul {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -1529,6 +1533,7 @@ label.active {
 .product-card-wrapper .product-card__loader {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.5);
+  z-index: 2;
   width: 100%;
   height: 100%;
   top: 0;
@@ -2039,5 +2044,102 @@ label.active {
   -o-object-fit: cover;
      object-fit: cover;
   margin-top: 20px;
+}
+
+.slider-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  margin-bottom: 20px;
+}
+
+.slider-grid .slider-grid__img {
+  position: relative;
+}
+
+.slider-grid .slider-grid__img .slider-grid__change-img {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: saturate(180%) blur(3px);
+          backdrop-filter: saturate(180%) blur(3px);
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 5px;
+  position: absolute;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.slider-grid .slider-grid__img .slider-grid__change-img span {
+  transition: 0.3s;
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+}
+
+.slider-grid .slider-grid__img .slider-grid__change-img:hover {
+  cursor: pointer;
+}
+
+.slider-grid .slider-grid__img .slider-grid__change-img .slider-grid__delete-item {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.slider-grid .slider-grid__img .slider-grid__change-img .slider-grid__delete-item .material-icons {
+  color: #D32F2F;
+}
+
+.slider-grid .slider-grid__img .slider-grid__change-img .slider-grid__delete-item .material-icons:hover {
+  background-color: #D32F2F;
+  border-radius: 100%;
+  color: #fff;
+  padding: 10px;
+}
+
+.slider-grid .slider-grid__img img {
+  border-radius: 5px;
+  width: 100%;
+  height: 115px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slider-grid .slider-grid__img:hover .slider-grid__change-img {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slider-grid .slider-grid__add-slide {
+  width: 100%;
+  height: 100%;
+  top: auto;
+  left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #989898;
+  border: 2px dashed #989898;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.slider-grid .slider-grid__add-slide:hover {
+  color: #000;
+  border: 2px dashed #000;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.slider-grid .slider-grid__title {
+  margin-top: 10px;
+  text-align: center;
 }
 
