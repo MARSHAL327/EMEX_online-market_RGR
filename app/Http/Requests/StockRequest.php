@@ -16,6 +16,14 @@ class StockRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('old_image') && $this->img == null)
+            $this->merge([
+                'img' => $this->old_image,
+            ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

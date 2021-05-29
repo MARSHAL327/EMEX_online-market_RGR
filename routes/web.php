@@ -143,6 +143,13 @@ Route::group(['middleware' => ['isUserRole:admin,content']], function () {
 
 
     // ************
+    // Редактирование акции
+    // ************
+    Route::get('/stock/edit/{id}', [AdminPanelController::class, "showStockEditPage"])->name("stock.edit");
+    Route::post('/stock/edit/{id}', [AdminPanelController::class, 'editStock'])->name("stock.edit");
+
+
+    // ************
     // Добавление авто
     // ************
     Route::prefix('add-auto')->group(function () {

@@ -17,7 +17,13 @@
         <div class="stock-card grid-4fr">
             @foreach($stock as $stockItem)
                 <div class="card stock-card__item">
-                    <div class="card-back">
+                    <div class="card-back edit">
+                        @if( $user )
+                            <a href="{{ route('stock.edit', $stockItem->id) }}" class="edit__btn">
+                                <span class="material-icons">edit</span>
+                            </a>
+                        @endif
+
                         <span class="stock-card__desc default-style">
                             <?= htmlspecialchars_decode($stockItem->desc) ?>
                             <div class="stock-card__date">

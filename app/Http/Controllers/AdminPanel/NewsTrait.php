@@ -27,10 +27,8 @@ trait NewsTrait
     }
 
     public function showNewsEditPage($id){
-        $news  = NewsModel::findOrFail($id);
-
         return view('admin.edit.editNews', [
-            "news" => $news
+            "news" => NewsModel::findOrFail($id)
         ]);
     }
 
