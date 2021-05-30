@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\NewsController;
 use App\Http\Models\Main;
 use App\Http\Models\Slider;
+use App\Mail\ContactsMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
@@ -36,5 +38,9 @@ class MainController extends Controller
         if( $saveStatus ){
             return $this->JSONResponse("success", "Успех", "Данные об организации успешно изменены");
         } else return $this->JSONResponse("error", "Ошибка", "При изменении произошла ошибка");
+    }
+
+    public function sendMail(){
+        Mail::to("sanya.shvedenko@mail.ru")->send(new ContactsMail());
     }
 }

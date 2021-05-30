@@ -19587,6 +19587,7 @@ function fillNumberFilterData() {
 }
 
 function clearBasket() {
+  $(".header__basket__count").text(0);
   $(".basket").fadeOut(400, "swing", function () {
     $(this).remove();
     $(".basket-empty").fadeIn(400);

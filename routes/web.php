@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 $user = Auth::user();
 
+
 // ************
 // Основной роут
 // ************
@@ -45,9 +46,8 @@ Route::get('/about-company', function () {
 // ************
 // Контакты
 // ************
-Route::get('/contacts', function () {
-    return view('contacts');
-})->name('contacts');
+Route::view('/contacts', 'contacts')->name('contacts');
+Route::post('/contacts/send', [MainController::class, ])->name('contacts');
 
 
 // ************
@@ -280,7 +280,7 @@ Route::prefix('product')->group(function (){
 // ************
 Route::prefix('basket')->group(function (){
     Route::view('', 'basket.basket')->name('basket');
-    Route::post('', [BasketController::class, "sendOrder"])->name('sendOrder');
+    Route::post('', [OrderController::class, "sendOrder"])->name('sendOrder');
 
     Route::post('add-item', [BasketController::class, "addItemsToBasket"])
         ->name('basketAddItems');
