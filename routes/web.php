@@ -38,16 +38,14 @@ Route::get('/stock/all', [StockController::class, 'showStock'])->name('stock_all
 // ************
 // О Компании
 // ************
-Route::get('/about-company', function () {
-    return view('about-company');
-})->name('about-company');
+Route::view('/about-company', 'about-company')->name('about-company');
 
 
 // ************
 // Контакты
 // ************
 Route::view('/contacts', 'contacts')->name('contacts');
-Route::post('/contacts/send', [MainController::class, ])->name('contacts');
+Route::post('/contacts/send', [MainController::class, "sendMail"])->name('contacts.send');
 
 
 // ************

@@ -72,7 +72,8 @@
                     <div class="backcall__title blue-text">
                         Связаться с нами
                     </div>
-                    <form class="backcall__form" action="" method="post">
+                    <form class="main-form" action="{{ route('contacts.send') }}" method="post">
+                        @csrf
                         <label for="name">
                             Имя
                             <input type="text" name="name">

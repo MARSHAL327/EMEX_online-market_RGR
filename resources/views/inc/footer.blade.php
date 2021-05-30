@@ -7,7 +7,7 @@
                 </div>
                 <div class="footer__item__content">
                     <ul>
-                        <li><a href="">Запчасти</a></li>
+                        <li><a href="{{ route('maintenance_brands') }}">Запчасти</a></li>
                         <li><a href="{{ route('about-company')  }}">О Нас</a></li>
                         <li><a href="{{ route('news_all')  }}">Новости</a></li>
                         <li><a href="{{ route('stock_all')  }}">Акции</a></li>

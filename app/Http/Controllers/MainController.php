@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\NewsController;
 use App\Http\Models\Main;
 use App\Http\Models\Slider;
+use App\Http\Requests\ContactsRequest;
 use App\Mail\ContactsMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -40,7 +41,13 @@ class MainController extends Controller
         } else return $this->JSONResponse("error", "Ошибка", "При изменении произошла ошибка");
     }
 
-    public function sendMail(){
-        Mail::to("sanya.shvedenko@mail.ru")->send(new ContactsMail());
+    public function sendMail(ContactsRequest $req){
+        try{
+            Mail::to("sanya.shvedenko@mail.ru")->send(new ContactsMail($req));
+            return $this->JSONResponse("success", "Успех", "Данные успешно отправлены");
+        } catch (\Exception $ex){
+            return $this->JSONResponse("success", "Успех", "При отправке произошла ошибка");
+        }
+
     }
 }

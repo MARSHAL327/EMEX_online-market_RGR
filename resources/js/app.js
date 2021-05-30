@@ -90,7 +90,7 @@ function sendAjax(_this, errorFoo, successFoo, completeFoo = "") {
                 if( completeFoo !== "" ) completeFoo(data)
             }
         },
-        complete: function (data) {
+        complete: function () {
             _this.find(".main-btn").prop("disabled", false);
         }
     });

@@ -33,7 +33,6 @@ class OrderMail extends Mailable
     public function build()
     {
         return $this
-            ->from('sanya.shvedenko@mail.ru')
             ->view('mail.order')
             ->with([
                 'customer' => $this->order->customer,

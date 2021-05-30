@@ -226,6 +226,7 @@ span.material-icons {
     text-align: center;
 
     &:hover {
+        cursor: pointer;
         background-color: #fff;
         box-shadow: $mainShadow;
         color: $blue;
@@ -451,19 +452,6 @@ section {
         font-size: 30px;
         font-weight: bold;
         margin-bottom: 20px;
-    }
-
-    & .main-btn {
-        background-color: $blue;
-        color: #fff;
-        font-weight: bold;
-        font-family: 'Roboto', sans-serif;
-
-        &:hover {
-            background-color: #fff;
-            box-shadow: $mainShadow;
-            color: $blue;
-        }
     }
 }
 

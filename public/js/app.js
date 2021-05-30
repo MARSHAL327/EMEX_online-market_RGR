@@ -19470,7 +19470,7 @@ function sendAjax(_this, errorFoo, successFoo) {
         if (completeFoo !== "") completeFoo(data);
       }
     },
-    complete: function complete(data) {
+    complete: function complete() {
       _this.find(".main-btn").prop("disabled", false);
     }
   });
