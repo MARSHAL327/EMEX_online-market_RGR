@@ -627,7 +627,6 @@ label.active {
 }
 
 .header-contact .header-contact_right .lang-change .lang-change__items {
-  min-width: 110px;
   position: absolute;
   top: 40px;
   left: 0;
@@ -653,6 +652,7 @@ label.active {
 }
 
 .header-contact .header-contact_right .lang-change .lang-change__items .lang-change__item a {
+  padding: 10px 20px;
   color: #000;
 }
 

@@ -18,7 +18,7 @@
             <div class="contacts-wrapper_left">
                 <div class="contacts-wrapper_left__item">
                     <div class="contacts-wrapper_left__item__title">
-                        Звоните
+                        @lang('main.call')
                     </div>
                     <div class="contacts-wrapper_left__item__text">
                         <a href="tel: {{ $siteData->phone }}">{{ $siteData->phone }}</a>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="contacts-wrapper_left__item">
                     <div class="contacts-wrapper_left__item__title">
-                        Пишите
+                        @lang('main.write')
                     </div>
                     <div class="contacts-wrapper_left__item__text">
                         <a href="mailto: {{ $siteData->email }}">{{ $siteData->email }}</a>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="contacts-wrapper_left__item">
                     <div class="contacts-wrapper_left__item__title">
-                        Приходите к нам
+                        @lang('main.come_to_us')
                     </div>
                     <div class="contacts-wrapper_left__item__text">
                         {{ $siteData->address }}
@@ -42,7 +42,7 @@
                 </div>
                 <div class="contacts-wrapper_left__item">
                     <div class="contacts-wrapper_left__item__title">
-                        Присоединяйтесь
+                        @lang('main.subscribe')
                     </div>
                     <div class="contacts-wrapper_left__item__text">
                         <div class="social-icons">

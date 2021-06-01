@@ -8,6 +8,7 @@ use App\Http\Models\Slider;
 use App\Http\Requests\ContactsRequest;
 use App\Mail\ContactsMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
@@ -49,5 +50,11 @@ class MainController extends Controller
             return $this->JSONResponse("success", "Успех", "При отправке произошла ошибка");
         }
 
+    }
+
+    public function changeLocale($locale){
+        session(["locale" => $locale]);
+        App::setLocale($locale);
+        return redirect()->back();
     }
 }

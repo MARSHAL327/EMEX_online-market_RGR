@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Главная страница
+    @lang('main.title')
 @endsection
 
 @section('content')

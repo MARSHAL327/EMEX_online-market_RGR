@@ -667,7 +667,6 @@ label {
             }
 
             & .lang-change__items {
-                min-width: 110px;
                 position: absolute;
                 top: 40px;
                 left: 0;
@@ -691,6 +690,7 @@ label {
                     }
 
                     & a {
+                        padding: 10px 20px;
                         color: #000;
                     }
 

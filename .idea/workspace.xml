@@ -22,17 +22,13 @@
     <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/ContactsRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/ContactsRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/ContactsMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/ContactsMail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/OrderMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/OrderMail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/contacts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/contacts.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/inc/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mail/contacts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mail/contacts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/inc/header-contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/header-contact.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/main.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,18 +155,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/lang/ru" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\views\admin" />
-      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\views\maintenance" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\IT\web\OSPanel\domains\RGR-Web\app\Http\Models" />
       <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\views\admin\edit" />
       <recent name="F:\IT\web\OSPanel\domains\RGR-Web\app\Http\Controllers\AdminPanel" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\lang\ru" />
+      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\views\admin" />
+      <recent name="F:\IT\web\OSPanel\domains\RGR-Web\resources\views\maintenance" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.phpunit.xml">
@@ -248,7 +245,8 @@
       <workItem from="1622050365412" duration="1418000" />
       <workItem from="1622225431862" duration="7324000" />
       <workItem from="1622269399179" duration="21346000" />
-      <workItem from="1622363487679" duration="10703000" />
+      <workItem from="1622363487679" duration="11426000" />
+      <workItem from="1622576005514" duration="2848000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
@@ -355,10 +353,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="676" y="243" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621079460693" />
-    <state x="794" y="443" key="NewPhpFileDialog" timestamp="1622369925985">
+    <state x="794" y="443" key="NewPhpFileDialog" timestamp="1622577688130">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622369925985" />
+    <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622577688130" />
     <state width="550" height="446" key="SwitcherDM" timestamp="1618944083058">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -379,9 +377,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1621710544049" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1622306048483">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1622578063511">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1622306048483" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1622578063511" />
   </component>
 </project>

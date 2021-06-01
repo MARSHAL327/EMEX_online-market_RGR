@@ -22,12 +22,25 @@
         </div>
         <div class="header-contact_right">
             <div class="lang-change header-contact__item">
-                Русский
+                @lang('main.locale_name')
                 <span class="material-icons">expand_more</span>
                 <div class="lang-change__items">
                     <ul>
-                        <li class="lang-change__item active"><a href="">Русский</a></li>
-                        <li class="lang-change__item"><a href="">Английский</a></li>
+                        @if(\Illuminate\Support\Facades\App::getLocale() == "ru")
+                            <li class="lang-change__item active">
+                                <a href="javascript:void(0)">Русский</a>
+                            </li>
+                            <li class="lang-change__item">
+                                <a href="{{ route('locale', 'en') }}">English</a>
+                            </li>
+                        @else
+                            <li class="lang-change__item">
+                                <a href="{{ route('locale', 'ru') }}">Русский</a>
+                            </li>
+                            <li class="lang-change__item active">
+                                <a href="javascript:void(0)">English</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
 

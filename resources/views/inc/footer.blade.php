@@ -3,7 +3,7 @@
         <div class="footer-part_top">
             <div class="footer__item">
                 <div class="footer__item__title">
-                    Карта сайта
+                    @lang('main.site_map')
                 </div>
                 <div class="footer__item__content">
                     <ul>
@@ -17,7 +17,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item__title">
-                    Звоните
+                    @lang('main.call')
                 </div>
                 <div class="footer__item__content">
                     <a href="tel: {{ $siteData->phone }}">{{ $siteData->phone }}</a>
@@ -25,7 +25,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item__title">
-                    Пишите
+                    @lang('main.write')
                 </div>
                 <div class="footer__item__content">
                     <a href="mailto: {{ $siteData->email }}">{{ $siteData->email }}</a>
@@ -33,7 +33,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item__title">
-                    Приходите к нам
+                    @lang('main.come_to_us')
                 </div>
                 <div class="footer__item__content">
                     <span>
@@ -43,7 +43,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item__title">
-                    Присоединяйтесь
+                    @lang('main.subscribe')
                 </div>
                 <div class="footer__item__content">
                     <div class="social-icons">
@@ -70,7 +70,7 @@
         </div>
         <div class="footer-part_bottom">
             <p>© 2010 – 2021, ООО «{{ $siteData->name }}»</p><br>
-            <p>Все права защищены</p>
+            <p>@lang('main.copyright')</p>
         </div>
     </div>
 </footer>

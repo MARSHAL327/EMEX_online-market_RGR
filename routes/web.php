@@ -17,6 +17,12 @@ $user = Auth::user();
 
 
 // ************
+// Переключение языков
+// ************
+Route::get('/locale/{locale}', [MainController::class, "changeLocale"])->name('locale');
+
+
+// ************
 // Основной роут
 // ************
 Route::get('/', [MainController::class, "showPage"])->name('main');
