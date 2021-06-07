@@ -1212,12 +1212,15 @@ label.active {
 
 .contacts-wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 70% 30%;
   margin-top: 30px;
 }
 
 .contacts-wrapper .contacts-wrapper_left {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   justify-self: start;
+  grid-row: 1/2;
 }
 
 .contacts-wrapper .contacts-wrapper_left .contacts-wrapper_left__item {
@@ -1253,8 +1256,12 @@ label.active {
   color: #fff;
 }
 
+.contacts-wrapper .contacts-wrapper__map {
+  grid-row: 2/3;
+}
+
 .contacts-wrapper .contacts-wrapper_right {
-  justify-self: end;
+  grid-row: 1/3;
 }
 
 .admin-controller {
