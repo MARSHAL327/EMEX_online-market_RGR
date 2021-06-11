@@ -17,7 +17,7 @@
                     <img src="/img/{{$oneNews->img }}" alt="">
                     <div class="one-news__title">{{ $oneNews->title }}</div>
                     <div class="one-news__desc"><?= htmlspecialchars_decode($oneNews->desc) ?></div>
-                    <div class="one-news__date">Дата добавления: {{ date('d.m.Y', strtotime($oneNews->date)) }}</div>
+                    <div class="one-news__date">@lang('news.date_added'): {{ date('d.m.Y', strtotime($oneNews->date)) }}</div>
                     <div class="black-bg"></div>
                 </div>
             </div>

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Контакты
+    @lang('contacts.page_name')
 @endsection
 
 @section('content')
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Контакты
+                @lang('contacts.page_name')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
@@ -77,26 +77,26 @@
             <div class="contacts-wrapper_right">
                 <div class="contacts-wrapper__backcall backcall">
                     <div class="backcall__title blue-text">
-                        Связаться с нами
+                        @lang('contacts.contact_us')
                     </div>
                     <form class="main-form" action="{{ route('contacts.send') }}" method="post">
                         @csrf
                         <label for="name">
-                            Имя
+                            @lang('contacts.contact_us_form.name')
                             <input type="text" name="name">
                         </label>
 
                         <label for="email">
-                            Email
+                            @lang('contacts.contact_us_form.email')
                             <input type="text" name="email">
                         </label>
 
                         <label for="text">
-                            Текст сообщения
+                            @lang('contacts.contact_us_form.message')
                             <textarea name="text" id=""></textarea>
                         </label>
 
-                        <button class="main-btn" type="submit">Отправить</button>
+                        <button class="main-btn" type="submit">@lang('main.send')</button>
                     </form>
 
                 </div>

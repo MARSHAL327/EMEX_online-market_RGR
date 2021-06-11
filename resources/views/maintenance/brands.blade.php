@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Запчасти для ТО
+    @lang('maintenance.spare_parts_for_maintenance')
 @endsection
 
 @section('content')
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Запчасти для ТО
+                @lang('maintenance.spare_parts_for_maintenance')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
@@ -24,7 +24,7 @@
                             <span class="material-icons">arrow_downward</span>
                         </div>
                         <div class="maintenance-progress__item__text">
-                            Выберите марку
+                            @lang('maintenance.brand_select')
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
@@ -35,7 +35,7 @@
                     <a href="javascript:void(0)">
                         <div class="maintenance-progress__item__circle"></div>
                         <div class="maintenance-progress__item__text">
-                            Выберите модель
+                            @lang('maintenance.model_select')
                         </div>
                         <div class="maintenance-progress__item__next-item">
                             <span class="material-icons">arrow_forward</span>
@@ -46,7 +46,7 @@
                     <a href="javascript:void(0)">
                         <div class="maintenance-progress__item__circle"></div>
                         <div class="maintenance-progress__item__text">
-                            Выберите модификацию
+                            @lang('maintenance.modification_select')
                         </div>
                     </a>
                 </li>

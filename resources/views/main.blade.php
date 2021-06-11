@@ -36,7 +36,7 @@
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Бренды автомобилей
+                @lang('maintenance.auto_brands')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
@@ -62,11 +62,11 @@
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Новости
+                @lang('news.page_name')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more">
-                <a href="{{ route('news_all')  }}">Посмотреть все новости</a>
+                <a href="{{ route('news_all')  }}">@lang('news.all_news_link')</a>
             </div>
         </div>
 
@@ -86,7 +86,7 @@
                         </div>
                         <a href="{{ route('news_one', $newsItem->id) }}">
                             <button class="news-btn">
-                                Подробнее
+                                @lang('main.more')
                             </button>
                         </a>
                     </div>
@@ -98,11 +98,11 @@
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Акции
+                 @lang('stock.page_name')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more">
-                <a href="{{ route('stock_all')  }}">Посмотреть все акции</a>
+                <a href="{{ route('stock_all')  }}">@lang('stock.all_stock_link')</a>
             </div>
         </div>
 
@@ -135,11 +135,11 @@
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                О Компании
+                @lang('about-company.page_name')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more">
-                <a href="{{ route('about-company')  }}">Подробнее</a>
+                <a href="{{ route('about-company')  }}">@lang('main.more')</a>
             </div>
         </div>
 

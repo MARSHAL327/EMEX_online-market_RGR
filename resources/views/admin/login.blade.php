@@ -14,22 +14,30 @@
             <div class="section-title__more"></div>
         </div>
 
-        <form action="{{ route('login') }}" method="post" class="main-form">
-            @csrf
-            <label for="phone">
-                Логин
-                <input type="text" name="login">
-            </label>
-
-            <label for="password">
-                Пароль
-                <input type="password" name="password">
-            </label>
-
-            <div class="modal__btn">
-                <button type="submit" class="main-btn">Войти</button>
+        @if( $user )
+            <div class="big-text">
+                Вы уже авторизованы
             </div>
-        </form>
+            <a href="{{ route('logout') }}">Выйти из системы</a>
+        @else
+            <form action="{{ route('login') }}" method="post" class="main-form">
+                @csrf
+                <label for="phone">
+                    Логин
+                    <input type="text" name="login">
+                </label>
+
+                <label for="password">
+                    Пароль
+                    <input type="password" name="password">
+                </label>
+
+                <div class="modal__btn">
+                    <button type="submit" class="main-btn">Войти</button>
+                </div>
+            </form>
+        @endif
+
 
     </section>
 

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title-block')
-    О Нас
+    @lang('about-company.page_name')
 @endsection
 
 @section('content')
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                О Компании
+                @lang('about-company.page_name')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>

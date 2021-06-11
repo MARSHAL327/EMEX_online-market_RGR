@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Запчасти для ТО
+    @lang('maintenance.spare_parts_for_maintenance')
 @endsection
 
 @section('content')
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Запчасти для ТО
+                @lang('maintenance.spare_parts_for_maintenance')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
@@ -27,13 +27,13 @@
                             {{ $autoData->autoModel->brand->name }} {{ $autoData->autoModel->name }}
                         </div>
                         <div class="maintenance-title__auto-data__modification">
-                            Модификация - {{ $autoData->name }}
+                            @lang('maintenance.modification') - {{ $autoData->name }}
                         </div>
                     </div>
                 </div>
                 <div class="maintenance-title__button maintenance-title__item">
                     <div class="transparent-btn">
-                        <a href="{{ route('maintenance_brands') }}">Выбрать другой автомобиль</a>
+                        <a href="{{ route('maintenance_brands') }}">@lang('maintenance.select_other_auto')</a>
                     </div>
                 </div>
             </div>
@@ -42,9 +42,9 @@
             <div class="modification__items">
                 <table>
                     <tr class="grey-strip">
-                        <th>Название детали</th>
-                        <th>Кол-во</th>
-                        <th>Цена</th>
+                        <th>@lang('maintenance.spare_part.name')</th>
+                        <th>@lang('maintenance.spare_part.count')</th>
+                        <th>@lang('maintenance.spare_part.price')</th>
                     </tr>
                     @if( count($products) > 0 )
                         @foreach($products as $product)
@@ -56,7 +56,9 @@
                                     {{ $product->count }} шт.
                                 </td>
                                 <td class="transparent-btn">
-                                    <a href="{{ route('product', [ "id_category" => $product->category->id, "id_product" => $product->id]) }}">Посмотреть цены</a>
+                                    <a href="{{ route('product', [ "id_category" => $product->category->id, "id_product" => $product->id]) }}">
+                                        @lang('maintenance.view_prices')
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

@@ -9,4 +9,6 @@ return [
     "come_to_us" => "Come to us",
     "subscribe" => "Subscribe",
     "copyright" => "All rights reserved",
+    "more" => "More",
+    "send" => "Send"
 ];

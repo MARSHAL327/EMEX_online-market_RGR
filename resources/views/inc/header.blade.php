@@ -9,20 +9,28 @@
             <ul>
                 <li class="header__submenu">
                     <a href="">
-                        Запчасти
+                        @lang('maintenance.page_name')
                         <span class="material-icons">expand_more</span>
                     </a>
                     <ul class="header__submenu__item">
-                        <li><a href="{{ route('maintenance_brands') }}">Запчасти для ТО</a></li>
+                        <li><a href="{{ route('maintenance_brands') }}">@lang('maintenance.spare_parts_for_maintenance')</a></li>
                         @foreach(\App\Http\Models\ProductCategory::all() as $productCategory)
                             <li><a href="{{ route('product-catalog', $productCategory->id) }}">{{ $productCategory->name }}</a></li>
                         @endforeach
                     </ul>
                 </li>
-                <li><a href="{{ route('about-company')  }}" class="<?php if(Route::current()->getName() == "about-company") echo "active"?>">О Нас</a></li>
-                <li><a href="{{ route('news_all')  }}" class="<?php if(Route::current()->getName() == "news_all") echo "active"?>">Новости</a></li>
-                <li><a href="{{ route('stock_all')  }}" class="<?php if(Route::current()->getName() == "stock_all") echo "active"?>">Акции</a></li>
-                <li><a href="{{ route('contacts')  }}" class="<?php if(Route::current()->getName() == "contacts") echo "active"?>">Контакты</a></li>
+                <li>
+                    <a href="{{ route('about-company')  }}" class="<?php if(Route::current()->getName() == "about-company") echo "active"?>">@lang('about-company.page_name')</a>
+                </li>
+                <li>
+                    <a href="{{ route('news_all')  }}" class="<?php if(Route::current()->getName() == "news_all") echo "active"?>">@lang('news.page_name')</a>
+                </li>
+                <li>
+                    <a href="{{ route('stock_all')  }}" class="<?php if(Route::current()->getName() == "stock_all") echo "active"?>">@lang('stock.page_name')</a>
+                </li>
+                <li>
+                    <a href="{{ route('contacts')  }}" class="<?php if(Route::current()->getName() == "contacts") echo "active"?>">@lang('contacts.page_name')</a>
+                </li>
             </ul>
         </nav>
 

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Акции
+    @lang('stock.page_name')
 @endsection
 
 @section('content')
     <section>
         <div class="section-title">
             <span class="section-title__text">
-                Акции
+                @lang('stock.page_name')
             </span>
             <div class="section-title__hr"></div>
             <div class="section-title__more"></div>
