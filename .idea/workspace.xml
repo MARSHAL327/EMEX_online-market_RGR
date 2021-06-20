@@ -19,25 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ru/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/about-company.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/about-company.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/contacts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/contacts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/brands.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/brands.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/maintenance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/maintenance.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/models.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/models.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/maintenance/modification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/maintenance/modification.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/news.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/news.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/oneNews.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/oneNews.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/stock.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/stock.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -263,7 +245,7 @@
       <workItem from="1623089923868" duration="4135000" />
       <workItem from="1623184963768" duration="929000" />
       <workItem from="1623187635806" duration="4566000" />
-      <workItem from="1623435195981" duration="4679000" />
+      <workItem from="1623435195981" duration="4950000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
