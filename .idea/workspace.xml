@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов" />
+    <list default="true" id="6647792c-0c21-494b-b68e-cb07ae46dbfd" name="Default Changelist" comment="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
+      <change beforePath="$PROJECT_DIR$/RGR/PZ_files/~$ПЗ.docx" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -246,6 +248,7 @@
       <workItem from="1623184963768" duration="929000" />
       <workItem from="1623187635806" duration="4566000" />
       <workItem from="1623435195981" duration="4950000" />
+      <workItem from="1624387245088" duration="164000" />
     </task>
     <task id="LOCAL-00001" summary="1. Сделаны страницы для выбора запчастей для ТО&#10;2. Организовано добавление бренда авто&#10;3. Добавлена проверка для НЕ админов&#10;4. Создана таблица для брендов">
       <created>1616950693440</created>
